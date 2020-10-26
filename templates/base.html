@@ -13,7 +13,9 @@
             src="https://kit.fontawesome.com/d6343cbdf9.js"
             crossorigin="anonymous">
         </script>
-        <title>Swap Them Clothes!</title>
+        <!-- Link to static stylesheet -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+        <title>{% block title %}{% endblock %}</title>
     </head>
 
     <body>
@@ -24,14 +26,15 @@
                     <a href="{{ url_for('home') }}" class="brand-logo center">SWAP</a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
                     <ul class="left hide-on-med-and-down">
-                        <li><a href="{{ url_for('home') }}">Home</a></li>
-                        <li><a href="#">Items</a></li>
+                        <li><a href="{{ url_for('home') }}" class="hvr-underline-from-center {% block nav_home %}{% endblock %}">Home</a></li>
+                        <li><a href="#" class="hvr-underline-from-center {% block nav_items %}{% endblock %}">Items</a></li>
                     </ul>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">Log In</a></li>
+                        <li><a href="#" class="hvr-underline-from-center {% block nav_register %}{% endblock %}">Register</a></li>
+                        <li><a href="#" class="hvr-underline-from-center {% block nav_login %}{% endblock %}">Log In</a></li>
                     </ul>
                 </div>
+                <!-- Sub navbar for 'My Profile' page -->
                 {% block topnav %}{% endblock %}
             </nav>
             
@@ -42,6 +45,7 @@
                 <li><a href="#">Register</a></li>
                 <li><a href="#">Login</a></li>
             </ul>
+            <!-- Sub navbar for 'My Profile page on mobile screen sizes' -->
             {% block mobilenav %}{% endblock %}
         </header>
 
