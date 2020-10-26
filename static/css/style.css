@@ -18,11 +18,30 @@ nav {
 nav ul a, .sidenav li>a {
     font-size: 1.25rem;
     transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
 }
 
 nav ul a:hover, .active {
     letter-spacing: 3px;
     background-color: rgba(0,0,0,0);
+}
+
+.sidenav li>a {
+    font-weight: 700;
+    color: rgba(255,98,109,1);
+}
+
+.sidenav li>a:hover, .sidenav .active-sidenav {
+    color: #fff;
+    background: -moz-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    background: -o-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    background: -ms-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    background: linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+
 }
 
 /* -------Using Hover.CSS library effects. Effects Used : Underline from center---------- */
