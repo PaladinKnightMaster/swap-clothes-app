@@ -25,7 +25,14 @@ def home():
     return render_template("index.html", items=items)
 
 
+@app.route("/items")
+def items():
+    items = mongo.db.items.find()
+    return render_template("items.html", items=items)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
+
