@@ -26,9 +26,20 @@
                         <div class="card-content">
                             <div class="item-content">
                                 <span class="card-title">{{ item.item_name }}</span>
-                                <p class="item-short-description">{{ item.short_description }}</p>
+                                <p class="item-short-description activator">{{ item.short_description }}</p>
+                                <p class="activator accent-text" id="display-more">more</p>
                             </div>
-                            <p class="activator accent-text" id="display-more">more</p>
+                            <!-- Item Footer displaying creator, delete and flag buttons -->
+                            <div class="row item-footer">
+                                <div class="col s6">
+                                    <p class="left item-creator">{{ item.created_by }}</p>
+                                </div>
+                                <div class="col s6 item-icon-container">
+                                    <i class="far fa-trash-alt"></i>
+                                    <i class="far fa-flag"></i>
+                                    <i class="fas fa-pencil-alt"></i>
+                                </div>
+                            </div>
                         </div>
                         <!-- More information displayed using card reveal component -->
                         <div class="card-reveal">

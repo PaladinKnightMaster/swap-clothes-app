@@ -193,11 +193,28 @@ nav ul a:hover, .active {
 }
 
 .card .card-content {
+    height: 200px;
+    display: relative;
     padding: 1rem 0.5rem;
 }
 
-.item-short-description {
+.item-creator {
     font-size: 0.9rem;
+}
+
+.item-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.item-icon-container {
+    text-align: right;
+}
+
+.item-icon-container i {
+    margin-left: 1rem
 }
 
 /* Adding pointer to the card revela component's trigger */
