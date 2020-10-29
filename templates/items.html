@@ -6,54 +6,61 @@
 {% block content %}
     <h1>Items</h1>
 
-<!-- Display Items -->
-{% for item in items %}
-    <div class="row">
-        <div class="col s12 m6 l4 xl3">
-            <div class="card">
-                <div class="card-image">
-                    <img src="{{ item.item_image }}">
-                    <a class="btn-floating halfway-fab waves-effect waves-light white"><i class="far fa-heart grey-text text-darken-3"></i></a>
-                </div>
-                <div class="card-content">
-                    <span class="card-title">{{ item.item_name }}</span>
-                    <p>{{ item.short_description }}</p>
-                    <p><a href="#" class="activator">more</a></p>
-                </div>
-                <!-- More information displayed using card reveal component -->
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{ item.item_name }}<i class="fas fa-times right"></i></span>
-                    <p>{{ item.long_description }}</p>
-                    <!-- Specific item details -->
-                    <div class="row">
-                        <div class="col s11 offset-s1">
+<div class="row">
+    <!-- display Categories -->
+    <div class="col s12 l3">
+
+    </div>
+    <!-- Display Items -->
+    <div class="col s12 l9">
+        <div class="row all-item-container">
+            {% for item in items %}
+                <div class="col s12 m6 l4">
+                    <div class="card center z-depth-4">
+                        <!-- Card Image -->
+                        <div class="card-image">
+                            <img src="{{ item.item_image }}" class="item-image">
+                            <a class="btn-floating halfway-fab waves-effect waves-light white"><i class="far fa-heart accent-text"></i></a>
+                        </div>
+                        <!-- Card Content -->
+                        <div class="card-content">
+                            <div class="item-content">
+                                <span class="card-title">{{ item.item_name }}</span>
+                                <p class="item-short-description">{{ item.short_description }}</p>
+                            </div>
+                            <p class="activator accent-text" id="display-more">more</p>
+                        </div>
+                        <!-- More information displayed using card reveal component -->
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">{{ item.item_name }}<i class="fas fa-times right"></i></span>
+                            <p>{{ item.long_description }}</p>
+                            <!-- Specific item details -->
                             <div class="row">
-                                <div class="col s5 item-labels">Category</div>
-                                <div class="col s1 item-icons"><i class="fas fa-sitemap"></i></div>
+                                <div class="col s5 item-labels right-align">Category</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-sitemap"></i></div>
                                 <div class="col s5 item-values">{{ item.category }}</div>
                             </div>
                             <div class="row">
-                                <div class="col s5 item-labels">Size</div>
-                                <div class="col s1 item-icons"><i class="fas fa-ruler"></i></div>
+                                <div class="col s5 item-labels right-align">Size</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-ruler"></i></div>
                                 <div class="col s5 item-values">{{ item.size }} ({{ item.size_country }})</div>
                             </div>
                             <div class="row">
-                                <div class="col s5 item-labels">Fit</div>
-                                <div class="col s1 item-icons"><i class="fas fa-transgender-alt"></i></div>
+                                <div class="col s5 item-labels right-align">Fit</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-transgender-alt"></i></div>
                                 <div class="col s5 item-values">{{ item.size_gender }}</div>
                             </div>
                             <div class="row">
-                                <div class="col s5 item-labels">Used</div>
-                                <div class="col s1 item-icons"><i class="far fa-clock"></i></div>
+                                <div class="col s5 item-labels right-align">Used</div>
+                                <div class="col s2 item-icons center-align"><i class="far fa-clock"></i></div>
                                 <div class="col s5 item-values">{{ item.used_status }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-
-{% endfor %}
+</div>
     
 {% endblock %}

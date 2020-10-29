@@ -18,6 +18,14 @@ h1 {
     font-family: 'Libre Baskerville', serif;
 }
 
+.accent-text{
+    color: #FF626D !important;
+}
+
+.secondary-accent-text {
+    color: #FFC371 !important;
+}
+
 /* ----------HEADER---------- */
 nav {
     background: -moz-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
@@ -160,5 +168,45 @@ nav ul a:hover, .active {
     .footer-links li {
     display: block;
     }
+}
+
+/* ----------ITEM CARDS--------- */
+.all-item-container {
+    max-width: 1200px;
+}
+
+.item-image {
+    height: 300px;
+    object-fit: cover;
+}
+
+/* overriding the existing border radius for images */
+.card .card-image img{
+    border-radius: 1rem 1rem 0 0;
+}
+
+.card {
+    height: 500px;
+    max-width: 300px;
+    margin: 1rem auto;
+    border-radius: 1rem;
+}
+
+.card .card-content {
+    padding: 1rem 0.5rem;
+}
+
+.item-short-description {
+    font-size: 0.9rem;
+}
+
+/* Adding pointer to the card revela component's trigger */
+#display-more {
+    cursor: pointer;
+    font-style: italic;
+}
+
+#display-more:hover {
+    text-decoration: underline;
 }
 
