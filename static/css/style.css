@@ -4,6 +4,7 @@
 /* ----------COMMON STYLES ACROSS ALL PAGES--------- */
 body {
     font-family: 'Montserrat', sans-serif;
+    color: #444;
     /* Styles to make Footer sticky */
     display: flex;
     min-height: 100vh;
@@ -227,3 +228,7 @@ nav ul a:hover, .active {
     text-decoration: underline;
 }
 
+/* Card Reveal styles */
+.card-reveal-title {
+    padding-left: 16.5px;
+}

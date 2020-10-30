@@ -43,28 +43,29 @@
                         </div>
                         <!-- More information displayed using card reveal component -->
                         <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">{{ item.item_name }}<i class="fas fa-times right"></i></span>
+                            <span class="card-title card-reveal-title">{{ item.item_name }}<i class="fas fa-times right accent-text"></i></span>
                             <p>{{ item.long_description }}</p>
+                            <hr>
                             <!-- Specific item details -->
                             <div class="row">
                                 <div class="col s5 item-labels right-align">Category</div>
-                                <div class="col s2 item-icons center-align"><i class="fas fa-sitemap"></i></div>
-                                <div class="col s5 item-values">{{ item.category }}</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-sitemap secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.category }}</div>
                             </div>
                             <div class="row">
                                 <div class="col s5 item-labels right-align">Size</div>
-                                <div class="col s2 item-icons center-align"><i class="fas fa-ruler"></i></div>
-                                <div class="col s5 item-values">{{ item.size }} ({{ item.size_country }})</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-ruler secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.size }} ({{ item.size_country }}) <a href="https://www.sizeguide.net/" target="_blank" class="tooltipped grey-text" data-position="bottom" data-tooltip="Not Sure about sizes?"><i class="far fa-question-circle"></i></a></div>
                             </div>
                             <div class="row">
                                 <div class="col s5 item-labels right-align">Fit</div>
-                                <div class="col s2 item-icons center-align"><i class="fas fa-transgender-alt"></i></div>
-                                <div class="col s5 item-values">{{ item.size_gender }}</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-transgender-alt secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.size_gender }}</div>
                             </div>
                             <div class="row">
                                 <div class="col s5 item-labels right-align">Used</div>
-                                <div class="col s2 item-icons center-align"><i class="far fa-clock"></i></div>
-                                <div class="col s5 item-values">{{ item.used_status }}</div>
+                                <div class="col s2 item-icons center-align"><i class="far fa-clock secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.used_status }}</div>
                             </div>
                         </div>
                     </div>
