@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import (Flask, render_template, redirect, request, url_for, session)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 # Only import env if env.py path exists
@@ -28,7 +28,17 @@ def home():
 @app.route("/items")
 def items():
     items = mongo.db.items.find()
-    return render_template("items.html", items=items)
+    categories = mongo.db.categories.find()
+    return render_template("items.html", items=items, categories=categories)
+
+
+@app.route("/filter", methods=["GET", "POST"])
+def filter():
+    if request.method == "POST":
+        selected_categories = request.form.getlist("selected-categories")
+        print(selected_categories)
+
+    return redirect(url_for('items'))
 
 
 if __name__ == '__main__':
