@@ -58,38 +58,42 @@
 <div class="row">
     <!-- Display Categories and allow user to filter items using them-->
     <div class="col s12 l3">
-        <div class="category-container z-depth-4">
+        <div class="category-container z-depth-4 border-radius-sm">
             <!-- Filter container title -->
-            <div class="row">
+            <div class="row category-title border-radius-sm">
                 <div class="col s12">
-                    <h5>Categories</h5>
+                    <h5 class="center">Categories</h5>
                 </div>
             </div>
             <!-- Filter container values -->
-            <div class="row">
-                <div class="col s10 offset-s1">
-                    <form action="{{ url_for('filter') }}" method="POST">
-                        <!-- Loop through all categories in the category collection and create a checbox for each -->
-                        {% for category in categories %}
-                        <p>
-                            <label for="{{ category.category_name }}">
-                                <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories" />
-                                <!-- Distinguish between selected and non selected categories -->
-                                {% if category.category_name in selected_categories %}
-                                    <span class="filtered-category">{{ category.category_name }}</span>
-                                {% else %}
-                                    <span>{{ category.category_name }}</span>
-                                {% endif %}
-                            </label>
-                        </p>
-                        {% endfor %}
-                        <!-- Submit button -->
-                        <button type="submit" class="btn">Apply</button>
-                        <!-- Button to display all items -->
-                        <a href="{{ url_for('items') }}" class="btn">Show All</a>
-                    </form>
+            <form action="{{ url_for('filter') }}" method="POST">
+                <!-- Loop through all categories in the category collection and create a checbox for each -->
+                <div class="category-labels">
+                    {% for category in categories %}
+                    <p>
+                        <label for="{{ category.category_name }}">
+                            <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories" />
+                            <!-- Distinguish between selected and non selected categories -->
+                            {% if category.category_name in selected_categories %}
+                                <span class="filtered-category">{{ category.category_name }}</span>
+                            {% else %}
+                                <span>{{ category.category_name }}</span>
+                            {% endif %}
+                        </label>
+                    </p>
+                    {% endfor %}
                 </div>
-            </div>
+                <div class="row center">
+                    <div class="col s6">
+                        <!-- Submit button -->
+                        <button type="submit" class="swap-btn outlined-red border-radius-m">Apply</button>
+                    </div>
+                    <div class="col s6">
+                        <!-- Display all items button -->
+                        <a href="{{ url_for('items') }}" class="swap-btn outlined-orange border-radius-m">Show All</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <!-- Display Items -->

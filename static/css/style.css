@@ -1,8 +1,10 @@
 /* Importing google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
 /* ----------COMMON STYLES ACROSS ALL PAGES--------- */
 body {
+    margin: 0;
+    padding: 0;
     font-family: 'Montserrat', sans-serif;
     color: #444;
     /* Styles to make Footer sticky */
@@ -28,6 +30,7 @@ h1 {
     background: linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
 }
 
+/* Color and text styles */
 .accent-text{
     color: #FF626D !important;
 }
@@ -35,6 +38,63 @@ h1 {
 .secondary-accent-text {
     color: #FFC371 !important;
 }
+
+.filled-red {
+    background-color: #FF626D;
+}
+
+.filled-orange {
+    background-color: #FFC371;
+}
+
+.filled-red, .filled-red {
+    color: #fff;
+}
+
+.outlined-red {
+    border: 3px solid #FF626D;
+    color: #FF626D;
+}
+
+.outlined-orange {
+    border: 3px solid #FFC371;
+    color: #FFC371;
+}
+
+.outlined-red, .outlined-orange {
+    background-color: #fff;
+}
+
+.border-radius-sm {
+    border-radius: 1rem;
+}
+
+.border-radius-m {
+    border-radius: 3rem;
+}
+
+/* Button styles */
+.swap-btn {
+    font-family: inherit;
+    line-height: 2.5rem;
+    width: 100%;
+    display: inline-block;
+    padding: 0;
+    margin: 0.5rem auto;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.swap-btn:hover {
+    box-shadow: 0px 3px 4px rgba(0,0,0,0.2);
+    transform: scale(1.1);
+}
+
+button:focus {
+    background-color: inherit;
+}
+
 
 
 /* ----------HEADER---------- */
@@ -152,7 +212,7 @@ nav ul a:hover, .active {
 }
 
 /* Add Hover effect */
-.footer-links li a:hover, .footer-socials li a:hover {
+.footer-links li a:hover, .footer-socials li a:hover{
     color: #fff;
     text-shadow: 1px 1px 1px #FF626D,
                 -1px -1px 1px #FFC371;
@@ -192,7 +252,7 @@ nav ul a:hover, .active {
 }
 
 /* overriding the existing border radius for images */
-.card .card-image img{
+.card .card-image img {
     border-radius: 1rem 1rem 0 0;
 }
 
@@ -244,6 +304,22 @@ nav ul a:hover, .active {
 }
 
 /* ----------CATEGORY FILTER--------- */
+.category-container {
+    padding: 0 0.75rem 1rem;
+    margin: 1rem auto;
+    max-width: 300px;
+}
+
+.category-title {
+    background-color: #FF626D;
+    color: #fff; 
+}
+
+.category-labels {
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+}
+
 .filtered-category {
     color: #000;
     font-weight: 600;
