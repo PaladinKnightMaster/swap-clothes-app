@@ -23,14 +23,23 @@ h1 {
     width: 20rem;
     text-align: center;
     border-radius: 3rem;
-    background: -webkit-linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
-    background: -moz-linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
-    background: -o-linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
-    background: -ms-linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
-    background: linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
 }
 
 /* Color and text styles */
+.gradient-bkg-light {
+    background: -webkit-linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
+    background: -moz-linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
+    background: -o-linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
+    background: linear-gradient(90deg, rgba(255,98,109,0.4) 0%, rgba(255,187,94,0.4) 58%, rgb(255,187,94,0.4) 100%);
+}
+
+.gradient-bkg {
+    background: -moz-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    background: -o-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    background: linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+}
+
 .accent-text{
     color: #FF626D !important;
 }
@@ -98,14 +107,6 @@ button:focus {
 
 
 /* ----------HEADER---------- */
-nav {
-    background: -moz-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
-    background: -o-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
-    background: -ms-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
-    background: linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
-}
-
 nav ul a, .sidenav li>a {
     font-size: 1.25rem;
     transition: all 0.3s ease-in-out;
@@ -130,9 +131,7 @@ nav ul a:hover, .active {
     background: -moz-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
     background: -webkit-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
     background: -o-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
-    background: -ms-linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
     background: linear-gradient(90deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
-
 }
 
 /* -------Using Hover.CSS library effects. Effects Used : Underline from center---------- */
@@ -230,7 +229,6 @@ nav ul a:hover, .active {
     background: -webkit-radial-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0) 50%);
     background: -moz-radial-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0) 50%);
     background: -o-radial-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0) 50%);
-    background: -ms-radial-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0) 50%);
     background: radial-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0) 50%);
 }
 
