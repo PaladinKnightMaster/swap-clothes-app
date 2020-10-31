@@ -27,22 +27,26 @@ def home():
 
 @app.route("/items")
 def items():
-    items = mongo.db.items.find()
+    items = list(mongo.db.items.find())
     categories = mongo.db.categories.find()
     return render_template("items.html", items=items, categories=categories)
 
 
 @app.route("/filter", methods=["GET", "POST"])
 def filter():
-    if request.method == "POST":
-        selected_categories = request.form.getlist("selected-categories")
-        print(selected_categories)
-
-    return redirect(url_for('items'))
+    """
+    Get all checked values for category filter,
+    find and display items with those categories
+    """
+    categories = mongo.db.categories.find()
+    selected_categories = request.form.getlist("selected-categories")
+    items = list(mongo.db.items.find(
+        {"category": {"$in": selected_categories}}))
+    return render_template("items.html", items=items, categories=categories,
+                           selected_categories=selected_categories)
 
 
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
-

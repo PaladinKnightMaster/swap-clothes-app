@@ -242,3 +242,9 @@ nav ul a:hover, .active {
 .card-reveal-title {
     padding-left: 16.5px;
 }
+
+/* ----------CATEGORY FILTER--------- */
+.filtered-category {
+    color: #000;
+    font-weight: 600;
+}

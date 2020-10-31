@@ -25,7 +25,12 @@
                         <p>
                             <label for="{{ category.category_name }}">
                                 <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories" />
-                                <span>{{ category.category_name }}</span>
+                                <!-- Distinguish between selected and non selected categories -->
+                                {% if category.category_name in selected_categories %}
+                                    <span class="filtered-category">{{ category.category_name }}</span>
+                                {% else %}
+                                    <span>{{ category.category_name }}</span>
+                                {% endif %}
                             </label>
                         </p>
                         {% endfor %}
@@ -40,6 +45,7 @@
     </div>
     <!-- Display Items -->
     <div class="col s12 l9">
+        {% if items|length > 0 %}
         <div class="row all-item-container">
             {% for item in items %}
                 <div class="col s12 m6 l4">
@@ -98,6 +104,9 @@
                     </div>
                 </div>
             {% endfor %}
+        {% else %}
+            <h3>No Results Found</h3>
+        {% endif %}
         </div>
     </div>
 </div>
