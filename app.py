@@ -68,6 +68,18 @@ def sort(sort_by):
     return render_template("items.html", items=items, categories=categories)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    """
+    Use an index from items collections to allow the user
+    to search through the itesm names and item shor description
+    """
+    categories = mongo.db.categories.find()
+    query = request.form.get("search")
+    items = list(mongo.db.items.find({"$text": {"$search": query}}))
+    return render_template("items.html", items=items, categories=categories)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

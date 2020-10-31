@@ -33,7 +33,25 @@
                     <i class="far fa-flag"></i>
                 </a>
             </div>
-            <div class="col s12 m6 l8 white">Search:</div>
+            <!-- Add search bar to allow the user to search through the items  -->
+            <div class="col s12 m6 l8 white">
+                <form action="{{ url_for('search') }}" method="POST">
+                    <div class="row">
+                        <div class="input-field col s12 m8">
+                            <input type="text" name="search" id="search" minlength="1" class="validate" required>
+                            <label for="search">Search:</label>
+                        </div>
+                        <div class="col s12 m4">
+                            <a href="{{ url_for('items') }}" class="btn">
+                                <i class="fas fa-redo-alt"></i>
+                            </a>
+                            <button type="submit" class="btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
