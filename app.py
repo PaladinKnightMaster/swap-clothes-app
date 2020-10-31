@@ -27,8 +27,8 @@ def home():
 
 @app.route("/items")
 def items():
-    items = list(mongo.db.items.find())
     categories = mongo.db.categories.find()
+    items = list(mongo.db.items.find())
     return render_template("items.html", items=items, categories=categories)
 
 
@@ -44,6 +44,28 @@ def filter():
         {"category": {"$in": selected_categories}}))
     return render_template("items.html", items=items, categories=categories,
                            selected_categories=selected_categories)
+
+
+@app.route("/sort/<sort_by>")
+def sort(sort_by):
+    """
+    Sort items alphabetically, reverse alphabetically,
+    by the lates date added, by liked items or
+    by item being flagged
+    """
+    categories = mongo.db.categories.find()
+    if sort_by == 'a-to-z':
+        items = list(mongo.db.items.find().sort("item_name", 1))
+    elif sort_by == 'z-to-a':
+        items = list(mongo.db.items.find().sort("item_name", -1))
+    elif sort_by == 'date':
+        items = list(mongo.db.items.find().sort("created_on", 1))
+    elif sort_by == 'liked':
+        items = list(mongo.db.items.find().sort("liked_by", 1))
+    elif sort_by == 'flagged':
+        items = list(mongo.db.items.find().sort("flagged", -1))
+
+    return render_template("items.html", items=items, categories=categories)
 
 
 if __name__ == '__main__':

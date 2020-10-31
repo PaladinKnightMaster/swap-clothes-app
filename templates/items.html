@@ -7,6 +7,37 @@
 <h1>Items</h1>
 
 <div class="row">
+    <div class="col s12 l9 offset-l3 pink lighten-2">
+        <div class="row">
+            <!-- Buttons to sort all items  -->
+            <div class="col s12 m6 l4 white">
+                Sort:
+                <!-- Alphabetically -->
+                <a href="{{ url_for('sort', sort_by = 'a-to-z') }}">
+                    <i class="fas fa-sort-alpha-down"></i>
+                </a>
+                <!-- Reverse Alphabetically -->
+                <a href="{{ url_for('sort', sort_by = 'z-to-a') }}">
+                    <i class="fas fa-sort-alpha-down-alt"></i>
+                </a>
+                <!-- Sort by the recent date added -->
+                <a href="{{ url_for('sort', sort_by = 'date') }}">
+                    <i class="far fa-calendar-alt"></i>
+                </a>
+                <!-- Sort by users liked items -->
+                <a href="{{ url_for('sort', sort_by = 'liked') }}">
+                    <i class="far fa-heart"></i>
+                </a>
+                <!-- Sort by flagged items -->
+                <a href="{{ url_for('sort', sort_by = 'flagged') }}">
+                    <i class="far fa-flag"></i>
+                </a>
+            </div>
+            <div class="col s12 m6 l8 white">Search:</div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <!-- Display Categories and allow user to filter items using them-->
     <div class="col s12 l3">
         <div class="category-container z-depth-4">
