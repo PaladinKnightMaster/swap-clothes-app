@@ -21,7 +21,7 @@
     <body>
         <header>
             <!-- Navbar for larger screens -->
-            <nav class="nav-extended">
+            <nav class="nav-extended gradient-bkg">
                 <div class="nav-wrapper">
                     <a href="{{ url_for('home') }}" class="brand-logo center">SWAP</a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
@@ -30,7 +30,7 @@
                         <li><a href="{{ url_for('items') }}" class="hvr-underline-from-center {% block nav_items %}{% endblock %}">Items</a></li>
                     </ul>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="#" class="hvr-underline-from-center {% block nav_register %}{% endblock %}">Register</a></li>
+                        <li><a href="{{ url_for('register') }}" class="hvr-underline-from-center {% block nav_register %}{% endblock %}">Register</a></li>
                         <li><a href="#" class="hvr-underline-from-center {% block nav_login %}{% endblock %}">Log In</a></li>
                     </ul>
                 </div>
@@ -42,7 +42,7 @@
             <ul class="sidenav" id="mobile-demo">
                 <li><a href="{{ url_for('home') }}" class="{% block sidenav_home %}{% endblock %}">Home</a></li>
                 <li><a href="{{ url_for('items') }}" class="{% block sidenav_items %}{% endblock %}">Items</a></li>
-                <li><a href="#" class="{% block sidenav_register %}{% endblock %}">Register</a></li>
+                <li><a href="{{ url_for('register') }}" class="{% block sidenav_register %}{% endblock %}">Register</a></li>
                 <li><a href="#" class="{% block sidenav_login %}{% endblock %}">Login</a></li>
             </ul>
             <!-- Sub navbar for 'My Profile page on mobile screen sizes' -->
