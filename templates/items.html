@@ -4,48 +4,55 @@
 {% block sidenav_items %}active-sidenav{% endblock %}
 
 {% block content %}
-<h1>Items</h1>
+<h1 class="gradient-bkg-light">Items</h1>
 
-<div class="row">
-    <div class="col s12 l9 offset-l3 pink lighten-2">
-        <div class="row">
+<div class="row mb-0">
+    <div class="col s12 l9 xl8 offset-l3 offset-xl3 gradient-bkg-top border-radius-sm">
+        <div class="row mb-0">
             <!-- Buttons to sort all items  -->
-            <div class="col s12 m6 l4 white">
-                Sort:
-                <!-- Alphabetically -->
-                <a href="{{ url_for('sort', sort_by = 'a-to-z') }}">
-                    <i class="fas fa-sort-alpha-down"></i>
-                </a>
-                <!-- Reverse Alphabetically -->
-                <a href="{{ url_for('sort', sort_by = 'z-to-a') }}">
-                    <i class="fas fa-sort-alpha-down-alt"></i>
-                </a>
-                <!-- Sort by the recent date added -->
-                <a href="{{ url_for('sort', sort_by = 'date') }}">
-                    <i class="far fa-calendar-alt"></i>
-                </a>
-                <!-- Sort by users liked items -->
-                <a href="{{ url_for('sort', sort_by = 'liked') }}">
-                    <i class="far fa-heart"></i>
-                </a>
-                <!-- Sort by flagged items -->
-                <a href="{{ url_for('sort', sort_by = 'flagged') }}">
-                    <i class="far fa-flag"></i>
-                </a>
+            <div class="col s12 m4">
+                <div class="white border-radius-sm sort-container">
+                    <span class="sort-title grey-text text-lighten-1">Sort:</span>
+                    <!-- Alphabetically -->
+                    <a href="{{ url_for('sort', sort_by = 'a-to-z') }}">
+                        <i class="fas fa-sort-alpha-down"></i>
+                    </a>
+                    <!-- Reverse Alphabetically -->
+                    <a href="{{ url_for('sort', sort_by = 'z-to-a') }}">
+                        <i class="fas fa-sort-alpha-down-alt"></i>
+                    </a>
+                    <!-- Sort by the recent date added -->
+                    <a href="{{ url_for('sort', sort_by = 'date') }}">
+                        <i class="far fa-calendar-alt"></i>
+                    </a>
+                    <!-- Sort by users liked items -->
+                    <a href="{{ url_for('sort', sort_by = 'liked') }}">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <!-- Sort by flagged items -->
+                    <a href="{{ url_for('sort', sort_by = 'flagged') }}">
+                        <i class="far fa-flag"></i>
+                    </a>
+                </div>
             </div>
             <!-- Add search bar to allow the user to search through the items  -->
-            <div class="col s12 m6 l8 white">
-                <form action="{{ url_for('search') }}" method="POST">
+            <div class="col s12 m8 search-container-parent">
+                <form action="{{ url_for('search') }}" method="POST" class="white border-radius-sm search-container">
                     <div class="row">
-                        <div class="input-field col s12 m8">
-                            <input type="text" name="search" id="search" minlength="1" class="validate" required>
-                            <label for="search">Search:</label>
+                        <!-- Search input -->
+                        <div class="col s12 m8">
+                            <label for="search"></label>                        
+                            <input type="text" name="search" id="search" minlength="1" placeholder="Search:" class="validate required">
                         </div>
-                        <div class="col s12 m4">
-                            <a href="{{ url_for('items') }}" class="btn">
+                        <!-- Reset button -->
+                        <div class="col s4 m2 offset-s2 center">
+                            <a href="{{ url_for('items') }}" class="swap-btn filled-orange border-radius-sm">
                                 <i class="fas fa-redo-alt"></i>
                             </a>
-                            <button type="submit" class="btn">
+                        </div>
+                        <!-- Submit button -->
+                        <div class="col s4 m2">
+                            <button type="submit" class="swap-btn filled-orange border-radius-sm">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
