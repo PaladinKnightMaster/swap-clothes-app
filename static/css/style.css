@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
-    color: rgb(85, 85, 85);
+    color: #585858;
     /* Styles to make Footer sticky */
     display: flex;
     min-height: 100vh;
@@ -23,6 +23,15 @@ h1 {
     width: 20rem;
     text-align: center;
     border-radius: 3rem;
+}
+
+/* Spacing */
+.centered-row {
+    display: flex;
+}
+
+.centered-element {
+    margin: 0 auto;
 }
 
 /* Override .row margin-bottom: 20px property */
@@ -117,6 +126,10 @@ button:focus {
     background-color: inherit;
 }
 
+.hover-undrline:hover {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
 
 
 /* ----------HEADER---------- */
@@ -395,4 +408,41 @@ input#search.validate {
 .search-container .swap-btn {
     margin: 0.25rem 0;
 }
+
+
+/* ---------FORMS FOR REGISTER, LOGIN, NEW ITEM PAGES---------- */
+.form-container {
+    display: flex;
+}
+
+.form-element{
+    max-width: 600px;
+    margin: 3rem auto;
+}
+
+
+.input-container {
+    border: 1px solid #b1b1b1;
+    border-radius: 3rem;
+    margin: 3rem 0;
+    padding: 0 1rem;
+    height: 4rem;
+}
+
+.input-container .input-field input {
+    margin: 0;
+}
+
+label.optional-label {
+    top: -30px;
+}
+
+.form-element > .card-panel {
+    padding: 3rem;
+}
+
+.input-field input, input.select-dropdown.dropdown-trigger {
+    color: #585858;
+}
+
 

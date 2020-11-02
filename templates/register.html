@@ -7,15 +7,15 @@
 {% block content %}
 <h1 class="gradient-bkg-light">Register</h1>
 
-<div class="row">
+<div class="row form-container">
     <!-- Registration form -->
     <form
-        class="col s12 m8 offset-m2"
+        class="col s12 form-element"
         method="POST"
         action="{{ url_for('register') }}">
         <div class="card-panel z-depth-4 border-radius-sm">
             <!-- username -->
-            <div class="row">
+            <div class="row input-container">
                 <div class="input-field col s12">
                     <input
                         id="username"
@@ -26,12 +26,17 @@
                         pattern="^[a-zA-Z0-9]{3,15}$"
                         class="validate"
                         required/>
-                    <label for="username">Username</label>
-                    <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="Username should be 3-15 characters long and only contains letters, numbers, '-' and '_'"></i>
+                    <label for="username">
+                        Username 
+                        <i 
+                            class="far fa-question-circle tooltipped" 
+                            data-position="right" 
+                            data-tooltip="Username should be 3-15 characters long and only contains letters, numbers, '-' and '_'"></i>
+                    </label>
                 </div>
             </div>
             <!-- password -->
-            <div class="row">
+            <div class="row input-container">
                 <div class="input-field col s12">
                     <input
                         id="password"
@@ -42,12 +47,17 @@
                         pattern="^[a-zA-Z0-9_-]{8,20}$"
                         class="validate"
                         required/>
-                    <label for="password">Password</label>
-                    <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="Password should be 8-20 characters long and only contains letters, numbers, '-' and '_'"></i>
+                    <label for="password">
+                        Password
+                        <i 
+                            class="far fa-question-circle tooltipped" 
+                            data-position="right" 
+                            data-tooltip="Password should be 8-20 characters long and only contains letters, numbers, '-' and '_'"></i>
+                    </label>
                 </div>
             </div>
             <!-- Looking-for dropdown selector -->
-            <div class="row">
+            <div class="row input-container">
                 <div class="input-field col s12">
                     <select name="looking_for" multiple>
                         <option value="" disabled selected>Looking For: </option>
@@ -55,14 +65,19 @@
                             <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                         {% endfor %}
                     </select>
-                    <label>(Optional)</label>
-                    <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="Let other swappers know what items you're looking for"></i>
+                    <label class="optional-label">
+                        (Optional)
+                        <i 
+                            class="far fa-question-circle tooltipped" 
+                            data-position="right" 
+                            data-tooltip="Let other swappers know what items you're looking for"></i>
+                    </label>
                 </div>
             </div>
             <!-- submit button -->
-            <div class="row">
+            <div class="row centered-row">
                 <button
-                    class="col s6 offset-s3 l4 offset-l4 btn"
+                    class="col s5 m4 l3 swap-btn filled-red border-radius-m centered-elem"
                     type="submit"
                     name="action">
                     Register
@@ -75,7 +90,7 @@
     <div class="col s12">
         <p class="center-align">
             Already a Swapper?
-            <a href="#">Log In</a>
+            <a href="#" class="accent-text hover-undrline">Log In</a>
         </p>
     </div>
 </div>
