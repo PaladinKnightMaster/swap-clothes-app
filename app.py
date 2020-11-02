@@ -1,5 +1,5 @@
 import os
-from flask import (Flask, render_template, redirect, request, url_for, session)
+from flask import (Flask, flash, render_template, redirect, request, url_for, session)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 # For security features used in registwer and login pages
@@ -84,6 +84,11 @@ def search():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Checks if a username already exists, if not, the
+    usernme and password is added to the users database,
+    otherwise the user is redirected to the registration page
+    """
     categories = mongo.db.categories.find()
     if request.method == 'POST':
         existing_user = mongo.db.users.find_one(
@@ -99,8 +104,9 @@ def register():
         }
 
         mongo.db.users.insert_one(register)
-
+        flash("Registration Succesful")
     return render_template("register.html", categories=categories)
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
