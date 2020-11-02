@@ -26,7 +26,7 @@
                         pattern="^[a-zA-Z0-9]{3,15}$"
                         class="validate"
                         required/>
-                    <label for="username">Username </label>
+                    <label for="username">Username</label>
                     <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="Username should be 3-15 characters long and only contains letters, numbers, '-' and '_'"></i>
                 </div>
             </div>
@@ -49,7 +49,7 @@
             <!-- Looking-for dropdown selector -->
             <div class="row">
                 <div class="input-field col s12">
-                    <select multiple>
+                    <select name="looking_for" multiple>
                         <option value="" disabled selected>Looking For: </option>
                         {% for category in categories %}
                             <option value="{{ category.category_name }}">{{ category.category_name }}</option>

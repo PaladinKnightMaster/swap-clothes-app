@@ -2,6 +2,8 @@ import os
 from flask import (Flask, render_template, redirect, request, url_for, session)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+# For security features used in registwer and login pages
+from werkzeug.security import generate_password_hash, check_password_hash
 # Only import env if env.py path exists
 if os.path.exists("env.py"):
     import env
@@ -83,6 +85,21 @@ def search():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     categories = mongo.db.categories.find()
+    if request.method == 'POST':
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+        if existing_user:
+            flash("Username already exists")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": request.form.get("password"),
+            "looking_for": request.form.getlist("looking_for")
+        }
+
+        mongo.db.users.insert_one(register)
+
     return render_template("register.html", categories=categories)
 
 if __name__ == '__main__':
