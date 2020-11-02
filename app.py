@@ -94,17 +94,17 @@ def register():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
         if existing_user:
-            flash("Username already exists")
+            flash("A Swapper already has this name, pick a new one!")
             return redirect(url_for("register"))
 
         register = {
             "username": request.form.get("username").lower(),
-            "password": request.form.get("password"),
+            "password": generate_password_hash(request.form.get("password")),
             "looking_for": request.form.getlist("looking_for")
         }
 
         mongo.db.users.insert_one(register)
-        flash("Registration Succesful")
+        flash("You're officially a Swapper now, woo!")
     return render_template("register.html", categories=categories)
 
 
