@@ -1,5 +1,6 @@
 import os
-from flask import (Flask, flash, render_template, redirect, request, url_for, session)
+from flask import (Flask, flash, render_template, redirect,
+                   request, url_for, session)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 # For security features used in registwer and login pages
@@ -110,6 +111,30 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Checks if username exists in the database and if it does,
+    return the username. The unhashed password from this user's
+    dictionary is chekced against the entered password. If password
+    or username don't match then a flash message is provided to user as
+    feedback.
+    """
+    if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+        # checks if the hashed password in DB matches entered one
+        if existing_user:
+            if check_password_hash(existing_user["password"],
+                                   request.form.get("password")):
+                flash("Welcome Swapper")
+                return redirect(url_for('items'))
+            else:
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for('login'))
+        # If user doesn't exist
+        else:
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for('login'))
+
     return render_template("login.html")
 
 
