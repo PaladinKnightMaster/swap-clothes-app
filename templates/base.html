@@ -31,7 +31,7 @@
                     </ul>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="{{ url_for('register') }}" class="hvr-underline-from-center {% block nav_register %}{% endblock %}">Register</a></li>
-                        <li><a href="#" class="hvr-underline-from-center {% block nav_login %}{% endblock %}">Log In</a></li>
+                        <li><a href="{{ url_for('login') }}" class="hvr-underline-from-center {% block nav_login %}{% endblock %}">Log In</a></li>
                     </ul>
                 </div>
                 <!-- Sub navbar for 'My Profile' page -->
@@ -43,7 +43,7 @@
                 <li><a href="{{ url_for('home') }}" class="{% block sidenav_home %}{% endblock %}">Home</a></li>
                 <li><a href="{{ url_for('items') }}" class="{% block sidenav_items %}{% endblock %}">Items</a></li>
                 <li><a href="{{ url_for('register') }}" class="{% block sidenav_register %}{% endblock %}">Register</a></li>
-                <li><a href="#" class="{% block sidenav_login %}{% endblock %}">Login</a></li>
+                <li><a href="{{ url_for('login') }}" class="{% block sidenav_login %}{% endblock %}">Login</a></li>
             </ul>
             <!-- Sub navbar for 'My Profile page on mobile screen sizes' -->
             {% block mobilenav %}{% endblock %}
