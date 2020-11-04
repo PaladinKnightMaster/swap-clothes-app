@@ -30,8 +30,14 @@
                         <li><a href="{{ url_for('items') }}" class="hvr-underline-from-center {% block nav_items %}{% endblock %}">Items</a></li>
                     </ul>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="{{ url_for('register') }}" class="hvr-underline-from-center {% block nav_register %}{% endblock %}">Register</a></li>
-                        <li><a href="{{ url_for('login') }}" class="hvr-underline-from-center {% block nav_login %}{% endblock %}">Log In</a></li>
+                        {% if session.user %}
+                        <li><a href="#" class="hvr-underline-from-center {% block nav_my_profile %}{% endblock %}">My Profile</a></li>
+                        <li><a href="#" class="hvr-underline-from-center {% block nav_add_item %}{% endblock %}"><i class="fas fa-plus"></i> Add Item</a></li>
+                            <li><a href="#" class="hvr-underline-from-center {% block nav_logout %}{% endblock %}">Log Out</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('register') }}" class="hvr-underline-from-center {% block nav_register %}{% endblock %}">Register</a></li>
+                            <li><a href="{{ url_for('login') }}" class="hvr-underline-from-center {% block nav_login %}{% endblock %}">Log In</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- Sub navbar for 'My Profile' page -->
@@ -42,8 +48,15 @@
             <ul class="sidenav" id="mobile-demo">
                 <li><a href="{{ url_for('home') }}" class="{% block sidenav_home %}{% endblock %}">Home</a></li>
                 <li><a href="{{ url_for('items') }}" class="{% block sidenav_items %}{% endblock %}">Items</a></li>
-                <li><a href="{{ url_for('register') }}" class="{% block sidenav_register %}{% endblock %}">Register</a></li>
-                <li><a href="{{ url_for('login') }}" class="{% block sidenav_login %}{% endblock %}">Login</a></li>
+                <!-- Display certain pages depending on if user session cookie is present -->
+                {% if session.user %}
+                    <li><a href="#" class="{% block sidenav_add_item %}{% endblock %}">Add Item <i class="fas fa-plus"></i></a></li>
+                    <li><a href="#" class="{% block sidenav_my_profile %}{% endblock %}">My Profile</a></li>
+                    <li><a href="#" class="{% block sidenav_logout %}{% endblock %}">Log Out</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('register') }}" class="{% block sidenav_register %}{% endblock %}">Register</a></li>
+                    <li><a href="{{ url_for('login') }}" class="{% block sidenav_login %}{% endblock %}">Login</a></li>
+                {% endif %}
             </ul>
             <!-- Sub navbar for 'My Profile page on mobile screen sizes' -->
             {% block mobilenav %}{% endblock %}
