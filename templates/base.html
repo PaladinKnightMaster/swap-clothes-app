@@ -33,7 +33,7 @@
                         {% if session.user %}
                         <li><a href="#" class="hvr-underline-from-center {% block nav_my_profile %}{% endblock %}">My Profile</a></li>
                         <li><a href="{{ url_for('add_item') }}" class="hvr-underline-from-center {% block nav_add_item %}{% endblock %}"><i class="fas fa-plus"></i> Add Item</a></li>
-                            <li><a href="#" class="hvr-underline-from-center {% block nav_logout %}{% endblock %}">Log Out</a></li>
+                            <li><a href="{{ url_for('logout') }}" class="hvr-underline-from-center {% block nav_logout %}{% endblock %}">Log Out</a></li>
                         {% else %}
                             <li><a href="{{ url_for('register') }}" class="hvr-underline-from-center {% block nav_register %}{% endblock %}">Register</a></li>
                             <li><a href="{{ url_for('login') }}" class="hvr-underline-from-center {% block nav_login %}{% endblock %}">Log In</a></li>
@@ -52,7 +52,7 @@
                 {% if session.user %}
                 <li><a href="#" class="{% block sidenav_my_profile %}{% endblock %}">My Profile</a></li>
                 <li><a href="{{ url_for('add_item') }}" class="{% block sidenav_add_item %}{% endblock %}">Add Item <i class="fas fa-plus"></i></a></li>
-                    <li><a href="#" class="{% block sidenav_logout %}{% endblock %}">Log Out</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="{% block sidenav_logout %}{% endblock %}">Log Out</a></li>
                 {% else %}
                     <li><a href="{{ url_for('register') }}" class="{% block sidenav_register %}{% endblock %}">Register</a></li>
                     <li><a href="{{ url_for('login') }}" class="{% block sidenav_login %}{% endblock %}">Login</a></li>

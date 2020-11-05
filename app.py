@@ -143,6 +143,17 @@ def login():
     return render_template("login.html")
 
 
+@app.route('/logout')
+def logout():
+    """
+    Implement log out functionality by removing user from
+    the session cookie
+    """
+    flash("See you soon")
+    session.pop("user")
+    return redirect(url_for('login'))
+
+
 @app.route("/add_item", methods=["GET","POST"])
 def add_item():
     """
