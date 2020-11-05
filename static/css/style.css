@@ -371,11 +371,16 @@ nav ul a:hover, .active {
 /* Style sorting buttons */
 .sort-container a {
     font-size: 1.5rem;
-    color: inherit;
     line-height: 3rem;
 }
 
-.sort-container a:hover {
+
+.sort-container a, .item-icon-container a {
+    color: inherit;
+}
+
+
+.sort-container a:hover, .item-icon-container a:hover {
     color: #FF626D;
 }
 
