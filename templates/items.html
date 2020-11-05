@@ -127,11 +127,17 @@
                                 <div class="col s6">
                                     <p class="left item-creator">{{ item.created_by }}</p>
                                 </div>
-                                <div class="col s6 item-icon-container">
-                                    <a href="#"><i class="far fa-trash-alt"></i></a>
-                                    <a><i class="far fa-flag"></i></a>
-                                    <a><i class="fas fa-pencil-alt"></i></a>
-                                </div>
+                                <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
+                                {% if session.user %}
+                                    <div class="col s6 item-icon-container">
+                                    {% if session.user == item.created_by %}
+                                        <a href="#"><i class="far fa-trash-alt"></i></a>
+                                        <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                                    {% else %}
+                                        <a href="#"><i class="far fa-flag"></i></a>
+                                    {% endif %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                         <!-- More information displayed using card reveal component -->
