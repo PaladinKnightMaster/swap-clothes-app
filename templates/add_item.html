@@ -15,7 +15,7 @@
         action="{{ url_for('add_item') }}">
         <div class="card-panel z-depth-4 border-radius-sm">
 
-            <!-- username -->
+            <!-- Item Name -->
             <div class="row input-container">
                 <div class="input-field col s12">
                     <input
@@ -31,6 +31,19 @@
                             class="far fa-question-circle tooltipped" 
                             data-position="right" 
                             data-tooltip="Between 3-20 characters long"></i>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Item Image -->
+            <div class="row input-container">
+                <div class="input-field col s12">
+                    <input
+                        id="item_image"
+                        name="item_image"
+                        type="text"/>
+                    <label for="item_image">
+                        Picture Link 
                     </label>
                 </div>
             </div>
