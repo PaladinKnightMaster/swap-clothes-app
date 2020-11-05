@@ -142,6 +142,12 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/add_item", methods=["GET","POST"])
+def add_item():
+    categories = mongo.db.categories.find()
+    return render_template("add_item.html", categories=categories)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
