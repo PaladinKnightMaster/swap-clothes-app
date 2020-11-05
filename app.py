@@ -188,7 +188,33 @@ def add_item():
 
 @app.route("/edit_item/<item_id>", methods=["GET", "POST"])
 def edit_item(item_id):
-    return render_template("edit_item.html")
+    """
+    Edit a chosen item identified by item_id and display updated version
+    after changes have been submitted
+    """
+    if request.method == "POST":
+        edited_item = {
+            "item_image": request.form.get("item_image"),
+            "item_name": request.form.get("item_name"),
+            "short_description": request.form.get("short_desc"),
+            "long_description": request.form.get("long_desc"),
+            "category": request.form.get("category"),
+            "size_gender": request.form.get("item_fit"),
+            "size_country": request.form.get("size_region"),
+            "size": request.form.get("size"),
+            "used_status": request.form.get("used_status"),
+            "created_on": datetime.now(),
+            "created_by": session["user"],
+            "liked_by": [],
+            "liked_count": 0,
+            "flagged": "N",
+        }
+        mongo.db.items.update({"_id": ObjectId(item_id)}, edited_item)
+        flash("'{}' updated succesfully".format(edited_item["item_name"]))
+
+    item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
+    categories = mongo.db.categories.find()
+    return render_template("edit_item.html", categories=categories, item=item)
 
 
 if __name__ == '__main__':
