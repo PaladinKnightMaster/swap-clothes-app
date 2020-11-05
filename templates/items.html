@@ -132,7 +132,7 @@
                                     <div class="col s6 item-icon-container">
                                     {% if session.user == item.created_by %}
                                         <a href="#"><i class="far fa-trash-alt"></i></a>
-                                        <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{ url_for('edit_item', item_id=item._id) }}"><i class="fas fa-pencil-alt"></i></a>
                                     {% else %}
                                         <a href="#"><i class="far fa-flag"></i></a>
                                     {% endif %}

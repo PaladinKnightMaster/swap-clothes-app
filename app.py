@@ -186,6 +186,11 @@ def add_item():
     return render_template("add_item.html", categories=categories)
 
 
+@app.route("/edit_item/<item_id>", methods=["GET", "POST"])
+def edit_item(item_id):
+    return render_template("edit_item.html")
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
