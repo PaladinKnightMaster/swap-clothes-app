@@ -6,6 +6,7 @@ from bson.objectid import ObjectId
 # For security features used in registwer and login pages
 from werkzeug.security import generate_password_hash, check_password_hash
 # Only import env if env.py path exists
+from datetime import datetime
 if os.path.exists("env.py"):
     import env
 
@@ -62,7 +63,7 @@ def sort(sort_by):
     elif sort_by == 'z-to-a':
         items = list(mongo.db.items.find().sort("item_name", -1))
     elif sort_by == 'date':
-        items = list(mongo.db.items.find().sort("created_on", 1))
+        items = list(mongo.db.items.find().sort("created_on", -1))
     elif sort_by == 'liked':
         items = list(mongo.db.items.find().sort("liked_by", 1))
     elif sort_by == 'flagged':
@@ -144,7 +145,33 @@ def login():
 
 @app.route("/add_item", methods=["GET","POST"])
 def add_item():
+    """
+    Insert new items added into Items collection along with
+    date and time when item was created and the user who
+    created the item
+    """
     categories = mongo.db.categories.find()
+    if request.method == "POST":
+        new_item = {
+            "item_image": request.form.get("item_image"),
+            "item_name": request.form.get("item_name"),
+            "short_description": request.form.get("short_desc"),
+            "long_description": request.form.get("long_desc"),
+            "category": request.form.get("category"),
+            "size_gender": request.form.get("item_fit"),
+            "size_country": request.form.get("size_region"),
+            "size": request.form.get("size"),
+            "used_status": request.form.get("used_status"),
+            "created_on": datetime.now(),
+            "created_by": session["user"],
+            "liked_by": [],
+            "liked_count": 0,
+            "flagged": "N",
+        }
+        mongo.db.items.insert_one(new_item)
+        flash("Item added succesfully")
+        return redirect('items')
+
     return render_template("add_item.html", categories=categories)
 
 
