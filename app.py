@@ -94,20 +94,20 @@ def register():
     categories = mongo.db.categories.find()
     if request.method == 'POST':
         existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+            {"username": request.form.get("username")})
         if existing_user:
             flash("A Swapper already has this name, pick a new one!")
             return redirect(url_for("register"))
 
         register = {
-            "username": request.form.get("username").lower(),
+            "username": request.form.get("username"),
             "password": generate_password_hash(request.form.get("password")),
             "looking_for": request.form.getlist("looking_for")
         }
 
         mongo.db.users.insert_one(register)
         # 
-        session["user"] = request.form.get("username").lower()
+        session["user"] = request.form.get("username")
         flash("You're officially a Swapper now, woo!")
         return redirect('items')
     return render_template("register.html", categories=categories)
@@ -124,12 +124,12 @@ def login():
     """
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+            {"username": request.form.get("username")})
         # checks if the hashed password in DB matches entered one
         if existing_user:
             if check_password_hash(existing_user["password"],
                                    request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
+                session["user"] = request.form.get("username")
                 flash("Welcome Back {}".format(session["user"]))
                 return redirect(url_for('items'))
             else:
