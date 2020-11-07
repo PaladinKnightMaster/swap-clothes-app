@@ -24,6 +24,36 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+def pag_items(items):
+    """
+    Uses flask_pagination and list methods to display 9 items per page
+    sorted by the most recently added item.
+    ***Page pagination code was modified from mozillazg GitHub demo and
+    Pretty Printed Youtube Tutorial on Query Pagination in Flask and MongoDB***
+    """
+    # getting page arguments for pagination
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    # set limit of 9 items per page
+    limit = 9
+    # calc offset of items for each page
+    offset = page * limit - limit
+    total = len(items)
+    # selecting items for each page
+    return items[offset: offset + limit]
+
+
+def pagination_arg(items):
+    # getting page arguments for pagination
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    # Total of all items in items list
+    total = len(items)
+    # Setting pagination parameters
+    return Pagination(page=page, per_page=9, total=total,
+                      css_framework="bootstrap3")
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -34,28 +64,14 @@ def home():
 @app.route("/items")
 def items():
     """
-    Uses flask_pagination and list methods to display 9 items per page
-    sorted by the most recently added item.
-    ***Page pagination code was modified from mozillazg GitHub demo and
-    Pretty Printed Youtube Tutorial on Query Pagination in Flask and MongoDB***
+    Display all items sorted  by the most recent,
+    Paginate displayed items
     """
-    # getting page arguments for pagination
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    starting_id = list(mongo.db.items.find().sort('_id', -1))
-    # set limit of 9 items per page
-    limit = 9
-    # calc offset of items for each page
-    offset = page * limit - limit
-    total = len(starting_id)
-    # selecting items for each page
-    items = starting_id[offset: offset + limit]
-    # Setting pagination parameters
-    pagination = Pagination(page=page, per_page=limit, total=total,
-                            css_framework="bootstrap3")
+    items = list(mongo.db.items.find().sort('_id', -1))
+    items_paginated = pag_items(items)
+    pagination = pagination_arg(items)
     categories = mongo.db.categories.find()
-
-    return render_template("items.html", items=items,
+    return render_template("items.html", items=items_paginated,
                            categories=categories, pagination=pagination)
 
 
