@@ -42,7 +42,7 @@
                         <!-- Search input -->
                         <div class="col s12 m8">
                             <label for="search"></label>                        
-                            <input type="text" name="search" id="search" minlength="1" placeholder="Search:" class="validate required">
+                            <input type="text" name="search" id="search" placeholder="Search:" class="validate" required>
                         </div>
                         <!-- Reset button -->
                         <div class="col s4 m2 offset-s2 center">
@@ -105,10 +105,10 @@
     </div>
     <!-- Display Items -->
     <div class="col s12 l9">
+    {{ pagination.links }}
+    {{ pagination.info }}
     {% if items|length > 0 %}
         <!-- Add Pagination information and page links -->
-        {{ pagination.links }}
-        {{ pagination.info }}
         <div class="row all-item-container">
             {% for item in items %}
             <div class="col s12 m6 l4">

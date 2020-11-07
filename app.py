@@ -68,8 +68,10 @@ def items():
     Paginate displayed items
     """
     items = list(mongo.db.items.find().sort('_id', -1))
+
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
+
     categories = mongo.db.categories.find()
     return render_template("items.html", items=items_paginated,
                            categories=categories, pagination=pagination)
@@ -84,9 +86,13 @@ def filter():
     categories = mongo.db.categories.find()
     selected_categories = request.form.getlist("selected-categories")
     items = list(mongo.db.items.find(
-        {"category": {"$in": selected_categories}}))
-    return render_template("items.html", items=items, categories=categories,
-                           selected_categories=selected_categories)
+        {"category": {"$in": selected_categories}}).sort('_id', -1))
+
+    items_paginated = pag_items(items)
+    pagination = pagination_arg(items)
+
+    return render_template("items.html", items=items_paginated, categories=categories,
+                           selected_categories=selected_categories, pagination=pagination)
 
 
 @app.route("/sort/<sort_by>")
@@ -108,7 +114,12 @@ def sort(sort_by):
     elif sort_by == 'flagged':
         items = list(mongo.db.items.find().sort("flagged", -1))
 
-    return render_template("items.html", items=items, categories=categories)
+    items_paginated = pag_items(items)
+    pagination = pagination_arg(items)
+
+    return render_template("items.html", items=items_paginated,
+                           categories=categories, pagination=pagination)
+
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -120,7 +131,13 @@ def search():
     categories = mongo.db.categories.find()
     query = request.form.get("search")
     items = list(mongo.db.items.find({"$text": {"$search": query}}))
-    return render_template("items.html", items=items, categories=categories)
+
+    items_paginated = pag_items(items)
+    pagination = pagination_arg(items)
+
+    return render_template("items.html", items=items_paginated,
+                           categories=categories, pagination=pagination)
+
 
 
 @app.route("/register", methods=["GET", "POST"])
