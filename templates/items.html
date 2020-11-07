@@ -105,75 +105,79 @@
     </div>
     <!-- Display Items -->
     <div class="col s12 l9">
-        {% if items|length > 0 %}
+    {% if items|length > 0 %}
+        <!-- Add Pagination information and page links -->
+        {{ pagination.links }}
+        {{ pagination.info }}
         <div class="row all-item-container">
             {% for item in items %}
-                <div class="col s12 m6 l4">
-                    <div class="card center z-depth-4">
-                        <!-- Card Image -->
-                        <div class="card-image">
-                            <img src="{{ item.item_image }}" class="item-image">
-                            <a class="btn-floating halfway-fab waves-effect waves-light white"><i class="far fa-heart accent-text"></i></a>
+            <div class="col s12 m6 l4">
+                <div class="card center z-depth-4">
+                    <!-- Card Image -->
+                    <div class="card-image">
+                        <img src="{{ item.item_image }}" class="item-image">
+                        <a class="btn-floating halfway-fab waves-effect waves-light white"><i class="far fa-heart accent-text"></i></a>
+                    </div>
+                    <!-- Card Content -->
+                    <div class="card-content">
+                        <div class="item-content">
+                            <span class="card-title">{{ item.item_name }}</span>
+                            <p class="item-short-description activator">{{ item.short_description }}</p>
+                            <p class="activator accent-text" id="display-more">more</p>
                         </div>
-                        <!-- Card Content -->
-                        <div class="card-content">
-                            <div class="item-content">
-                                <span class="card-title">{{ item.item_name }}</span>
-                                <p class="item-short-description activator">{{ item.short_description }}</p>
-                                <p class="activator accent-text" id="display-more">more</p>
+                        <!-- Item Footer displaying creator, delete and flag buttons -->
+                        <div class="row item-footer">
+                            <div class="col s6">
+                                <p class="left item-creator">{{ item.created_by }}</p>
                             </div>
-                            <!-- Item Footer displaying creator, delete and flag buttons -->
-                            <div class="row item-footer">
-                                <div class="col s6">
-                                    <p class="left item-creator">{{ item.created_by }}</p>
-                                </div>
-                                <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
-                                {% if session.user %}
-                                    <div class="col s6 item-icon-container">
-                                    {% if session.user == item.created_by %}
-                                        <a href="{{ url_for('delete_item', item_id = item._id) }}"><i class="far fa-trash-alt"></i></a>
-                                        <a href="{{ url_for('edit_item', item_id=item._id) }}"><i class="fas fa-pencil-alt"></i></a>
-                                    {% else %}
-                                        <a href="#"><i class="far fa-flag"></i></a>
-                                    {% endif %}
-                                    </div>
+                            <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
+                            {% if session.user %}
+                                <div class="col s6 item-icon-container">
+                                {% if session.user == item.created_by %}
+                                    <a href="{{ url_for('delete_item', item_id = item._id) }}"><i class="far fa-trash-alt"></i></a>
+                                    <a href="{{ url_for('edit_item', item_id=item._id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                {% else %}
+                                    <a href="#"><i class="far fa-flag"></i></a>
                                 {% endif %}
-                            </div>
+                                </div>
+                            {% endif %}
                         </div>
-                        <!-- More information displayed using card reveal component -->
-                        <div class="card-reveal">
-                            <span class="card-title card-reveal-title">{{ item.item_name }}<i class="fas fa-times right accent-text"></i></span>
-                            <p>{{ item.long_description }}</p>
-                            <hr>
-                            <!-- Specific item details -->
-                            <div class="row">
-                                <div class="col s5 item-labels right-align">Category</div>
-                                <div class="col s2 item-icons center-align"><i class="fas fa-sitemap secondary-accent-text"></i></div>
-                                <div class="col s5 item-values left-align">{{ item.category }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col s5 item-labels right-align">Size</div>
-                                <div class="col s2 item-icons center-align"><i class="fas fa-ruler secondary-accent-text"></i></div>
-                                <div class="col s5 item-values left-align">{{ item.size }} ({{ item.size_country }}) <a href="https://www.sizeguide.net/" target="_blank" class="tooltipped grey-text" data-position="bottom" data-tooltip="Not Sure about sizes?"><i class="far fa-question-circle"></i></a></div>
-                            </div>
-                            <div class="row">
-                                <div class="col s5 item-labels right-align">Fit</div>
-                                <div class="col s2 item-icons center-align"><i class="fas fa-transgender-alt secondary-accent-text"></i></div>
-                                <div class="col s5 item-values left-align">{{ item.size_gender }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col s5 item-labels right-align">Used</div>
-                                <div class="col s2 item-icons center-align"><i class="far fa-clock secondary-accent-text"></i></div>
-                                <div class="col s5 item-values left-align">{{ item.used_status }}</div>
-                            </div>
+                    </div>
+                    <!-- More information displayed using card reveal component -->
+                    <div class="card-reveal">
+                        <span class="card-title card-reveal-title">{{ item.item_name }}<i class="fas fa-times right accent-text"></i></span>
+                        <p>{{ item.long_description }}</p>
+                        <hr>
+                        <!-- Specific item details -->
+                        <div class="row">
+                            <div class="col s5 item-labels right-align">Category</div>
+                            <div class="col s2 item-icons center-align"><i class="fas fa-sitemap secondary-accent-text"></i></div>
+                            <div class="col s5 item-values left-align">{{ item.category }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col s5 item-labels right-align">Size</div>
+                            <div class="col s2 item-icons center-align"><i class="fas fa-ruler secondary-accent-text"></i></div>
+                            <div class="col s5 item-values left-align">{{ item.size }} ({{ item.size_country }}) <a href="https://www.sizeguide.net/" target="_blank" class="tooltipped grey-text" data-position="bottom" data-tooltip="Not Sure about sizes?"><i class="far fa-question-circle"></i></a></div>
+                        </div>
+                        <div class="row">
+                            <div class="col s5 item-labels right-align">Fit</div>
+                            <div class="col s2 item-icons center-align"><i class="fas fa-transgender-alt secondary-accent-text"></i></div>
+                            <div class="col s5 item-values left-align">{{ item.size_gender }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col s5 item-labels right-align">Used</div>
+                            <div class="col s2 item-icons center-align"><i class="far fa-clock secondary-accent-text"></i></div>
+                            <div class="col s5 item-values left-align">{{ item.used_status }}</div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        {% else %}
-            <h3>No Results Found</h3>
-        {% endif %}
+            </div>
+        {% endfor %}
         </div>
+        {{ pagination.links }}
+    {% else %}
+        <h3>No Results Found</h3>
+    {% endif %}
     </div>
 </div>
     

@@ -5,13 +5,15 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 # For security features used in registwer and login pages
 from werkzeug.security import generate_password_hash, check_password_hash
-# Only import env if env.py path exists
 from datetime import datetime
+from flask_paginate import Pagination, get_page_args
+# Only import env if env.py path exists
 if os.path.exists("env.py"):
     import env
 
 # Create instance of Flask
 app = Flask(__name__)
+
 
 # Adding
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
@@ -31,9 +33,30 @@ def home():
 
 @app.route("/items")
 def items():
+    """
+    Uses flask_pagination and list methods to display 9 items per page
+    sorted by the most recently added item.
+    ***Page pagination code was modified from mozillazg GitHub demo and
+    Pretty Printed Youtube Tutorial on Query Pagination in Flask and MongoDB***
+    """
+    # getting page arguments for pagination
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    starting_id = list(mongo.db.items.find().sort('_id', -1))
+    # set limit of 9 items per page
+    limit = 9
+    # calc offset of items for each page
+    offset = page * limit - limit
+    total = len(starting_id)
+    # selecting items for each page
+    items = starting_id[offset: offset + limit]
+    # Setting pagination parameters
+    pagination = Pagination(page=page, per_page=limit, total=total,
+                            css_framework="bootstrap3")
     categories = mongo.db.categories.find()
-    items = list(mongo.db.items.find())
-    return render_template("items.html", items=items, categories=categories)
+
+    return render_template("items.html", items=items,
+                           categories=categories, pagination=pagination)
 
 
 @app.route("/filter", methods=["GET", "POST"])
