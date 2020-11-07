@@ -451,3 +451,11 @@ label.optional-label {
 }
 
 
+/* ----------PAGINATION---------- */
+ul.pagination, div.pagination-page-info{
+    text-align: center;
+}
+
+.pagination li.active a {
+    background-color: #FF626D;
+}
