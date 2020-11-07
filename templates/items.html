@@ -105,9 +105,7 @@
     </div>
     <!-- Display Items -->
     <div class="col s12 l9">
-    {{ pagination.links }}
-    {{ pagination.info }}
-    {% if items|length > 0 %}
+        {% if items|length > 0 %}
         <!-- Add Pagination information and page links -->
         <div class="row all-item-container">
             {% for item in items %}
@@ -174,6 +172,7 @@
             </div>
         {% endfor %}
         </div>
+        {{ pagination.info }}
         {{ pagination.links }}
     {% else %}
         <h3>No Results Found</h3>
