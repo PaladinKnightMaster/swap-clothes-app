@@ -301,7 +301,6 @@ def liked_item(item_id, action):
         {"_id": ObjectId(item_id)})["created_by"]
     item_creator_liked_by = mongo.db.matches.find_one(
         {"username": item_creator})["liked_by"]
-    print(user, user_liked_by, item_creator, item_creator_liked_by)
     # Add user to liked_by array in the item dictinory
     if action == 'like':
         mongo.db.items.update_one({"_id": ObjectId(item_id)},
@@ -319,6 +318,19 @@ def liked_item(item_id, action):
     elif action == 'unlike':
         mongo.db.items.update_one({"_id": ObjectId(item_id)},
                                   {'$pull': {'liked_by': user}})
+        # check if user likes any other creator items
+        all_items_from_creator = list(mongo.db.items.find({"created_by": item_creator}))
+        liked_items_from_creator = []
+        for item in all_items_from_creator:
+            # Add all liked items by the same creator in a list
+            if user in item["liked_by"]:
+                liked_items_from_creator.append(item["item_name"])
+
+            # If list=0 remove user from creators matched dictionary 
+        if len(liked_items_from_creator) == 0:
+            mongo.db.matches.update_one({"username": item_creator},
+                        {'$pull': {'liked_by': user}})
+            
 
     return redirect(request.referrer)
 
