@@ -352,7 +352,15 @@ def liked_item(item_id, action):
 
 @app.route('/my_profile')
 def my_profile():
-    return render_template('my_profile.html')
+    """
+    Get session user data and items data
+    """
+    items = list(mongo.db.items.find())
+    item_count = mongo.db.items.find({"created_by": session["user"]}).count()
+
+    user = mongo.db.users.find_one({"username": session["user"]})
+
+    return render_template('my_profile.html', items=items, user=user, item_count=item_count)
 
 
 if __name__ == '__main__':

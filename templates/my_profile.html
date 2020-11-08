@@ -6,4 +6,36 @@
 {% block content %}
 <h1>My Profile</h1>
 
+<!-- Profile detail container -->
+<div class="container">
+    <div class="row">
+        <!-- Username and picture -->
+        <div class="col s12 l4">
+            <p>{{ user["username"] }}</p>
+            <div class="blue border-radius-m" style="height: 100px; width: 100px;"><img src="{{ user['user_image'] }}" alt=""></div>
+        </div>
+        <div class="col s12 l8">
+            <div class="row">
+                <!-- User Description -->
+                <div class="col s12">
+                    <h5>Description</h5>
+                    <p>{{ user["user_description"] }}</p>
+                </div>
+                <!-- Items user is looking for -->
+                <div class="col s12">
+                    <h5>Looking For</h5>
+                    {% for item in user["looking_for"] %}
+                        <p>{{ item }}</p>
+                    {% endfor %}
+                </div>
+                <!-- Count of items the user has -->
+                <div class="col s12">
+                    <h5>Items</h5>
+                    <p>{{ item_count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock %}
