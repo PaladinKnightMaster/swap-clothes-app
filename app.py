@@ -350,6 +350,11 @@ def liked_item(item_id, action):
     return redirect(request.referrer)
 
 
+@app.route('/my_profile')
+def my_profile():
+    return render_template('my_profile.html')
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
