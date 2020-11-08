@@ -292,15 +292,33 @@ def delete_item(item_id):
 def liked_item(item_id, action):
     """
     If user likes an item, add them to the items collection,
-    liked_by array. If the user unlikes the item, remove them from the same array
+    liked_by array. If the user unlikes the item,
+    remove them from the same array
     """
     user = session['user']
-
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
+    item_creator = mongo.db.items.find_one(
+        {"_id": ObjectId(item_id)})["created_by"]
+    item_creator_liked_by = mongo.db.matches.find_one(
+        {"username": item_creator})["liked_by"]
+    print(user, user_liked_by, item_creator, item_creator_liked_by)
+    # Add user to liked_by array in the item dictinory
     if action == 'like':
-        mongo.db.items.update({"_id": ObjectId(item_id)}, {'$push': {'liked_by': user}})
-    
+        mongo.db.items.update_one({"_id": ObjectId(item_id)},
+                                  {'$push': {'liked_by': user}})
+        # Add user to creators liked_by array
+        if user not in item_creator_liked_by:
+            mongo.db.matches.update_one({"username": item_creator},
+                                        {'$push': {'liked_by': user}})
+        # Check if item creator has liked users items and match them
+        if item_creator in user_liked_by:
+            flash("""It's a match! You can now click
+                  on {}'s username and say hi :)""".format(item_creator))
+
+    # Remove user from liked_by array in item dictionary
     elif action == 'unlike':
-        mongo.db.items.update({"_id": ObjectId(item_id)}, {'$pull': {'liked_by': user}})
+        mongo.db.items.update_one({"_id": ObjectId(item_id)},
+                                  {'$pull': {'liked_by': user}})
 
     return redirect(request.referrer)
 
