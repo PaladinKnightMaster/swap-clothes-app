@@ -114,7 +114,16 @@
                     <!-- Card Image -->
                     <div class="card-image">
                         <img src="{{ item.item_image }}" class="item-image">
-                        <a class="btn-floating halfway-fab waves-effect waves-light white"><i class="far fa-heart like-button"></i></a>
+                        <!-- Checks if the logged in user already likes the item and display the like button accordingly -->
+                        {% if session.user in item.liked_by %}
+                            <a href="{{ url_for('liked_item', item_id=item._id, action='unlike') }}"
+                                class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="fas fa-heart like-button"></i></a>
+                        {% else %}
+                            <a href="{{ url_for('liked_item', item_id=item._id, action='like') }}"
+                                class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="far fa-heart like-button"></i></a>
+                        {% endif %}    
                     </div>
                     <!-- Card Content -->
                     <div class="card-content">

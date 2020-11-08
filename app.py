@@ -281,6 +281,23 @@ def delete_item(item_id):
     return redirect(url_for('items'))
 
 
+@app.route('/liked_item/<item_id>/<action>')
+def liked_item(item_id, action):
+    """
+    If user likes an item, add them to the items collection,
+    liked_by array. If the user unlikes the item, remove them from the same array
+    """
+    user = session['user']
+
+    if action == 'like':
+        mongo.db.items.update({"_id": ObjectId(item_id)}, {'$push': {'liked_by': user}})
+    
+    elif action == 'unlike':
+        mongo.db.items.update({"_id": ObjectId(item_id)}, {'$pull': {'liked_by': user}})
+
+    return redirect(request.referrer)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
