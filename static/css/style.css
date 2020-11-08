@@ -477,3 +477,29 @@ a i.like-button-disabled {
     background-color: #d8d8d8;
     cursor: default;
 }
+
+/* User socials dropdown, overriding some default materialize styles */
+ul#user-socials{
+    width: auto !important;
+    height: 37px !important;
+}
+
+ul#user-socials li i {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+
+ul#user-socials li{
+    display: inline;
+    text-align: center;
+}
+
+ul#user-socials li a{
+    display: inline-block;
+    padding: 0.5rem;
+}
+
+ul#user-socials li a:hover{
+    background-color: #eee;
+}
