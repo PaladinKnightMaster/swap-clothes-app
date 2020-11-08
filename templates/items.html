@@ -114,7 +114,19 @@
                     <!-- Card Image -->
                     <div class="card-image">
                         <img src="{{ item.item_image }}" class="item-image">
-                        <a class="btn-floating halfway-fab waves-effect waves-light white"><i class="far fa-heart accent-text"></i></a>
+                        <!-- Checks if the logged in user already likes the item and display the like button accordingly -->
+                        {% if session.user == item.created_by %}
+                            <a class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="far fa-heart like-button-disabled"></i></a>
+                        {% elif session.user in item.liked_by %}
+                            <a href="{{ url_for('liked_item', item_id=item._id, action='unlike') }}"
+                                class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="fas fa-heart like-button"></i></a>
+                        {% else %}
+                            <a href="{{ url_for('liked_item', item_id=item._id, action='like') }}"
+                                class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="far fa-heart like-button"></i></a>
+                        {% endif %}    
                     </div>
                     <!-- Card Content -->
                     <div class="card-content">
@@ -126,7 +138,18 @@
                         <!-- Item Footer displaying creator, delete and flag buttons -->
                         <div class="row item-footer">
                             <div class="col s6">
+                            <!-- In case of a match  display creators socials in a dropdown so the user can contact them -->
+                            {% if session.user in item.liked_by and item.created_by in liked %}
+                                <a id="user-socials-container" href="#" data-target='user-socials' class="dropdown-trigger"><p class="left item-creator accent-text">{{ item.created_by }}</p></a>
+                                <ul id='user-socials' class='dropdown-content border-radius-sm z-depth-4'>
+                                    <li><a href="#!" class="blue-text"><i class="fab fa-facebook-messenger"></i></a></li>
+                                    <li><a href="#!" class="green-text text-accent-4"><i class="fab fa-whatsapp"></i></a></li>
+                                    <li><a href="#!" class="pink-text text-darken-1"><i class="fab fa-instagram"></i></a></li>
+                                </ul>
+                            <!--If it's not a match, show unclickable creators username  -->
+                            {% else %}
                                 <p class="left item-creator">{{ item.created_by }}</p>
+                            {% endif %}
                             </div>
                             <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
                             {% if session.user %}

@@ -72,9 +72,13 @@ def items():
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
     categories = mongo.db.categories.find()
+
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+                           categories=categories, pagination=pagination,
+                           liked=user_liked_by)
 
 
 @app.route("/filter", methods=["GET", "POST"])
@@ -90,9 +94,15 @@ def filter():
 
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
+    # a list of users who have liked session user
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
 
-    return render_template("items.html", items=items_paginated, categories=categories,
-                           selected_categories=selected_categories, pagination=pagination)
+    return render_template("items.html", items=items_paginated,
+                           categories=categories,
+                           selected_categories=selected_categories,
+                           pagination=pagination,
+                           liked=user_liked_by)
 
 
 @app.route("/sort/<sort_by>")
@@ -117,9 +127,12 @@ def sort(sort_by):
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
 
+    return render_template("items.html", items=items_paginated,
+                           categories=categories, pagination=pagination,
+                           liked=user_liked_by)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -135,9 +148,12 @@ def search():
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
 
+    return render_template("items.html", items=items_paginated,
+                           categories=categories, pagination=pagination,
+                           liked=user_liked_by)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -162,7 +178,14 @@ def register():
         }
 
         mongo.db.users.insert_one(register)
-        # 
+
+        # Add new user to matches database to facilitate
+        mongo.db.matches.insert_one(
+            { "username": request.form.get("username"),
+            "liked_by": [],
+            "matched_items": [],
+            "matched_creator": []})
+
         session["user"] = request.form.get("username")
         flash("You're officially a Swapper now, woo!")
         return redirect('items')
@@ -279,6 +302,52 @@ def delete_item(item_id):
     mongo.db.items.remove({'_id': ObjectId(item_id)})
     flash("Item has been deleted, bye!")
     return redirect(url_for('items'))
+
+
+@app.route('/liked_item/<item_id>/<action>')
+def liked_item(item_id, action):
+    """
+    If user likes an item, add them to the items collection,
+    liked_by array. If the user unlikes the item,
+    remove them from the same array
+    """
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
+    item_creator = mongo.db.items.find_one(
+        {"_id": ObjectId(item_id)})["created_by"]
+    item_creator_liked_by = mongo.db.matches.find_one(
+        {"username": item_creator})["liked_by"]
+    # Add user to liked_by array in the item dictinory
+    if action == 'like':
+        mongo.db.items.update_one({"_id": ObjectId(item_id)},
+                                  {'$push': {'liked_by': user}})
+        # Add user to creators liked_by array
+        if user not in item_creator_liked_by:
+            mongo.db.matches.update_one({"username": item_creator},
+                                        {'$push': {'liked_by': user}})
+        # Check if item creator has liked users items and match them
+        if item_creator in user_liked_by:
+            flash("""It's a match! You can now click
+                  on {}'s username and say hi :)""".format(item_creator))
+
+    # Remove user from liked_by array in item dictionary
+    elif action == 'unlike':
+        mongo.db.items.update_one({"_id": ObjectId(item_id)},
+                                  {'$pull': {'liked_by': user}})
+        # check if user likes any other creator items
+        all_items_from_creator = list(mongo.db.items.find({"created_by": item_creator}))
+        liked_items_from_creator = []
+        for item in all_items_from_creator:
+            # Add all liked items by the same creator in a list
+            if user in item["liked_by"]:
+                liked_items_from_creator.append(item["item_name"])
+
+            # If list=0 remove user from creators matched dictionary 
+        if len(liked_items_from_creator) == 0:
+            mongo.db.matches.update_one({"username": item_creator},
+                        {'$pull': {'liked_by': user}})
+            
+    return redirect(request.referrer)
 
 
 if __name__ == '__main__':
