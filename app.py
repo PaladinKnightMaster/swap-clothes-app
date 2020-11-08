@@ -162,7 +162,14 @@ def register():
         }
 
         mongo.db.users.insert_one(register)
-        # 
+
+        # Add new user to matches database to facilitate
+        mongo.db.matches.insert_one(
+            { "username": request.form.get("username"),
+            "liked_by": [],
+            "matched_items": [],
+            "matched_creator": []})
+
         session["user"] = request.form.get("username")
         flash("You're officially a Swapper now, woo!")
         return redirect('items')
