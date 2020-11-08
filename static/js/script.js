@@ -4,8 +4,3 @@ $(document).ready(function(){
 	$('.tooltipped').tooltip();
 	$('select').formSelect();
 });
-
-// Implement like button toggle
-$('.like-button').on( 'click', function() {
-    $(this).toggleClass('far fas') 
-});
