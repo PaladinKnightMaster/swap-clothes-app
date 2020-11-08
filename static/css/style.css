@@ -471,3 +471,9 @@ a i.like-button, a i.liked-button {
     color: #fff;
     background-color: #FF626D;
 }
+
+a i.like-button-disabled {
+    color: #acacac;
+    background-color: #d8d8d8;
+    cursor: default;
+}
