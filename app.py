@@ -72,9 +72,13 @@ def items():
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
     categories = mongo.db.categories.find()
+
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+                           categories=categories, pagination=pagination,
+                           liked=user_liked_by)
 
 
 @app.route("/filter", methods=["GET", "POST"])
@@ -90,9 +94,15 @@ def filter():
 
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
+    # a list of users who have liked session user
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
 
-    return render_template("items.html", items=items_paginated, categories=categories,
-                           selected_categories=selected_categories, pagination=pagination)
+    return render_template("items.html", items=items_paginated,
+                           categories=categories,
+                           selected_categories=selected_categories,
+                           pagination=pagination,
+                           liked=user_liked_by)
 
 
 @app.route("/sort/<sort_by>")
@@ -117,9 +127,12 @@ def sort(sort_by):
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
 
+    return render_template("items.html", items=items_paginated,
+                           categories=categories, pagination=pagination,
+                           liked=user_liked_by)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -135,9 +148,12 @@ def search():
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+    user = session['user']
+    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
 
+    return render_template("items.html", items=items_paginated,
+                           categories=categories, pagination=pagination,
+                           liked=user_liked_by)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -331,7 +347,6 @@ def liked_item(item_id, action):
             mongo.db.matches.update_one({"username": item_creator},
                         {'$pull': {'liked_by': user}})
             
-
     return redirect(request.referrer)
 
 

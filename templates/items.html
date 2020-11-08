@@ -138,7 +138,18 @@
                         <!-- Item Footer displaying creator, delete and flag buttons -->
                         <div class="row item-footer">
                             <div class="col s6">
+                            <!-- In case of a match  display creators socials in a dropdown so the user can contact them -->
+                            {% if session.user in item.liked_by and item.created_by in liked %}
+                                <a href="#" data-target='dropdown1' class="dropdown-trigger"><p class="left item-creator accent-text">{{ item.created_by }}</p></a>
+                                <ul id='dropdown1' class='dropdown-content'>
+                                    <li><a href="#!"><i class="fab fa-facebook-messenger"></i></a></li>
+                                    <li><a href="#!"><i class="fab fa-whatsapp"></i></a></li>
+                                    <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                                </ul>
+                            <!--If it's not a match, show unclickable creators username  -->
+                            {% else %}
                                 <p class="left item-creator">{{ item.created_by }}</p>
+                            {% endif %}
                             </div>
                             <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
                             {% if session.user %}
