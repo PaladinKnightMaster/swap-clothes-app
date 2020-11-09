@@ -16,17 +16,19 @@
         </div>
         <div class="col s12 m6">
             <div class="row profile-detail-container">
-                <!-- User Description -->
-                <div class="col s12">
-                    <h5>Description</h5>
-                    <p>{{ user["user_description"] }}</p>
-                </div>
                 <!-- Items user is looking for -->
                 <div class="col s12">
                     <h5>Looking For</h5>
                     {% for item in user["looking_for"] %}
-                        <p>{{ item }}</p>
+                    <p>{{ item }}</p>
                     {% endfor %}
+                </div>
+                <!-- User Socials -->
+                <div class="col s12">
+                    <h5>Contact Info</h5>
+                    <p><i class="fab fa-facebook-messenger blue-text"></i> m.me/<strong>{{ user["fb_msgr"] }}</strong></p>
+                    <p><i class="fab fa-whatsapp green-text text-accent-4t"></i> wa.me/<strong>{{ user["whatsapp"] }}</strong></p>
+                    <p><i class="fab fa-instagram pink-text text-darken-1"></i> instagram.com/<strong>{{ user["instagram"] }}</strong></p>
                 </div>
                 <!-- Count of items the user has -->
                 <div class="col s12">
