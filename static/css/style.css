@@ -525,8 +525,11 @@ ul#user-socials li a:hover{
 }
 
 .profile-detail-container {
-    padding: 1rem;
     text-align: center;
+    padding-top: 2rem;
+}
+.profile-detail-container p {
+    padding-left: 2rem;
 }
 
 .profile-btn {
@@ -535,7 +538,7 @@ ul#user-socials li a:hover{
     margin-bottom: 1.5rem;
 }
 
-/* Profile omage on big screens */
+/* Profile image on big screens */
 @media screen and (min-width: 1250px) {
     .profile-img-container {
         width: 300px;
