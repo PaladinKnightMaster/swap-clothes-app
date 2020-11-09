@@ -25,6 +25,10 @@ h1 {
     border-radius: 3rem;
 }
 
+h2 {
+    padding-top: 3rem;
+}
+
 /* Spacing */
 .centered-row {
     display: flex;
@@ -480,7 +484,7 @@ a i.like-button-disabled {
 
 /* User socials dropdown, overriding some default materialize styles */
 ul#user-socials{
-    width: auto !important;
+    width: 140px !important;
     height: 37px !important;
 }
 
@@ -528,9 +532,6 @@ ul#user-socials li a:hover{
     text-align: center;
     padding-top: 2rem;
 }
-.profile-detail-container p {
-    padding-left: 2rem;
-}
 
 .profile-btn {
     width: auto;
@@ -550,6 +551,10 @@ ul#user-socials li a:hover{
     .profile-detail-container {
         text-align: left;
     }
+
+    .profile-detail-container p {
+        padding-left: 2rem;
+    }
 }
 
 /* Profile image on small screen sizes */
@@ -560,3 +565,12 @@ ul#user-socials li a:hover{
     }
 }
 
+/* 
+border-width: 3px;
+  border-style: solid;
+  border-image: 
+    linear-gradient(
+      to bottom, 
+      red, 
+      rgba(0, 0, 0, 0)
+    ) 1 100%; */

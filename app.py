@@ -361,10 +361,10 @@ def my_profile():
     """
     items = list(mongo.db.items.find())
     item_count = mongo.db.items.find({"created_by": session["user"]}).count()
-
+    user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
     user = mongo.db.users.find_one({"username": session["user"]})
 
-    return render_template('my_profile.html', items=items, user=user, item_count=item_count)
+    return render_template('my_profile.html', items=items, user=user, item_count=item_count, liked=user_liked_by)
 
 
 if __name__ == '__main__':

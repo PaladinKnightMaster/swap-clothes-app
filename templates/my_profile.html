@@ -41,7 +41,263 @@
             </a>
         </div>
     </div>
-    </div>
-
 </div>
+
+<!-- Display session user items -->
+<article>
+    <h2 class="center-align">My Items</h2>
+    <!-- Loops through items if the user has any -->
+    {% if items|length > 0 and item_count != 0 %}
+        <div class="row all-item-container">
+        {% for item in items %}
+            <!-- Only Display users items -->
+            {% if item.created_by == session.user %}
+                <div class="col s12 m6 l4">
+                    <div class="card center z-depth-4 hoverable">
+                        <!-- Card Image -->
+                        <div class="card-image">
+                            <img src="{{ item.item_image }}" class="item-image">
+                            <!-- Like Button disabled -->
+                                <a href="{{ url_for('liked_item', item_id=item._id, action='like') }}"
+                                    class="btn-floating halfway-fab waves-effect waves-light white">
+                                    <i class="far fa-heart like-button"></i></a>
+                        </div>
+                        <!-- Card Content -->
+                        <div class="card-content">
+                            <div class="item-content">
+                                <span class="card-title">{{ item.item_name }}</span>
+                                <p class="item-short-description activator">{{ item.short_description }}</p>
+                                <p class="activator accent-text" id="display-more">more</p>
+                            </div>
+                            <!-- Item Footer displaying creator, delete and edit buttons -->
+                            <div class="row item-footer">
+                                <div class="col s6">
+                                    <p class="left item-creator">{{ item.created_by }}</p>
+                                </div>
+                                <div class="col s6 item-icon-container">
+                                    <a href="{{ url_for('delete_item', item_id = item._id) }}"><i class="far fa-trash-alt"></i></a>
+                                    <a href="{{ url_for('edit_item', item_id=item._id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- More information displayed using card reveal component -->
+                        <div class="card-reveal">
+                            <span class="card-title card-reveal-title">{{ item.item_name }}<i class="fas fa-times right accent-text"></i></span>
+                            <p>{{ item.long_description }}</p>
+                            <hr>
+                            <!-- Specific item details -->
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Category</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-sitemap secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.category }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Size</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-ruler secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.size }} ({{ item.size_country }}) <a href="https://www.sizeguide.net/" target="_blank" class="tooltipped grey-text" data-position="bottom" data-tooltip="Not Sure about sizes?"><i class="far fa-question-circle"></i></a></div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Fit</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-transgender-alt secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.size_gender }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Used</div>
+                                <div class="col s2 item-icons center-align"><i class="far fa-clock secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.used_status }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% else %}
+        <!-- If user has no items, display an action button to add an item -->
+        <h5 class="center-align">Nothing to see here yet</h5>
+        <div class="row">
+            <div class="col s12 center">
+                <a href="{{ url_for('add_item') }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
+                    Add Item
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</article>
+
+<!-- Display items that session user has matched with -->
+<article>
+    <h2 class="center-align">Matches</h2>
+    {% if items|length > 0 and item_count != 0 %}
+        <div class="row all-item-container">
+        {% for item in items %}
+            {% if session.user in item.liked_by and item.created_by in liked %}
+                <div class="col s12 m6 l4">
+                    <div class="card center z-depth-4 hoverable">
+                        <!-- Card Image -->
+                        <div class="card-image">
+                            <img src="{{ item.item_image }}" class="item-image">
+                            <!-- Checks if the logged in user already likes the item and display the like button accordingly -->
+                            {% if session.user == item.created_by %}
+                                <a class="btn-floating halfway-fab waves-effect waves-light white">
+                                    <i class="far fa-heart like-button-disabled"></i></a>
+                            {% else %}
+                                <a href="{{ url_for('liked_item', item_id=item._id, action='unlike') }}"
+                                    class="btn-floating halfway-fab waves-effect waves-light white">
+                                    <i class="fas fa-heart like-button"></i></a>
+                            {% endif %}    
+                        </div>
+                        <!-- Card Content -->
+                        <div class="card-content">
+                            <div class="item-content">
+                                <span class="card-title">{{ item.item_name }}</span>
+                                <p class="item-short-description activator">{{ item.short_description }}</p>
+                                <p class="activator accent-text" id="display-more">more</p>
+                            </div>
+                            <!-- Item Footer displaying creator and flag buttons -->
+                            <div class="row item-footer">
+                                <div class="col s6">
+                                    <a id="user-socials-container" href="#" data-target='user-socials' class="dropdown-trigger"><p class="left item-creator accent-text">{{ item.created_by }}</p></a>
+                                    <ul id='user-socials' class='dropdown-content border-radius-sm z-depth-4'>
+                                        <li><a href="https://m.me/{{ user['fb_msgr'] }}" target="_blank" class="blue-text"><i class="fab fa-facebook-messenger"></i></a></li>
+                                        <li><a href="https://wa.me/{{ user['whatsapp'] }}" target="_blank" class="green-text text-accent-4"><i class="fab fa-whatsapp"></i></a></li>
+                                        <li><a href="https://instagram.com/{{ user['instagram'] }}" target="_blank" class="pink-text text-darken-1"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="col s6 item-icon-container">
+                                    <a href="#"><i class="far fa-flag"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- More information displayed using card reveal component -->
+                        <div class="card-reveal">
+                            <span class="card-title card-reveal-title">{{ item.item_name }}<i class="fas fa-times right accent-text"></i></span>
+                            <p>{{ item.long_description }}</p>
+                            <hr>
+                            <!-- Specific item details -->
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Category</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-sitemap secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.category }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Size</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-ruler secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.size }} ({{ item.size_country }}) <a href="https://www.sizeguide.net/" target="_blank" class="tooltipped grey-text" data-position="bottom" data-tooltip="Not Sure about sizes?"><i class="far fa-question-circle"></i></a></div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Fit</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-transgender-alt secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.size_gender }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Used</div>
+                                <div class="col s2 item-icons center-align"><i class="far fa-clock secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.used_status }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% else %}
+        <!-- If user has no matches -->
+        <h5 class="center-align">Go to Items Page and see if anything tickles your fancy</h5>
+        <div class="row">
+            <div class="col s12 center">
+                <a href="{{ url_for('items') }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
+                    Items
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</article>
+
+<!-- Display Suggested items based on categories the user is looking for -->
+<article>
+    <h2 class="center-align">Suggestions</h2>
+    <!-- Loop through items if user has selected at least one category they are looking for -->
+    {% if items|length > 0 and user["looking_for"] != 0 %}
+        <div class="row all-item-container">
+        {% for item in items %}
+            <!--  Do not show matching category items added by the user or liked by the user -->
+            {% if item.category in user["looking_for"] and item.created_by != session.user and session.user not in item.liked_by %}
+                <div class="col s12 m6 l4">
+                    <div class="card center z-depth-4">
+                        <!-- Card Image -->
+                        <div class="card-image">
+                            <img src="{{ item.item_image }}" class="item-image">
+                            <!-- Checks if the logged in user already likes the item and display the like button accordingly -->
+                            {% if session.user == item.created_by %}
+                                <a class="btn-floating halfway-fab waves-effect waves-light white">
+                                    <i class="far fa-heart like-button-disabled"></i></a>
+                            {% elif session.user in item.liked_by %}
+                                <a href="{{ url_for('liked_item', item_id=item._id, action='unlike') }}"
+                                    class="btn-floating halfway-fab waves-effect waves-light white">
+                                    <i class="fas fa-heart like-button"></i></a>
+                            {% endif %}    
+                        </div>
+                        <!-- Card Content -->
+                        <div class="card-content">
+                            <div class="item-content">
+                                <span class="card-title">{{ item.item_name }}</span>
+                                <p class="item-short-description activator">{{ item.short_description }}</p>
+                                <p class="activator accent-text" id="display-more">more</p>
+                            </div>
+                            <!-- Item Footer displaying creator and flag button -->
+                            <div class="row item-footer">
+                                <div class="col s6">
+                                    <p class="left item-creator">{{ item.created_by }}</p>
+                                </div>
+                                <div class="col s6 item-icon-container">
+                                    <a href="#"><i class="far fa-flag"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- More information displayed using card reveal component -->
+                        <div class="card-reveal">
+                            <span class="card-title card-reveal-title">{{ item.item_name }}<i class="fas fa-times right accent-text"></i></span>
+                            <p>{{ item.long_description }}</p>
+                            <hr>
+                            <!-- Specific item details -->
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Category</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-sitemap secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.category }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Size</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-ruler secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.size }} ({{ item.size_country }}) <a href="https://www.sizeguide.net/" target="_blank" class="tooltipped grey-text" data-position="bottom" data-tooltip="Not Sure about sizes?"><i class="far fa-question-circle"></i></a></div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Fit</div>
+                                <div class="col s2 item-icons center-align"><i class="fas fa-transgender-alt secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.size_gender }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col s5 item-labels right-align">Used</div>
+                                <div class="col s2 item-icons center-align"><i class="far fa-clock secondary-accent-text"></i></div>
+                                <div class="col s5 item-values left-align">{{ item.used_status }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% else %}
+    <!-- Display if the user hasn't selected any categories they are looking for -->
+        <h5 class="center-align">Let us know what you're looking for.</h5>
+        <div class="row">
+            <div class="col s12 center">
+                <a href="{{ url_for('items') }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
+                    Edit Profile
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</article>
+
 {% endblock %}
