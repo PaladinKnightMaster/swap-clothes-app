@@ -503,3 +503,57 @@ ul#user-socials li a{
 ul#user-socials li a:hover{
     background-color: #eee;
 }
+
+
+/* ----------MY PROFILE PAGE---------- */
+.profile-img-container {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.profile-img-container img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.username {
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+}
+
+.profile-detail-container {
+    padding: 1rem;
+    text-align: center;
+}
+
+.profile-btn {
+    width: auto;
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Profile omage on big screens */
+@media screen and (min-width: 1250px) {
+    .profile-img-container {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    .profile-detail-container {
+        text-align: left;
+    }
+}
+
+/* Profile image on small screen sizes */
+@media screen and (max-width: 300px) {
+    .profile-img-container {
+        width: 200px;
+        height: 200px;
+    }
+}
+

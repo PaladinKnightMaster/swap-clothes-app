@@ -7,15 +7,15 @@
 <h1>My Profile</h1>
 
 <!-- Profile detail container -->
-<div class="container">
+<div class="container z-depth-4 border-radius-sm">
     <div class="row">
         <!-- Username and picture -->
-        <div class="col s12 l4">
-            <p>{{ user["username"] }}</p>
-            <div class="blue border-radius-m" style="height: 100px; width: 100px;"><img src="{{ user['user_image'] }}" alt=""></div>
+        <div class="col s12 m6">
+            <p class="center-align username">{{ user["username"] }}</p>
+            <div class="profile-img-container"><img src="{{ user['user_image'] }}" alt="{{user['username']}}'s Profile Image'" class="z-depth-2"></div>
         </div>
-        <div class="col s12 l8">
-            <div class="row">
+        <div class="col s12 m6">
+            <div class="row profile-detail-container">
                 <!-- User Description -->
                 <div class="col s12">
                     <h5>Description</h5>
@@ -35,6 +35,15 @@
                 </div>
             </div>
         </div>
+    </div>
+    <!-- Edit Profile Button -->
+    <div class="row">
+        <div class="col s12 center">
+            <a href="{{ url_for('items') }}" class="swap-btn filled-red gradient-bkg border-radius-m center-align profile-btn">
+                Edit Profile
+            </a>
+        </div>
+    </div>
     </div>
 
 </div>
