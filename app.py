@@ -74,11 +74,12 @@ def items():
 
     user = session['user']
     user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
+    user_data = mongo.db.users.find_one({"username": session["user"]})
     categories = mongo.db.categories.find()
 
     return render_template("items.html", items=items_paginated,
                            categories=categories, pagination=pagination,
-                           liked=user_liked_by)
+                           liked=user_liked_by, user=user_data)
 
 
 @app.route("/filter", methods=["GET", "POST"])
@@ -97,12 +98,13 @@ def filter():
     # a list of users who have liked session user
     user = session['user']
     user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
+    user_data = mongo.db.users.find_one({"username": session["user"]})
 
     return render_template("items.html", items=items_paginated,
                            categories=categories,
                            selected_categories=selected_categories,
                            pagination=pagination,
-                           liked=user_liked_by)
+                           liked=user_liked_by, user=user_data)
 
 
 @app.route("/sort/<sort_by>")
@@ -129,10 +131,11 @@ def sort(sort_by):
 
     user = session['user']
     user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
+    user_data = mongo.db.users.find_one({"username": session["user"]})
 
     return render_template("items.html", items=items_paginated,
                            categories=categories, pagination=pagination,
-                           liked=user_liked_by)
+                           liked=user_liked_by, user=user_data)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -150,10 +153,11 @@ def search():
 
     user = session['user']
     user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
+    user_data = mongo.db.users.find_one({"username": session["user"]})
 
     return render_template("items.html", items=items_paginated,
                            categories=categories, pagination=pagination,
-                           liked=user_liked_by)
+                           liked=user_liked_by, user=user_data)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -348,6 +352,19 @@ def liked_item(item_id, action):
                         {'$pull': {'liked_by': user}})
             
     return redirect(request.referrer)
+
+
+@app.route('/my_profile')
+def my_profile():
+    """
+    Get session user data and items data
+    """
+    items = list(mongo.db.items.find())
+    item_count = mongo.db.items.find({"created_by": session["user"]}).count()
+    user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
+    user = mongo.db.users.find_one({"username": session["user"]})
+
+    return render_template('my_profile.html', items=items, user=user, item_count=item_count, liked=user_liked_by)
 
 
 if __name__ == '__main__':
