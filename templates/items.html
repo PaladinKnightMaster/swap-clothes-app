@@ -141,31 +141,35 @@
                         </div>
                         <!-- Item Footer displaying creator, delete and flag buttons -->
                         <div class="row item-footer">
-                            <div class="col s6">
-                            <!-- In case of a match  display creators socials in a dropdown so the user can contact them -->
-                            {% if session.user in item.liked_by and item.created_by in liked %}
-                                <a id="user-socials-container" href="#" data-target='user-socials' class="dropdown-trigger"><p class="left item-creator accent-text">{{ item.created_by }}</p></a>
-                                <ul id='user-socials' class='dropdown-content border-radius-sm z-depth-4'>
-                                    <li><a href="https://m.me/{{ user['fb_msgr'] }}" target="_blank" class="blue-text"><i class="fab fa-facebook-messenger"></i></a></li>
-                                    <li><a href="https://wa.me/{{ user['whatsapp'] }}" target="_blank" class="green-text text-accent-4"><i class="fab fa-whatsapp"></i></a></li>
-                                    <li><a href="https://instagram.com/{{ user['instagram'] }}" target="_blank" class="pink-text text-darken-1"><i class="fab fa-instagram"></i></a></li>
-                                </ul>
-                            <!--If it's not a match, show unclickable creators username  -->
-                            {% else %}
-                                <p class="left item-creator">{{ item.created_by }}</p>
-                            {% endif %}
+                        <!-- In case of a match  display creators socials in a dropdown so the user can contact them -->
+                        {% if session.user in item.liked_by and item.created_by in liked %}
+                            <div class="col s5 item-creator-container">
+                                <p class="left item-creator-active accent-text">{{ item.created_by }}</p>
                             </div>
-                            <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
-                            {% if session.user != 'guest' %}
+                            <div class="col s5 item-socials-container">
+                                <a href="https://m.me/{{ user['fb_msgr'] }}" target="_blank" class="blue-text"><i class="fab fa-facebook-messenger"></i></a>
+                                <a href="https://wa.me/{{ user['whatsapp'] }}" target="_blank" class="green-text text-accent-4"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://instagram.com/{{ user['instagram'] }}" target="_blank" class="pink-text text-darken-1"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        <!--If it's not a match, show unclickable creators username  -->
+                        {% else %}
+                            <div class="col s6">
+                                <p class="left item-creator">{{ item.created_by }}</p>
+                            </div>
+                        {% endif %}
+                        <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
+                        {% if session.user != 'guest' %}
+                            {% if session.user == item.created_by %}
                                 <div class="col s6 item-icon-container">
-                                {% if session.user == item.created_by %}
                                     <a href="{{ url_for('delete_item', item_id = item._id) }}"><i class="far fa-trash-alt"></i></a>
                                     <a href="{{ url_for('edit_item', item_id=item._id) }}"><i class="fas fa-pencil-alt"></i></a>
-                                {% else %}
+                                </div>
+                            {% else %}
+                                <div class="col s2 item-icon-container right">
                                     <a href="#"><i class="far fa-flag"></i></a>
-                                {% endif %}
                                 </div>
                             {% endif %}
+                        {% endif %}
                         </div>
                     </div>
                     <!-- More information displayed using card reveal component -->

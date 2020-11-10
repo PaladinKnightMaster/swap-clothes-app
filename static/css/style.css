@@ -482,33 +482,25 @@ a i.like-button-disabled {
     cursor: default;
 }
 
-/* User socials dropdown, overriding some default materialize styles */
-ul#user-socials{
-    width: 140px !important;
-    height: 37px !important;
+/* Item user socials */
+.item-creator-active {
+    cursor: pointer;
 }
 
-ul#user-socials li i {
+.item-socials-container {
+    display: flex;
+    justify-content: space-between;
     font-size: 1.25rem;
-    margin: 0;
+    visibility: hidden;
 }
 
-
-ul#user-socials li{
-    display: inline;
-    text-align: center;
+.visible {
+    visibility: visible;
 }
 
-ul#user-socials li a{
-    display: inline-block;
-    padding: 0.5rem;
+.item-footer {
+    line-height: 1.25rem;
 }
-
-ul#user-socials li a:hover{
-    background-color: #eee;
-}
-
-
 /* ----------MY PROFILE PAGE---------- */
 .profile-img-container {
     width: 250px;
@@ -587,4 +579,4 @@ border-width: 3px;
       to bottom, 
       red, 
       rgba(0, 0, 0, 0)
-    ) 1 100%; */
+     1 100%; */
