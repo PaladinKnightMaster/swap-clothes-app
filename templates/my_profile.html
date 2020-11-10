@@ -59,9 +59,8 @@
                         <div class="card-image">
                             <img src="{{ item.item_image }}" class="item-image">
                             <!-- Like Button disabled -->
-                            <a href="{{ url_for('liked_item', item_id=item._id, action='like') }}"
-                                class="btn-floating halfway-fab waves-effect waves-light white">
-                                <i class="far fa-heart like-button"></i>
+                            <a class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="far fa-heart like-button-disabled"></i></a>
                             </a>
                         </div>
                         <!-- Card Content -->
@@ -136,7 +135,7 @@
         {% for item in items %}
             {% if session.user in item.liked_by and item.created_by in liked %}
                 <div class="col s12 m6 l4 carousel-item">
-                    <div class="card center z-depth-4 hoverable">
+                    <div class="card center z-depth-4">
                         <!-- Card Image -->
                         <div class="card-image">
                             <img src="{{ item.item_image }}" class="item-image">
@@ -159,15 +158,15 @@
                             </div>
                             <!-- Item Footer displaying creator and flag buttons -->
                             <div class="row item-footer">
-                                <div class="col s6">
-                                    <a id="user-socials-container" href="#" data-target='user-socials' class="dropdown-trigger"><p class="left item-creator accent-text">{{ item.created_by }}</p></a>
-                                    <ul id='user-socials' class='dropdown-content border-radius-sm z-depth-4'>
-                                        <li><a href="https://m.me/{{ user['fb_msgr'] }}" target="_blank" class="blue-text"><i class="fab fa-facebook-messenger"></i></a></li>
-                                        <li><a href="https://wa.me/{{ user['whatsapp'] }}" target="_blank" class="green-text text-accent-4"><i class="fab fa-whatsapp"></i></a></li>
-                                        <li><a href="https://instagram.com/{{ user['instagram'] }}" target="_blank" class="pink-text text-darken-1"><i class="fab fa-instagram"></i></a></li>
-                                    </ul>
+                                <div class="col s5 item-creator-container">
+                                    <p class="left item-creator-active accent-text">{{ item.created_by }}</p>
                                 </div>
-                                <div class="col s6 item-icon-container">
+                                <div class="col s5 item-socials-container">
+                                    <a href="https://m.me/{{ user['fb_msgr'] }}" target="_blank" class="blue-text"><i class="fab fa-facebook-messenger"></i></a>
+                                    <a href="https://wa.me/{{ user['whatsapp'] }}" target="_blank" class="green-text text-accent-4"><i class="fab fa-whatsapp"></i></a>
+                                    <a href="https://instagram.com/{{ user['instagram'] }}" target="_blank" class="pink-text text-darken-1"><i class="fab fa-instagram"></i></a>
+                                </div>
+                                <div class="col s2 item-icon-container">
                                     <a href="#"><i class="far fa-flag"></i></a>
                                 </div>
                             </div>
@@ -233,14 +232,10 @@
                         <div class="card-image">
                             <img src="{{ item.item_image }}" class="item-image">
                             <!-- Checks if the logged in user already likes the item and display the like button accordingly -->
-                            {% if session.user == item.created_by %}
-                                <a class="btn-floating halfway-fab waves-effect waves-light white">
-                                    <i class="far fa-heart like-button-disabled"></i></a>
-                            {% elif session.user in item.liked_by %}
-                                <a href="{{ url_for('liked_item', item_id=item._id, action='unlike') }}"
-                                    class="btn-floating halfway-fab waves-effect waves-light white">
-                                    <i class="fas fa-heart like-button"></i></a>
-                            {% endif %}    
+                            <a href="{{ url_for('liked_item', item_id=item._id, action='like') }}"
+                                class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="far fa-heart like-button"></i>
+                            </a>
                         </div>
                         <!-- Card Content -->
                         <div class="card-content">
