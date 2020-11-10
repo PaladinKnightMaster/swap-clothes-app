@@ -36,7 +36,7 @@
     <!-- Edit Profile Button -->
     <div class="row">
         <div class="col s12 center">
-            <a href="{{ url_for('items') }}" class="swap-btn filled-red gradient-bkg border-radius-m center-align profile-btn">
+            <a href="{{ url_for('items', username=session.user) }}" class="swap-btn filled-red gradient-bkg border-radius-m center-align profile-btn">
                 Edit Profile
             </a>
         </div>
@@ -59,9 +59,10 @@
                         <div class="card-image">
                             <img src="{{ item.item_image }}" class="item-image">
                             <!-- Like Button disabled -->
-                                <a href="{{ url_for('liked_item', item_id=item._id, action='like') }}"
-                                    class="btn-floating halfway-fab waves-effect waves-light white">
-                                    <i class="far fa-heart like-button"></i></a>
+                            <a href="{{ url_for('liked_item', item_id=item._id, action='like') }}"
+                                class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="far fa-heart like-button"></i>
+                            </a>
                         </div>
                         <!-- Card Content -->
                         <div class="card-content">
@@ -208,7 +209,7 @@
         <h5 class="center-align">Go to Items Page and see if anything tickles your fancy</h5>
         <div class="row">
             <div class="col s12 center">
-                <a href="{{ url_for('items') }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
+                <a href="{{ url_for('items', username = session.user) }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
                     Items
                 </a>
             </div>
@@ -295,7 +296,7 @@
         <h5 class="center-align">Let us know what you're looking for.</h5>
         <div class="row">
             <div class="col s12 center">
-                <a href="{{ url_for('items') }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
+                <a href="{{ url_for('items', username = session.user) }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
                     Edit Profile
                 </a>
             </div>

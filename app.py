@@ -58,13 +58,15 @@ def pagination_arg(items):
 @app.route("/home")
 def home():
     items = mongo.db.items.find()
+    # Add guest as a session user before user logs in
+    session["user"] = "guest"
     return render_template("index.html", items=items)
 
 
-@app.route("/items")
-def items():
+@app.route("/items/<username>", methods=["GET", "POST"])
+def items(username):
     """
-    Display all items sorted  by the most recent,
+    Display all items sorted  by the most recent and
     Paginate displayed items
     """
     items = list(mongo.db.items.find().sort('_id', -1))
@@ -72,18 +74,22 @@ def items():
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    user = session['user']
-    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
-    user_data = mongo.db.users.find_one({"username": session["user"]})
     categories = mongo.db.categories.find()
-
+    # If user is logged in, add useers data to identify matched and like items
+    if username != "guest":
+        user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
+        user_data = mongo.db.users.find_one({"username": username})
+        return render_template("items.html", items=items_paginated,
+                            categories=categories, pagination=pagination,
+                            liked=user_liked_by, user=user_data)
+                            
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination,
-                           liked=user_liked_by, user=user_data)
+                           categories=categories, pagination=pagination)
 
 
-@app.route("/filter", methods=["GET", "POST"])
-def filter():
+
+@app.route("/filter/<username>", methods=["GET", "POST"])
+def filter(username):
     """
     Get all checked values for category filter,
     find and display items with those categories
@@ -95,20 +101,25 @@ def filter():
 
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
-    # a list of users who have liked session user
-    user = session['user']
-    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
-    user_data = mongo.db.users.find_one({"username": session["user"]})
+
+    if username != "guest":
+        user_data = mongo.db.users.find_one({"username": username})
+        # a list of users who have liked session user
+        user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
+        return render_template("items.html", items=items_paginated,
+                            categories=categories,
+                            selected_categories=selected_categories,
+                            pagination=pagination,
+                            liked=user_liked_by, user=user_data)
 
     return render_template("items.html", items=items_paginated,
                            categories=categories,
                            selected_categories=selected_categories,
-                           pagination=pagination,
-                           liked=user_liked_by, user=user_data)
+                           pagination=pagination)
 
 
-@app.route("/sort/<sort_by>")
-def sort(sort_by):
+@app.route("/sort/<sort_by>/<username>")
+def sort(sort_by, username):
     """
     Sort items alphabetically, reverse alphabetically,
     by the lates date added, by liked items or
@@ -129,17 +140,19 @@ def sort(sort_by):
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    user = session['user']
-    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
-    user_data = mongo.db.users.find_one({"username": session["user"]})
-
+    if username != "guest":
+        user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
+        user_data = mongo.db.users.find_one({"username": username})
+        return render_template("items.html", items=items_paginated,
+                            categories=categories, pagination=pagination,
+                            liked=user_liked_by, user=user_data)
+    
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination,
-                           liked=user_liked_by, user=user_data)
+                        categories=categories, pagination=pagination)
 
 
-@app.route("/search", methods=["GET", "POST"])
-def search():
+@app.route("/search/<username>", methods=["GET", "POST"])
+def search(username):
     """
     Use an index from items collections to allow the user
     to search through the itesm names and item shor description
@@ -151,13 +164,15 @@ def search():
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    user = session['user']
-    user_liked_by = mongo.db.matches.find_one({"username": user})["liked_by"]
-    user_data = mongo.db.users.find_one({"username": session["user"]})
+    if username != 'guest':
+        user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
+        user_data = mongo.db.users.find_one({"username": username})
+        return render_template("items.html", items=items_paginated,
+                                categories=categories, pagination=pagination,
+                                liked=user_liked_by, user=user_data)
 
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination,
-                           liked=user_liked_by, user=user_data)
+                           categories=categories, pagination=pagination)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -192,7 +207,7 @@ def register():
 
         session["user"] = request.form.get("username")
         flash("You're officially a Swapper now, woo!")
-        return redirect('items')
+        return redirect(url_for('items', username=session['user']))
     return render_template("register.html", categories=categories)
 
 
@@ -214,7 +229,7 @@ def login():
                                    request.form.get("password")):
                 session["user"] = request.form.get("username")
                 flash("Welcome Back {}".format(session["user"]))
-                return redirect(url_for('items'))
+                return redirect(url_for('items', username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for('login'))
@@ -264,7 +279,7 @@ def add_item():
         }
         mongo.db.items.insert_one(new_item)
         flash("Item added succesfully")
-        return redirect('items')
+        return redirect(url_for('items', username=session['user']))
 
     return render_template("add_item.html", categories=categories)
 
@@ -305,7 +320,7 @@ def delete_item(item_id):
     # Delete selected item
     mongo.db.items.remove({'_id': ObjectId(item_id)})
     flash("Item has been deleted, bye!")
-    return redirect(url_for('items'))
+    return redirect(url_for('items', username=session['user']))
 
 
 @app.route('/liked_item/<item_id>/<action>')

@@ -14,30 +14,30 @@
                 <div class="white border-radius-sm sort-container">
                     <span class="sort-title grey-text text-lighten-1">Sort:</span>
                     <!-- Alphabetically -->
-                    <a href="{{ url_for('sort', sort_by = 'a-to-z') }}">
+                    <a href="{{ url_for('sort', sort_by = 'a-to-z', username = session.user) }}">
                         <i class="fas fa-sort-alpha-down"></i>
                     </a>
                     <!-- Reverse Alphabetically -->
-                    <a href="{{ url_for('sort', sort_by = 'z-to-a') }}">
+                    <a href="{{ url_for('sort', sort_by = 'z-to-a', username = session.user) }}">
                         <i class="fas fa-sort-alpha-down-alt"></i>
                     </a>
                     <!-- Sort by the recent date added -->
-                    <a href="{{ url_for('sort', sort_by = 'date') }}">
+                    <a href="{{ url_for('sort', sort_by = 'date', username = session.user) }}">
                         <i class="far fa-calendar-alt"></i>
                     </a>
                     <!-- Sort by users liked items -->
-                    <a href="{{ url_for('sort', sort_by = 'liked') }}">
+                    <a href="{{ url_for('sort', sort_by = 'liked', username = session.user) }}">
                         <i class="far fa-heart"></i>
                     </a>
                     <!-- Sort by flagged items -->
-                    <a href="{{ url_for('sort', sort_by = 'flagged') }}">
+                    <a href="{{ url_for('sort', sort_by = 'flagged', username = session.user) }}">
                         <i class="far fa-flag"></i>
                     </a>
                 </div>
             </div>
             <!-- Add search bar to allow the user to search through the items  -->
             <div class="col s12 m8 search-container-parent">
-                <form action="{{ url_for('search') }}" method="POST" class="white border-radius-sm search-container">
+                <form action="{{ url_for('search', username=session.user) }}" method="POST" class="white border-radius-sm search-container">
                     <div class="row">
                         <!-- Search input -->
                         <div class="col s12 m8">
@@ -46,7 +46,7 @@
                         </div>
                         <!-- Reset button -->
                         <div class="col s4 m2 offset-s2 center">
-                            <a href="{{ url_for('items') }}" class="swap-btn filled-orange border-radius-sm">
+                            <a href="{{ url_for('items', username=session.user) }}" class="swap-btn filled-orange border-radius-sm">
                                 <i class="fas fa-redo-alt"></i>
                             </a>
                         </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <!-- Filter container values -->
-            <form action="{{ url_for('filter') }}" method="POST">
+            <form action="{{ url_for('filter', username=session.user) }}" method="POST">
                 <!-- Loop through all categories in the category collection and create a checbox for each -->
                 <div class="category-labels">
                     {% for category in categories %}
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col s6">
                         <!-- Display all items button -->
-                        <a href="{{ url_for('items') }}" class="swap-btn outlined-orange border-radius-m">Show All</a>
+                        <a href="{{ url_for('items', username=session.user) }}" class="swap-btn outlined-orange border-radius-m">Show All</a>
                     </div>
                 </div>
             </form>
@@ -117,6 +117,10 @@
                         <!-- Checks if the logged in user already likes the item and display the like button accordingly -->
                         {% if session.user == item.created_by %}
                             <a class="btn-floating halfway-fab waves-effect waves-light white">
+                                <i class="far fa-heart like-button-disabled"></i></a>
+                        <!-- Disable like buttons if user has not logged in -->
+                        {% elif session.user == 'guest' %}
+                            <a class="btn-floating halfway-fab waves-effect waves-light white tooltipped" data-position="bottom" data-tooltip="Register to like an item">
                                 <i class="far fa-heart like-button-disabled"></i></a>
                         {% elif session.user in item.liked_by %}
                             <a href="{{ url_for('liked_item', item_id=item._id, action='unlike') }}"
@@ -152,7 +156,7 @@
                             {% endif %}
                             </div>
                             <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
-                            {% if session.user %}
+                            {% if session.user != 'guest' %}
                                 <div class="col s6 item-icon-container">
                                 {% if session.user == item.created_by %}
                                     <a href="{{ url_for('delete_item', item_id = item._id) }}"><i class="far fa-trash-alt"></i></a>

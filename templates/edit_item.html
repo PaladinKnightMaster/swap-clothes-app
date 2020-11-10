@@ -155,7 +155,7 @@
 
             <!-- Submit button -->
             <div class="row centered-row">
-                <a href="{{ url_for('items') }}" class="col s5 m4 l3 swap-btn outlined-orange border-radius-m centered-elem center-align">
+                <a href="{{ url_for('items', username=session.user) }}" class="col s5 m4 l3 swap-btn outlined-orange border-radius-m centered-elem center-align">
                     Cancel
                 </a>
                 <button
