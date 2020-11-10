@@ -48,11 +48,12 @@
     <h2 class="center-align">My Items</h2>
     <!-- Loops through items if the user has any -->
     {% if items|length > 0 and item_count != 0 %}
-        <div class="row all-item-container">
+        <!-- Add Materialize carousel for scrolling effect -->
+        <div class="row all-item-container carousel">
         {% for item in items %}
             <!-- Only Display users items -->
             {% if item.created_by == session.user %}
-                <div class="col s12 m6 l4">
+                <div class="col s12 m6 l4 carousel-item">
                     <div class="card center z-depth-4 hoverable">
                         <!-- Card Image -->
                         <div class="card-image">
@@ -127,12 +128,13 @@
 
 <!-- Display items that session user has matched with -->
 <article>
-    <h2 class="center-align">Matches</h2>
+    <h2 class="center-align" data-scroll-header>Matches</h2>
     {% if items|length > 0 and item_count != 0 %}
-        <div class="row all-item-container">
+        <!-- Add Materialize carousel to create a scrolling effect of items -->
+        <div class="row all-item-container carousel">
         {% for item in items %}
             {% if session.user in item.liked_by and item.created_by in liked %}
-                <div class="col s12 m6 l4">
+                <div class="col s12 m6 l4 carousel-item">
                     <div class="card center z-depth-4 hoverable">
                         <!-- Card Image -->
                         <div class="card-image">
@@ -219,11 +221,12 @@
     <h2 class="center-align">Suggestions</h2>
     <!-- Loop through items if user has selected at least one category they are looking for -->
     {% if items|length > 0 and user["looking_for"] != 0 %}
-        <div class="row all-item-container">
+        <!-- Add Materialize carousel for scrolling effect -->
+        <div class="row all-item-container carousel">
         {% for item in items %}
             <!--  Do not show matching category items added by the user or liked by the user -->
             {% if item.category in user["looking_for"] and item.created_by != session.user and session.user not in item.liked_by %}
-                <div class="col s12 m6 l4">
+                <div class="col s12 m6 l4 carousel-item">
                     <div class="card center z-depth-4">
                         <!-- Card Image -->
                         <div class="card-image">

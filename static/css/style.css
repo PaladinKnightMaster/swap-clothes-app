@@ -565,6 +565,20 @@ ul#user-socials li a:hover{
     }
 }
 
+/* ----------CAROUSEL STYLES---------- */
+.carousel-item.active {
+    height: 550px;
+    letter-spacing: 0;
+}
+
+.carousel div.carousel-item {
+    top: -175px;
+}
+
+.carousel {
+    height: 600px;
+}
+
 /* 
 border-width: 3px;
   border-style: solid;
