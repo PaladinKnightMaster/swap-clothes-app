@@ -59,7 +59,11 @@ def pagination_arg(items):
 def home():
     items = mongo.db.items.find()
     # Add guest as a session user before user logs in
-    session["user"] = "guest"
+    if not session['user']:
+        session["user"] = "guest"
+
+    items = mongo.db.items.find()
+
     return render_template("index.html", items=items)
 
 
@@ -155,11 +159,20 @@ def sort(sort_by, username):
 def search(username):
     """
     Use an index from items collections to allow the user
-    to search through the itesm names and item shor description
+    to search through the item names and item short description
+
+    If a user likes a searched item, the page is refreshed without 
+    a search query being passed in and the page breaks. As a fix, 
+    users liked items are being displayed
     """
     categories = mongo.db.categories.find()
     query = request.form.get("search")
-    items = list(mongo.db.items.find({"$text": {"$search": query}}))
+
+    if query == None:
+        items = list(mongo.db.items.find({"liked_by": session['user']}))
+    else:
+        items = list(mongo.db.items.find({"$text": {"$search": query}}))
+        
 
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
@@ -169,10 +182,10 @@ def search(username):
         user_data = mongo.db.users.find_one({"username": username})
         return render_template("items.html", items=items_paginated,
                                 categories=categories, pagination=pagination,
-                                liked=user_liked_by, user=user_data)
+                                liked=user_liked_by, user=user_data, query=query)
 
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+                           categories=categories, pagination=pagination, query=query)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -336,10 +349,10 @@ def liked_item(item_id, action):
         {"_id": ObjectId(item_id)})["created_by"]
     item_creator_liked_by = mongo.db.matches.find_one(
         {"username": item_creator})["liked_by"]
-    # Add user to liked_by array in the item dictinory
+    # Add user to liked_by array in the item dictinory and increase like count
     if action == 'like':
         mongo.db.items.update_one({"_id": ObjectId(item_id)},
-                                  {'$push': {'liked_by': user}})
+                                  {'$push': {'liked_by': user}, '$inc': {'liked_count': 1}})
         # Add user to creators liked_by array
         if user not in item_creator_liked_by:
             mongo.db.matches.update_one({"username": item_creator},
@@ -352,7 +365,7 @@ def liked_item(item_id, action):
     # Remove user from liked_by array in item dictionary
     elif action == 'unlike':
         mongo.db.items.update_one({"_id": ObjectId(item_id)},
-                                  {'$pull': {'liked_by': user}})
+                                  {'$pull': {'liked_by': user}, '$inc': {'liked_count': -1}})
         # check if user likes any other creator items
         all_items_from_creator = list(mongo.db.items.find({"created_by": item_creator}))
         liked_items_from_creator = []
@@ -365,7 +378,7 @@ def liked_item(item_id, action):
         if len(liked_items_from_creator) == 0:
             mongo.db.matches.update_one({"username": item_creator},
                         {'$pull': {'liked_by': user}})
-            
+    print(request.referrer)       
     return redirect(request.referrer)
 
 
