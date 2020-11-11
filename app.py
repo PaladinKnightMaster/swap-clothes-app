@@ -57,13 +57,15 @@ def pagination_arg(items):
 @app.route("/")
 @app.route("/home")
 def home():
-    items = mongo.db.items.find()
-    # Add guest as a session user before user logs in
+    """
+    Display home page with top 3 items and add
+    a guest as a session user until user logs in 
+    """
     if not session['user']:
         session["user"] = "guest"
 
-    items = mongo.db.items.find()
-
+    items = mongo.db.items.find().sort("liked_count", -1).limit(3)
+    
     return render_template("index.html", items=items)
 
 
