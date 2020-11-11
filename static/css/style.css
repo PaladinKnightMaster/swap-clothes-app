@@ -26,7 +26,17 @@ h1 {
 }
 
 h2 {
-    padding-top: 3rem;
+    font-size: 3rem;
+    padding: 1rem 0;
+    margin: 3rem auto 2rem;
+    max-width: 25rem;
+    border-width: 3px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-image: linear-gradient(0deg, #FF626D, #FFC371) 1;
+    border-image: -webkit-linear-gradient(0deg, #FF626D, #FFC371) 1;
+    border-image: -moz-linear-gradient(0deg, #FF626D, #FFC371) 1;
+    border-image: -o-linear-gradient(0deg, #FF626D, #FFC371) 1;
 }
 
 /* Spacing */
@@ -83,7 +93,7 @@ h2 {
 
 .filled-red, .filled-orange {
     color: #fff;
-    border: none;
+    border: none
 }
 
 .outlined-red {
@@ -572,22 +582,103 @@ a i.like-button-disabled {
 }
 
 /* ---------HOME PAGE---------- */
-#swap-heading {
-    font-size: 5rem;
-}
 
+/* Landing page top section */
 .landing-graphic-container {
     width: 100%;
-    height: 15rem;
+    height: 5rem;
     background: #fff url('/static/graphics/feet.png') top/contain no-repeat;    
 }
 
-/* 
-border-width: 3px;
-  border-style: solid;
-  border-image: 
-    linear-gradient(
-      to bottom, 
-      red, 
-      rgba(0, 0, 0, 0)
-     1 100%; */
+.landing-content-container {
+    max-width: 800px;
+    margin:  0 auto 5rem;
+    padding: 2rem 0.5rem;
+}
+
+.landing-content {
+    max-width: 300px;
+    margin: 2rem auto 0;
+}
+
+.landing-content p {
+    font-size: 1rem;
+    line-height: 2rem;
+}
+
+.landing-content a {
+    margin: 1rem 0 0;
+    width: 8rem;
+}
+ 
+#swap-heading {
+    font-size: 4.5rem;
+    font-weight: 800;
+    width: 100%;
+}
+
+#swap-subheading {
+    font-size: 2.25rem;
+    font-weight: 700;
+}
+
+#swap-heading, #swap-subheading {
+    margin: 0 auto;
+    color: #808080;
+}
+
+@media screen and (min-width: 600px) {
+    .landing-graphic-container {
+        height: 10rem;
+    }
+    .landing-content-container {
+        padding: 3rem;
+    }
+    .landing-content a {
+        margin: 3rem 1rem 0;
+    }
+    .landing-content p {
+        font-size: 1.25em;
+    }
+    .landing-content{
+        margin: 0 auto;
+        max-width: 500px;
+    }
+    #swap-heading {
+        font-size: 8rem;
+    }
+    #swap-subheading {
+        font-size: 4.5rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .landing-graphic-container {
+        height: 15rem;
+    }
+}
+
+/* Hot Items section */
+.hot-items {
+    margin: 5rem auto;
+    max-width: 1200px;
+}
+
+.hot-items h2 {
+    padding: 2rem 0;
+    margin-bottom: 5rem;
+}
+
+.liked-count {
+    font-size: 1.5rem;
+}
+
+.hot-item-card {
+    margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 992px) {
+    .hot-items {
+        margin: 10rem auto;
+    }
+}
