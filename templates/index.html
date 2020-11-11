@@ -2,12 +2,17 @@
 <!-- Add active class to the  navbar -->
 {% block nav_home %}active{% endblock %}
 {% block sidenav_home %}active-sidenav{% endblock %}
-{% block content %}
 
+<!-- Landing Page graphic -->
+{% block landing_graphic %}
+    <div class="landing-graphic-container center "></div>
+{% endblock %}
+
+{% block content %}
 <!-- Top Landing Page section -->
 <section class="landing-pg-container">
     <div class="container">
-        <h1>SWAP</h1>
+        <h1 id="swap-heading">SWAP</h1>
         <p>your clothes</p>
         <p>Add items you're ready to say goodbye to and swap them with other swappers' pre-loved pieces</p>
         <p>Add. Like. Swap. Simple!</p>
