@@ -5,92 +5,78 @@
 
 <!-- Main content -->
 {% block content %}
-<h1 class="gradient-bkg-light">Register</h1>
 
-<div class="row form-container">
+<div class="row container mb-0">
     <!-- Registration form -->
     <form
-        class="col s12 form-element"
+        class="col s12 form-element z-depth-4 border-radius-m register"
         method="POST"
         action="{{ url_for('register') }}">
-        <div class="card-panel z-depth-4 border-radius-sm">
-            <!-- username -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <input
-                        id="username"
-                        name="username"
-                        type="text"
-                        minlength="3"
-                        maxlength="15"
-                        pattern="^[a-zA-Z0-9]{3,15}$"
-                        class="validate"
-                        required/>
-                    <label for="username">
-                        Username 
-                        <i 
-                            class="far fa-question-circle tooltipped" 
-                            data-position="right" 
-                            data-tooltip="Username should be 3-15 characters long and only contains letters, numbers, '-' and '_'"></i>
-                    </label>
-                </div>
+        <h3 class="center-align">Register</h3>
+        <!-- Username -->
+        <div class="row mb-0">
+            <div class="col s12 input-field">
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    minlength="3"
+                    maxlength="15"
+                    pattern="^[a-zA-Z0-9]{3,15}$"
+                    data-length="15"
+                    class="validate"
+                    required/>
+                <label for="username">Username:</label>
+                <span class="helper-text" data-error="Letters and numbers only" data-success=""></span>
             </div>
-            <!-- password -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        minlength="8"
-                        maxlength="20"
-                        pattern="^[a-zA-Z0-9_-]{8,20}$"
-                        class="validate"
-                        required/>
-                    <label for="password">
-                        Password
-                        <i 
-                            class="far fa-question-circle tooltipped" 
-                            data-position="right" 
-                            data-tooltip="Password should be 8-20 characters long and only contains letters, numbers, '-' and '_'"></i>
-                    </label>
-                </div>
+        </div>
+        <!-- Password -->
+        <div class="row input-container">
+            <div class="input-field col s12">
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    minlength="8"
+                    maxlength="20"
+                    pattern="^[a-zA-Z0-9_-]{8,20}$"
+                    data-length="20"
+                    class="validate"
+                    required/>
+                <label for="password">Password:</label>
+                <span class="helper-text" data-error="Letters, numbers, '-' and ' _'" data-success=""></span>
             </div>
-            <!-- Looking-for dropdown selector -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <select name="looking_for" multiple>
-                        <option value="" disabled selected>Looking For: </option>
-                        {% for category in categories %}
-                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
-                        {% endfor %}
-                    </select>
-                    <label class="optional-label">
-                        (Optional)
-                        <i 
-                            class="far fa-question-circle tooltipped" 
-                            data-position="right" 
-                            data-tooltip="Let other swappers know what items you're looking for"></i>
-                    </label>
-                </div>
+        </div>
+        <!-- Looking-for dropdown selector -->
+        <div class="row input-container">
+            <div class="input-field col s12">
+                <select name="looking_for" multiple>
+                    <option value="" disabled selected>Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                    {% endfor %}
+                </select>
+                <label class="options-label">Looking For: (Optional)</label>
             </div>
-            <!-- submit button -->
-            <div class="row centered-row">
-                <button
-                    class="col s5 m4 l3 swap-btn filled-red border-radius-m centered-elem"
-                    type="submit"
-                    name="action">
-                    Register
-                </button>
-            </div>
+        </div>
+        <!-- submit button -->
+        <div class="row centered-row">
+            <button
+                class="col s5 m4 l3 swap-btn filled-red border-radius-m centered-elem"
+                type="submit"
+                name="action">
+                Register
+            </button>
         </div>
     </form>
 </div>
+
+<!-- Redirect to log in page -->
 <div class="row">
     <div class="col s12">
         <p class="center-align">
             Already a Swapper?
-            <a href="{{ url_for('login') }}" class="secondary-accent-text hover-undrline">Log In</a>
+            <a href="{{ url_for('login') }}" class="accent-text hover-undrline">Log In</a>
         </p>
     </div>
 </div>

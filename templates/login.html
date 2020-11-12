@@ -5,54 +5,52 @@
 
 <!-- Main content -->
 {% block content %}
-<h1 class="gradient-bkg-light">Login</h1>
 
-<div class="row form-container">
+<div class="row container mb-0">
     <!-- Log In form -->
     <form
-        class="col s12 form-element"
-        method="POST"
-        action="{{ url_for('login') }}">
-        <div class="card-panel z-depth-4 border-radius-sm">
-            <!-- Username -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <input
-                        id="username"
-                        name="username"
-                        type="text"
-                        minlength="3"
-                        maxlength="15"
-                        pattern="^[a-zA-Z0-9]{3,15}$"
-                        class="validate"
-                        required/>
-                    <label for="username">Username</label>
-                </div>
+    class="col s12 form-element z-depth-4 border-radius-m"
+    method="POST"
+    action="{{ url_for('login') }}">
+        <h3 class="center-align">Login</h3>
+        <!-- Username -->
+        <div class="row mb-0">
+            <div class="input-field col s12">
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    minlength="3"
+                    maxlength="15"
+                    pattern="^[a-zA-Z0-9]{3,15}$"
+                    class="validate"
+                    required/>
+                <label for="username">Username:</label>
             </div>
-            <!-- Password -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        minlength="8"
-                        maxlength="20"
-                        pattern="^[a-zA-Z0-9_-]{8,20}$"
-                        class="validate"
-                        required/>
-                    <label for="password">Password</label>
-                </div>
+        </div>
+        <!-- Password -->
+        <div class="row input-container mb-0">
+            <div class="input-field col s12">
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    minlength="8"
+                    maxlength="20"
+                    pattern="^[a-zA-Z0-9_-]{8,20}$"
+                    class="validate"
+                    required/>
+                <label for="password">Password</label>
             </div>
-            <!-- Submit button -->
-            <div class="row centered-row">
-                <button
-                    class="col s5 m4 l3 swap-btn filled-orange border-radius-m centered-elem"
-                    type="submit"
-                    name="action">
-                    Log In
-                </button>
-            </div>
+        </div>
+        <!-- Submit button -->
+        <div class="row centered-row">
+            <button
+                class="col s5 m4 l3 swap-btn filled-orange border-radius-m centered-elem"
+                type="submit"
+                name="action">
+                Log In
+            </button>
         </div>
     </form>
 </div>
