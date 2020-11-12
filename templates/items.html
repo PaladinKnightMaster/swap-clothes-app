@@ -7,11 +7,11 @@
 <h1 class="gradient-bkg-light">Items</h1>
 
 <div class="row mb-0">
-    <div class="col s12 l9 xl8 offset-l3 offset-xl3 gradient-bkg-top border-radius-sm">
-        <div class="row mb-0">
+    <div class="col s12 l9 xl8 offset-l3 offset-xl3 border-radius-sm">
+        <div class="row mb-0 all-item-container">
             <!-- Buttons to sort all items  -->
             <div class="col s12 m4">
-                <div class="white border-radius-sm sort-container">
+                <div class="white border-radius-sm sort-container z-depth-2">
                     <span class="sort-title grey-text text-lighten-1">Sort:</span>
                     <!-- Alphabetically -->
                     <a href="{{ url_for('sort', sort_by = 'a-to-z', username = session.user) }}">
@@ -37,24 +37,21 @@
             </div>
             <!-- Add search bar to allow the user to search through the items  -->
             <div class="col s12 m8 search-container-parent">
-                <form action="{{ url_for('search', username=session.user) }}" method="POST" class="white border-radius-sm search-container">
+                <form action="{{ url_for('search', username=session.user) }}" method="POST" class="search-container z-depth-2 border-radius-sm">
                     <div class="row">
-                        <!-- Search input -->
-                        <div class="col s12 m8">
-                            <label for="search"></label>                        
-                            <input type="text" name="search" id="search" placeholder="Search:" class="validate" required>
+                        <!-- Search input -->  
+                        <div class="col s6 m8">                 
+                            <input type="text" name="search" id="search" placeholder="Search:" class="white">
                         </div>
-                        <!-- Reset button -->
-                        <div class="col s4 m2 offset-s2 center">
-                            <a href="{{ url_for('items', username=session.user) }}" class="swap-btn filled-orange border-radius-sm">
-                                <i class="fas fa-redo-alt"></i>
-                            </a>
-                        </div>
-                        <!-- Submit button -->
-                        <div class="col s4 m2">
-                            <button type="submit" class="swap-btn filled-orange border-radius-sm">
+                        <div class="col s6 m4 center">
+                            <!-- Submit button -->
+                            <button type="submit" class="swap-btn filled-red border-radius-sm profile-btn">
                                 <i class="fas fa-search"></i>
                             </button>
+                            <!-- Reset button -->
+                            <a href="{{ url_for('items', username=session.user) }}" class="swap-btn filled-red border-radius-sm profile-btn">
+                                <i class="fas fa-redo-alt"></i>
+                            </a>
                         </div>
                     </div>
                 </form>

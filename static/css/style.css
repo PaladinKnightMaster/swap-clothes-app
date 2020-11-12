@@ -382,6 +382,15 @@ nav ul a:hover, .active {
     font-size: 1.25rem;
 }
 
+input#search {
+    height: 3rem;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    padding: 0 1rem;
+    font-size: 1.25rem;
+    font-family: inherit;
+}
+
 /* Style sorting buttons */
 .sort-container a {
     font-size: 1.5rem;
@@ -430,39 +439,176 @@ input#search.validate {
 
 
 /* ---------FORMS FOR REGISTER, LOGIN, NEW ITEM PAGES---------- */
-.form-container {
-    display: flex;
+form h3 {
+    padding-bottom: 1.5rem;
+    font-size: 2.5rem;
 }
 
-.form-element{
+div.container form.form-element {
+    float: none;
     max-width: 600px;
-    margin: 3rem auto;
+    margin: 2rem auto 0;
+    padding: 0.5rem 2rem 3rem;
 }
 
-
-.input-container {
-    border: 1px solid #b1b1b1;
-    border-radius: 3rem;
-    margin: 3rem 0;
-    padding: 0 1rem;
-    height: 4rem;
+form .swap-btn {
+    margin-top: 2rem;
 }
 
-.input-container .input-field input {
-    margin: 0;
+.input-field {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-label.optional-label {
+.register .input-field {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 300px) {
+    div.container form.form-element {
+        padding: 1rem 1rem 3rem;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .input-field {
+        margin-bottom: 1.5rem;
+    }
+    div.container form.form-element {
+        padding: 1rem 5rem 3rem;
+        margin: 3rem auto
+    }
+    form h3 {
+        padding-bottom: 3rem;
+        font-size: 3rem;
+    }
+}
+
+ /* Character counter in input fields, compensating for the helper text row to line up */
+ span.character-counter {
+    padding-right: 2rem;
+ }
+
+ .register span.character-counter {
+    position: relative;
+    top: -18px;
+ }
+
+ .helper-text {
+     margin-left: 1rem;
+ }
+
+/* Overriding Materialize input-field class styles */
+ /* label color */
+div.input-field input[type=text],
+div.input-field input[type=password],
+div.input-field textarea {
+    height: 3rem;
+}
+
+/* Label syle */
+.input-field>label {
+    color: inherit;
+    z-index: -1;
+    margin-left: 1.75rem;
+    top: 0.25rem;
+}
+
+label.options-label {
     top: -30px;
+    letter-spacing: 2px;
 }
 
-.form-element > .card-panel {
-    padding: 3rem;
+label>i {
+    z-index: 1;
 }
 
-.input-field input, input.select-dropdown.dropdown-trigger {
-    color: #585858;
+@media screen and (min-width: 600px) {
+    div.input-field input[type=text],
+    div.input-field input[type=password],
+    div.input-field textarea {
+        height: 4rem;
+    }
+    .input-field>label {
+        top: 0.5rem;
+    }
+    label.options-label {
+        top: -30px;
+    }
 }
+
+/* Removing bottom border when a field is focused on */
+input[type=text]:not(.browser-default) {
+    border-bottom: none;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus,
+input[type=text]:focus,
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input#search[type=password]:not(.browser-default),
+textarea.materialize-textarea:focus:not([readonly]),
+textarea.materialize-textarea:focus {
+    border: 2px solid #bbb;
+    border-radius: 3rem;
+    box-shadow: 1px 2px 6px rgba(0,0,0,0.2),
+                2px 4px 8px rgba(0,0,0,0.1);
+}
+
+/* label underline focus color for search bar */
+.input-field input#search[type=text]:focus,
+    input#search[type=text]:focus,
+    input#search[type=text]:not(.browser-default):focus:not([readonly]),
+    input#search[type=password]:not(.browser-default):focus:not([readonly]),
+    input#search[type=password]:not(.browser-default) {
+    border: none;
+    box-shadow: none;
+}
+
+/* valid color class */
+.input-field input[type=text].valid,
+.input-field input[type=password].valid,
+textarea.materialize-textarea.valid {
+    border: 2px solid #26b38f;
+    border-radius: 3rem;
+    box-shadow: none;
+}
+
+/* invalid color class  */
+.input-field input[type=text].invalid,
+.input-field input[type=password].invalid,
+textarea.materialize-textarea.invalid {
+    border: 2px solid #FF626D;
+    border-radius: 3rem;
+    box-shadow: none;
+}
+
+/* Input border */
+input[type=text].validate, input[type=password].validate,
+input.select-dropdown.dropdown-trigger,
+textarea.materialize-textarea {
+    border: 2px solid #bbb;
+    border-radius: 3rem;
+    box-sizing: border-box;
+    padding: 0 2rem;
+    margin: 0 auto;
+}
+
+textarea.materialize-textarea {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+ /* Change label animation */
+ .input-field>label:not(.label-icon).active,
+ .input-field>input[type]:-webkit-autofill:not(.browser-default):not([type="search"])+label {
+    -webkit-transform: translateY(-25px) scale(0.8);
+    transform: translateY(-25px) scale(0.8);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+ }
+ /* --------------------------------------------------- */
 
 
 /* ----------PAGINATION---------- */
