@@ -8,7 +8,7 @@ $(document).ready(function(){
 		dist: -30,
 		shift: -20,
 	});
-	$('.register input#username, .register input#password, .add-item input#item_name, .add-item textarea#short_desc, .add-item textarea#long_desc').characterCounter();
+	$('.register input#username, .register input#password, input#item_name, textarea#short_desc, textarea#long_desc').characterCounter();
 
 	// Code used from Code Institute task manager mini project, classes changed to fit formating for this project
 	validateMaterializeSelect();
