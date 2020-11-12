@@ -430,9 +430,10 @@ input#search.validate {
 
 
 /* ---------FORMS FOR REGISTER, LOGIN, NEW ITEM PAGES---------- */
-/* .form-container {
-    display: flex;
-} */
+form h3 {
+    padding-bottom: 1.5rem;
+    font-size: 2.5rem;
+}
 
 div.container form.form-element {
     float: none;
@@ -441,9 +442,8 @@ div.container form.form-element {
     padding: 0.5rem 2rem 3rem;
 }
 
-form h3 {
-    padding-bottom: 1.5rem;
-    font-size: 2.5rem;
+form .swap-btn {
+    margin-top: 2rem;
 }
 
 .input-field {
@@ -455,16 +455,11 @@ form h3 {
     margin-bottom: 0;
 }
 
-form .swap-btn {
-    margin-top: 2rem;
-}
-
 @media screen and (max-width: 300px) {
     div.container form.form-element {
         padding: 1rem 1rem 3rem;
     }
 }
-
 
 @media screen and (min-width: 600px) {
     .input-field {
@@ -481,11 +476,23 @@ form .swap-btn {
     input[type=text], input[type=password] {
         height: 4rem !important;
     }
-    
 }
 
-/* Overriding Materialize input-field class styles */
+ /* Character counter in input fields, compensating for the helper text row to line up */
+ span.character-counter {
+    padding-right: 2rem;
+ }
 
+ .register span.character-counter {
+    position: relative;
+    top: -18px;
+ }
+
+ .helper-text {
+     margin-left: 1rem;
+ }
+
+/* Overriding Materialize input-field class styles */
  /* label color */
 input[type=text], input[type=password] {
     height: 3rem !important;
@@ -516,8 +523,6 @@ label.options-label {
     }
 }
 
-
-
 /* label underline focus color */
 .input-field input[type=text]:focus,
     input[type=text]:focus,
@@ -530,21 +535,24 @@ label.options-label {
 }
 
 /* valid color class */
-.input-field input[type=text].valid, .input-field input[type=password].valid {
+.input-field input[type=text].valid,
+.input-field input[type=password].valid {
     border: 2px solid #26b38f;
     border-radius: 3rem;
     box-shadow: none;
 }
 
 /* invalid color class  */
-.input-field input[type=text].invalid, .input-field input[type=password].invalid {
+.input-field input[type=text].invalid,
+.input-field input[type=password].invalid {
     border: 2px solid #FF626D;
     border-radius: 3rem;
     box-shadow: none;
 }
 
 /* Input border */
-input[type=text].validate, input[type=password].validate, input.select-dropdown.dropdown-trigger {
+input[type=text].validate, input[type=password].validate,
+input.select-dropdown.dropdown-trigger {
     border: 2px solid #bbb;
     border-radius: 3rem;
     box-sizing: border-box;
@@ -552,12 +560,6 @@ input[type=text].validate, input[type=password].validate, input.select-dropdown.
     margin: 0 auto;
 
 }
-/* 
-.register input[type=text].validate,
-.register input[type=password].validate,
-.register input.select-dropdown.dropdown-trigger {
-    margin: 0 auto;
-} */
 
  /* Change label animation */
  .input-field>label:not(.label-icon).active {
@@ -566,20 +568,7 @@ input[type=text].validate, input[type=password].validate, input.select-dropdown.
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
  }
-
- /* Character counter in input fields, compensating for the helper text row to line up */
- span.character-counter {
-    padding-right: 2rem;
- }
-
- .register span.character-counter {
-    position: relative;
-    top: -18px;
- }
-
- .helper-text {
-     margin-left: 1rem;
- }
+ /* --------------------------------------------------- */
 
 
 /* ----------PAGINATION---------- */
