@@ -5,163 +5,147 @@
 
 <!-- Main content -->
 {% block content %}
-<h1 class="gradient-bkg-light">New Item</h1>
 
-<div class="row form-container">
+<div class="row container">
     <!-- New Item Form -->
     <form
-        class="col s12 form-element"
-        method="POST"
-        action="{{ url_for('add_item') }}">
-        <div class="card-panel z-depth-4 border-radius-sm">
-
-            <!-- Item Name -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <input
-                        id="item_name"
-                        name="item_name"
-                        type="text"
-                        minlength="3"
-                        maxlength="20"
-                        required/>
-                    <label for="item_name">
-                        Item Name 
-                        <i 
-                            class="far fa-question-circle tooltipped" 
-                            data-position="right" 
-                            data-tooltip="Between 3-20 characters long"></i>
-                    </label>
-                </div>
+    class="col s12 form-element z-depth-4 border-radius-sm add-item"
+    method="POST"
+    action="{{ url_for('add_item') }}">
+        <h3 class="center">New Item</h1>
+        <!-- Item Name -->
+        <div class="row">
+            <div class="input-field col s12">
+                <input
+                    id="item_name"
+                    name="item_name"
+                    type="text"
+                    minlength="3"
+                    maxlength="20"
+                    class="validate"
+                    data-length="20"
+                    required/>
+                <label for="item_name">Item Name:</label>
             </div>
+        </div>
 
-            <!-- Item Image -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <input
-                        id="item_image"
-                        name="item_image"
-                        type="text"/>
-                    <label for="item_image">
-                        Picture Link 
-                    </label>
-                </div>
+        <!-- Item Image -->
+        <div class="row input-container">
+            <div class="input-field col s12">
+                <input
+                    id="item_image"
+                    name="item_image"
+                    type="text"
+                    class="validate"/>
+                <label for="item_image">
+                    Picture Link (Optional) 
+                </label>
             </div>
+        </div>
 
-            <!-- Short Description for the item card front -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <textarea
-                        id="short_desc"
-                        name="short_desc"
-                        maxlength="100"
-                        class="materialize-textarea"
-                        required></textarea>
-                    <label for="short_desc">
-                    Short Description
-                        <i 
-                            class="far fa-question-circle tooltipped" 
-                            data-position="right" 
-                            data-tooltip="Between 3-100 characters long"></i>
-                    </label>
-                </div>
+        <!-- Short Description for the item card front -->
+        <div class="row input-container">
+            <div class="input-field col s12">
+                <textarea
+                    id="short_desc"
+                    name="short_desc"
+                    maxlength="100"
+                    data-length="100"
+                    class="materialize-textarea validate"
+                    required></textarea>
+                <label for="short_desc">Short Description:</label>
             </div>
+        </div>
 
-            <!-- Long Description for the item card back -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <textarea
-                        id="long_desc"
-                        name="long_desc"
-                        maxlength="300"
-                        class="materialize-textarea"
-                        required></textarea>
-                    <label for="long_desc">
-                    Long Description
-                        <i 
-                            class="far fa-question-circle tooltipped" 
-                            data-position="right" 
-                            data-tooltip="Less than 300 characters"></i>
-                    </label>
-                </div>
+        <!-- Long Description for the item card back -->
+        <div class="row input-container">
+            <div class="input-field col s12">
+                <textarea
+                    id="long_desc"
+                    name="long_desc"
+                    maxlength="300"
+                    data-length="300"
+                    class="materialize-textarea validate"
+                    required></textarea>
+                <label for="long_desc">Long Description:</label>
             </div>
+        </div>
 
-            <!-- Category selector -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <select name="category">
-                        <option value="" disabled selected>Category</option>
-                        {% for category in categories %}
-                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
-                        {% endfor %}
-                    </select>
-                    <label for="">Category</label>
-                </div>
+        <!-- Category selector -->
+        <div class="row input-container">
+            <div class="input-field col s12">
+                <select name="category" class="validate" required>
+                    <option value="" disabled selected>Category</option>
+                    {% for category in categories %}
+                        <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                    {% endfor %}
+                </select>
+                <label class="options-label">Category</label>
             </div>
+        </div>
 
-            <!-- Item Sizing -->
-            <div class="row input-container">
-                <div class="input-field col s6">
-                    <input
-                        id="size"
-                        name="size"
-                        type="text"
-                        maxlength="5"
-                        class="materialize-textarea"
-                        required></input>
-                    <label for="size">Size</label>
-                </div>
-                <div class="input-field col s6">
-                    <select name="size_region">
-                        <option value="" disabled selected>From</option>
-                            <option value="EU">EU</option>
-                            <option value="UK">UK</option>
-                            <option value="USA">USA</option>
-                    </select>
-                </div>
+        <!-- Item Sizing -->
+        <div class="row input-container">
+            <div class="input-field col s6">
+                <input
+                    id="size"
+                    name="size"
+                    type="text"
+                    maxlength="5"
+                    class="validate"
+                    required></input>
+                <label for="size">Size: </label>
             </div>
-
-            <!-- Item Fit -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <select name="item_fit">
-                        <option value="" disabled selected>Fit</option>
-                            <option value="Women">Women</option>
-                            <option value="Men">Men</option>
-                            <option value="Unisex">Unisex</option>
-                    </select>
-                    <label for="">Fit</label>
-                </div>
+            <div class="input-field col s6">
+                <select name="size_region" class="validate" required>
+                    <option value="" disabled selected>From</option>
+                        <option value="EU">EU</option>
+                        <option value="UK">UK</option>
+                        <option value="USA">USA</option>
+                </select>
+                <label class="options-label">Item From:</label>
             </div>
+        </div>
 
-            <!-- Used Status -->
-            <div class="row input-container">
-                <div class="input-field col s12">
-                    <select name="used_status">
-                        <option value="" disabled selected>Used</option>
-                            <option value="Never">Never</option>
-                            <option value="Barely">Barely</option>
-                            <option value="Few Times">Few Times</option>
-                            <option value="Often">Often</option>
-                            <option value="Heavily">Heavily</option>
-                    </select>
-                    <label for="">Used</label>
-                </div>
+        <!-- Item Fit -->
+        <div class="row input-container">
+            <div class="input-field col s12">
+                <select name="item_fit" class="validate" required>
+                    <option value="" disabled selected>Fit</option>
+                        <option value="Women">Women</option>
+                        <option value="Men">Men</option>
+                        <option value="Unisex">Unisex</option>
+                </select>
+                <label class="options-label">Fit</label>
             </div>
+        </div>
 
-            <!-- Submit button -->
-            <div class="row centered-row">
-                <a href="{{ url_for('add_item') }}" class="col s5 m4 l3 swap-btn outlined-red border-radius-m centered-elem center-align">
-                    Reset
-                </a>
-                <button
-                    class="col s5 m4 l3 swap-btn filled-red gradient-bkg border-radius-m centered-elem"
-                    type="submit"
-                    name="action">
-                    Add Item
-                </button>
+        <!-- Used Status -->
+        <div class="row input-container">
+            <div class="input-field col s12">
+                <select name="used_status" class="validate" required>
+                    <option value="" disabled selected>Used</option>
+                        <option value="Never">Never</option>
+                        <option value="Barely">Barely</option>
+                        <option value="Few Times">Few Times</option>
+                        <option value="Often">Often</option>
+                        <option value="Heavily">Heavily</option>
+                </select>
+                <label class="options-label">Used</label>
             </div>
+        </div>
 
+        <!-- Submit button -->
+        <div class="row centered-row">
+            <a href="{{ url_for('add_item') }}" class="col s5 m4 l3 swap-btn outlined-red border-radius-m centered-elem center-align">
+                Reset
+            </a>
+            <button
+                class="col s5 m4 l3 swap-btn filled-red gradient-bkg border-radius-m centered-elem"
+                type="submit"
+                name="action">
+                Add Item
+            </button>
         </div>
     </form>
 </div>
