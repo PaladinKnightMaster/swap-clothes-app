@@ -8,7 +8,7 @@ $(document).ready(function(){
 		dist: -30,
 		shift: -20,
 	});
-	$('input#username, input#password').characterCounter();
+	$('.register input#username, .register input#password').characterCounter();
 });
 
 $('.item-creator-container').on('click', function() {
