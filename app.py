@@ -61,11 +61,11 @@ def home():
     Display home page with top 3 items and add
     a guest as a session user until user logs in 
     """
-    if not session['user']:
+    if not session:
         session["user"] = "guest"
 
     items = mongo.db.items.find().sort("liked_count", -1).limit(3)
-    
+
     return render_template("index.html", items=items)
 
 
@@ -259,11 +259,11 @@ def login():
 @app.route('/logout')
 def logout():
     """
-    Implement log out functionality by removing user from
+    Implement log out functionality by switching to a guest user
     the session cookie
     """
     flash("See you soon")
-    session.pop("user")
+    session['user'] = 'guest'
     return redirect(url_for('login'))
 
 
