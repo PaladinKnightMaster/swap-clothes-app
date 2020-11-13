@@ -94,14 +94,14 @@ def items(username):
 
 
 
-@app.route("/filter/<username>", methods=["GET", "POST"])
+@app.route("/filter/<username>")
 def filter(username):
     """
     Get all checked values for category filter,
     find and display items with those categories
     """
     categories = mongo.db.categories.find()
-    selected_categories = request.form.getlist("selected-categories")
+    selected_categories = request.args.getlist("selected-categories")
     items = list(mongo.db.items.find(
         {"category": {"$in": selected_categories}}).sort('_id', -1))
 
@@ -168,14 +168,13 @@ def search(username):
     users liked items are being displayed
     """
     categories = mongo.db.categories.find()
-    query = request.form.get("search")
+    query = request.args.get("search")
 
-    if query == None:
-        items = list(mongo.db.items.find({"liked_by": session['user']}))
-    else:
-        items = list(mongo.db.items.find({"$text": {"$search": query}}))
-        
-
+    # if query == None:
+    #     items = list(mongo.db.items.find({"liked_by": session['user']}))
+    # else:
+    items = list(mongo.db.items.find({"$text": {"$search": query}}))
+    
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
