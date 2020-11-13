@@ -1,3 +1,4 @@
+
 // Initialize Materialize components using jQuery
 $(document).ready(function(){
 	$('.sidenav').sidenav();
@@ -44,3 +45,6 @@ $(document).ready(function(){
 $('.item-creator-container').on('click', function() {
 	$(this).next().toggleClass('visible')
 })
+
+// Sweetalert connected basic message
+Swal.fire('Hello World')
