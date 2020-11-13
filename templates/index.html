@@ -3,26 +3,28 @@
 {% block nav_home %}active{% endblock %}
 {% block sidenav_home %}active-sidenav{% endblock %}
 
-<!-- Landing Page graphic -->
-{% block landing_graphic %}
-    <div class="landing-graphic-container center "></div>
-{% endblock %}
+
 
 {% block content %}
-<!-- Top Landing Page section -->
-<section class="container center">
-    <div class="landing-content-container z-depth-4 border-radius-m">
-        <h1 id="swap-heading">SWAP</h1>
-        <p id="swap-subheading">your clothes</p>
-        <div class="landing-content">
-            <p>Ready for a closet makeover?</p>
-            <p>Add items you're ready to say goodbye to and swap them with other pre-loved pieces.</p>
-            <p>Add. Like. Swap. Enjoy!</p>
-            <a href="{{ url_for('register') }}" class="swap-btn filled-red border-radius-m profile-btn">Register</a>
-            <a href="{{ url_for('login') }}" class="swap-btn filled-red border-radius-m profile-btn">Log In</a>
+<div class="landing-page">
+    <!-- Landing Page graphic, hero image and content -->
+    <div class="landing-image-container"></div>
+    <div class="landing-graphic-container center"></div>
+    <!-- Top Landing Page section -->
+    <div class="container center">
+        <div class="landing-content-container z-depth-4 border-radius-m">
+            <h1 id="swap-heading">SWAP</h1>
+            <p id="swap-subheading">your clothes</p>
+            <div class="landing-content">
+                <p>Ready for a closet makeover?</p>
+                <p>Add items you're ready to say goodbye to and swap them with other pre-loved pieces.</p>
+                <p>Add. Like. Swap. Enjoy!</p>
+                <a href="{{ url_for('register') }}" class="swap-btn filled-red border-radius-m profile-btn">Register</a>
+                <a href="{{ url_for('login') }}" class="swap-btn filled-red border-radius-m profile-btn">Log In</a>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Hot Items section -->
 <section class="hot-items">
