@@ -36,7 +36,7 @@
     <!-- Edit Profile Button -->
     <div class="row">
         <div class="col s12 center">
-            <a href="{{ url_for('items', username=session.user) }}" class="swap-btn filled-red gradient-bkg border-radius-m center-align profile-btn">
+            <a href="{{ url_for('edit_profile', username=session.user) }}" class="swap-btn filled-red gradient-bkg border-radius-m center-align profile-btn">
                 Edit Profile
             </a>
         </div>

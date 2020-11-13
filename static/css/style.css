@@ -612,6 +612,20 @@ textarea.materialize-textarea {
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
  }
+
+ /* Form dvider heading */
+form h6 {
+    margin: 0 auto 1.5rem;
+    font-size: 1.25rem;
+}
+
+label > i {
+    font-size: 1.4rem;
+}
+
+form div.input-field.socials {
+    margin-bottom: 1rem;
+}
  /* --------------------------------------------------- */
 
 
@@ -869,12 +883,10 @@ div.swal2-popup {
 }
 
 
-/* Form dvider heading */
-form h6 {
-    margin: 0 auto 1.5rem;
-    font-size: 1.25rem;
-}
+.hot-items h2 i {
+    font-size: 3rem;
+    background: -webkit-linear-gradient(270deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
-label > i {
-    font-size: 1.4rem;
 }
