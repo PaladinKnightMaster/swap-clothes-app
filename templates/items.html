@@ -70,17 +70,18 @@
                 </div>
             </div>
             <!-- Filter container values -->
-            <form action="{{ url_for('filter', username=session.user) }}" method="POST">
+            <form action="{{ url_for('filter', username=session.user) }}" method="GET" name="categories">
                 <!-- Loop through all categories in the category collection and create a checbox for each -->
                 <div class="category-labels">
                     {% for category in categories %}
                     <p>
                         <label for="{{ category.category_name }}">
-                            <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories" />
                             <!-- Distinguish between selected and non selected categories -->
                             {% if category.category_name in selected_categories %}
+                                <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories" checked/>
                                 <span class="filtered-category">{{ category.category_name }}</span>
                             {% else %}
+                                <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories"/>
                                 <span>{{ category.category_name }}</span>
                             {% endif %}
                         </label>
@@ -199,9 +200,9 @@
                 </div>
             </div>
         {% endfor %}
-        </div>
         {{ pagination.info }}
         {{ pagination.links }}
+        </div>
     {% else %}
         <h3>No Results Found</h3>
     {% endif %}
