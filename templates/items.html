@@ -37,7 +37,7 @@
             </div>
             <!-- Add search bar to allow the user to search through the items  -->
             <div class="col s12 m8 search-container-parent">
-                <form action="{{ url_for('search', username=session.user) }}" method="POST" class="search-container z-depth-2 border-radius-sm">
+                <form action="{{ url_for('search', username=session.user) }}" method="GET" class="search-container z-depth-2 border-radius-sm">
                     <div class="row">
                         <!-- Search input -->  
                         <div class="col s6 m8">                 
@@ -70,17 +70,18 @@
                 </div>
             </div>
             <!-- Filter container values -->
-            <form action="{{ url_for('filter', username=session.user) }}" method="POST">
+            <form action="{{ url_for('filter', username=session.user) }}" method="GET" name="categories">
                 <!-- Loop through all categories in the category collection and create a checbox for each -->
                 <div class="category-labels">
                     {% for category in categories %}
                     <p>
                         <label for="{{ category.category_name }}">
-                            <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories" />
                             <!-- Distinguish between selected and non selected categories -->
                             {% if category.category_name in selected_categories %}
+                                <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories" checked/>
                                 <span class="filtered-category">{{ category.category_name }}</span>
                             {% else %}
+                                <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories"/>
                                 <span>{{ category.category_name }}</span>
                             {% endif %}
                         </label>
@@ -102,10 +103,9 @@
     </div>
     <!-- Display Items -->
     <div class="col s12 l9">
-        {% if items|length > 0 %}
-        <!-- Add Pagination information and page links -->
+    {% if items|length > 0 %}
         <div class="row all-item-container">
-            {% for item in items %}
+        {% for item in items %}
             <div class="col s12 m6 l4">
                 <div class="card center z-depth-4">
                     <!-- Card Image -->
@@ -199,9 +199,12 @@
                 </div>
             </div>
         {% endfor %}
+            <!-- Add Pagination infromation and pagination page links -->
+            <div class="col s12">
+                {{ pagination.info }}
+                {{ pagination.links }}
+            </div>
         </div>
-        {{ pagination.info }}
-        {{ pagination.links }}
     {% else %}
         <h3>No Results Found</h3>
     {% endif %}
