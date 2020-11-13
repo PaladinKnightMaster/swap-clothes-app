@@ -464,6 +464,10 @@ form .swap-btn {
     margin-bottom: 0;
 }
 
+.register .input-container .input-field.dropdown-space {
+    margin-bottom: 1.5rem;
+}
+
 @media screen and (max-width: 300px) {
     div.container form.form-element {
         padding: 1rem 1rem 3rem;
@@ -862,4 +866,15 @@ button.swal2-styled:focus {
 
 div.swal2-popup {
     border-radius: 1.5rem;
+}
+
+
+/* Form dvider heading */
+form h6 {
+    margin: 0 auto 1.5rem;
+    font-size: 1.25rem;
+}
+
+label > i {
+    font-size: 1.4rem;
 }

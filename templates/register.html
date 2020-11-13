@@ -13,7 +13,7 @@
         method="POST"
         action="{{ url_for('register') }}">
         <h3 class="center-align">Register</h3>
-        <h6 class="center accent-text">Basics</h6>
+        <h6 class="center accent-text">Basics (Required) <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="Only contain letters, numbers, '-' and '_'"></i></h6>
         <!-- Username -->
         <div class="row mb-0">
             <div class="col s12 input-field">
@@ -23,12 +23,12 @@
                     type="text"
                     minlength="3"
                     maxlength="15"
-                    pattern="^[a-zA-Z0-9]{3,15}$"
+                    pattern="^[a-zA-Z0-9_-]{3,15}$"
                     data-length="15"
                     class="validate"
                     required/>
                 <label for="username">Username:</label>
-                <span class="helper-text" data-error="Letters and numbers only" data-success=""></span>
+                <span class="helper-text" data-error="3-15 characters" data-success=""></span>
             </div>
         </div>
         <!-- Password -->
@@ -45,10 +45,10 @@
                     class="validate"
                     required/>
                 <label for="password">Password:</label>
-                <span class="helper-text" data-error="Letters, numbers, '-' and ' _'" data-success=""></span>
+                <span class="helper-text" data-error="8-20 characters" data-success=""></span>
             </div>
         </div>
-        <h6 class="center accent-text">Tell Us More...</h6>
+        <h6 class="center accent-text">Tell Us More (Optional)</h6>
         <!-- Select Progile Image -->
         <div class="row input-container">
             <div class="input-field col s12 dropdown-space">
@@ -70,10 +70,10 @@
                         <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                     {% endfor %}
                 </select>
-                <label class="options-label">Looking For: (Optional)</label>
+                <label class="options-label">Looking For:</label>
             </div>
         </div>
-        <h6 class="center accent-text">Add your socials</h6>
+        <h6 class="center accent-text">Add your socials (Optional) <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="Only visible to a matched users"></i></h6>
         <!-- Facebook Messanger -->
         <div class="row">
             <div class="col s12 input-field">
