@@ -334,7 +334,6 @@ def edit_item(item_id):
 def delete_item(item_id):
     # Delete selected item
     mongo.db.items.remove({'_id': ObjectId(item_id)})
-    flash("Item has been deleted, bye!")
     return redirect(url_for('items', username=session['user']))
 
 

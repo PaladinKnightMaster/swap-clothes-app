@@ -46,33 +46,43 @@ $('.item-creator-container').on('click', function() {
 	$(this).next().toggleClass('visible')
 })
 
+
+// Delay page re-direct for 1.5s so user can sede pop-up display with detail cnfirmation
+function deleteItemDelay(link) {
+    setTimeout(function () {
+        window.location.href = link;
+    }, 1500);
+}
+
 // Sweetalert delete confirmation pop-up
 // Sweetalert code used from sweetalert documentation on https://sweetalert2.github.io/
 function deleteConfirm(link) {
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Delete Item?',
+        text: "Once it's gone - it's gone!",
         icon: 'warning',
+        iconColor: '#FF626D',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-        // Go to link in href attribute of the delete button clicked
-        // This code was taken from a tutorial on https://www.seblod.com/resources/tutorials/sebold-and-sweetalert2-replace-the-default-delete-confirm-box
-          window.location.href = link;
+        confirmButtonColor: '#FF626D',
+        cancelButtonColor: '#fff',
+        confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+        if (result.isConfirmed) { 
+            Swal.fire({
+                title: 'Deleted!',
+                icon: 'success',
+                iconColor: '#FF626D',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            // Go to link in href attribute of the delete button clicked
+            deleteItemDelay(link)
         }
-    })
+    });
 }
 
 // Prevent delete until it's confirmed in sweetaert pop-up
-// This code was taken from a tutorial on  https://www.seblod.com/resources/tutorials/sebold-and-sweetalert2-replace-the-default-delete-confirm-box
+// Idea for this code camed from a tutorial on https://www.seblod.com/resources/tutorials/sebold-and-sweetalert2-replace-the-default-delete-confirm-box
 $('.delete-confirm').click(function(event) {
     // Prevent opening link in href attribute before sweetalert modal runs
     event.preventDefault();
@@ -80,6 +90,5 @@ $('.delete-confirm').click(function(event) {
     let link = $(this).attr("href");
     // Run Sweetalert function
     deleteConfirm(link)
+
 })
-
-

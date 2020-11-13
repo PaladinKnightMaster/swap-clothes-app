@@ -828,3 +828,38 @@ a i.like-button-disabled {
         margin: 10rem auto;
     }
 }
+
+/* ---------DELETE CONFIRMATION--------- */
+/* heading */
+h2#swal2-title {
+    border-top: none;
+    padding: 0.5rem;
+    border-width: 2px;
+}
+
+/* warnin sign color */
+/* div.swal2-icon.swal2-warning {
+    border-color: #FF626D;
+    color: #FF626D;
+} */
+
+/* confirm button */
+button.swal2-styled.swal2-confirm {
+    border: 3px solid #FF626D;
+    border-radius: 3rem;
+}
+
+button.swal2-styled.swal2-cancel {
+    color: #FF626D;
+    border: 3px solid #FF626D;
+    border-radius: 3rem;
+}
+
+button.swal2-styled:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+div.swal2-popup {
+    border-radius: 1.5rem;
+}
