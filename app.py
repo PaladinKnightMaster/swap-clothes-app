@@ -208,7 +208,11 @@ def register():
         register = {
             "username": request.form.get("username"),
             "password": generate_password_hash(request.form.get("password")),
-            "looking_for": request.form.getlist("looking_for")
+            "user_image": request.form.get("user-img"),
+            "looking_for": request.form.getlist("looking_for"),
+            "fb_msgr": request.form.get("fb-msgr"),
+            "whatsapp": request.form.get("whatsapp"),
+            "instagram": request.form.get("instagram")
         }
 
         mongo.db.users.insert_one(register)
@@ -336,7 +340,7 @@ def delete_item(item_id):
     mongo.db.items.remove({'_id': ObjectId(item_id)})
     return redirect(url_for('items', username=session['user']))
 
-
+ 
 @app.route('/liked_item/<item_id>/<action>')
 def liked_item(item_id, action):
     """
@@ -394,6 +398,31 @@ def my_profile():
     user = mongo.db.users.find_one({"username": session["user"]})
 
     return render_template('my_profile.html', items=items, user=user, item_count=item_count, liked=user_liked_by)
+
+@app.route('/edit_profile/<username>', methods=['GET', 'POST'])
+def edit_profile(username):
+
+    categories = mongo.db.categories.find()
+    user = mongo.db.users.find_one({"username": session['user']})
+
+    if request.method == 'POST':
+        edited_profile = {
+            "username": user["username"],
+            "password": user["password"],
+            "user_image": request.form.get("user-img"),
+            "looking_for": request.form.getlist("looking-for"),
+            "fb_msgr": request.form.get("fb-msgr"),
+            "whatsapp": request.form.get("whatsapp"),
+            "instagram": request.form.get("instagram")
+        }
+
+        mongo.db.users.update({"username": session['user']}, edited_profile)
+        flash("{}'s profile updated succesfully".format(edited_profile["username"]))
+        return redirect(url_for('my_profile'))
+
+    return render_template("edit_profile.html", categories=categories, user=user )
+
+
 
 
 if __name__ == '__main__':
