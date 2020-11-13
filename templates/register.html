@@ -13,6 +13,7 @@
         method="POST"
         action="{{ url_for('register') }}">
         <h3 class="center-align">Register</h3>
+        <h6 class="center accent-text">Basics</h6>
         <!-- Username -->
         <div class="row mb-0">
             <div class="col s12 input-field">
@@ -47,9 +48,22 @@
                 <span class="helper-text" data-error="Letters, numbers, '-' and ' _'" data-success=""></span>
             </div>
         </div>
+        <h6 class="center accent-text">Tell Us More...</h6>
+        <!-- Select Progile Image -->
+        <div class="row input-container">
+            <div class="input-field col s12 dropdown-space">
+                <select name="user-img" class="center">
+                    <option value="" disabled selected>Choose your face</option>
+                    <option value="" data-icon="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/woman-detective.png">Detective</option>
+                    <option value="" data-icon="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/man-cook.png">Cook</option>
+                    <option value="" data-icon="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/woman-construction-worker.png">Construction Worker</option>
+                </select>
+                <label class="options-label">Profile Pic</label>
+            </div>
+        </div>
         <!-- Looking-for dropdown selector -->
         <div class="row input-container">
-            <div class="input-field col s12">
+            <div class="input-field col s12 dropdown-space">
                 <select name="looking_for" multiple>
                     <option value="" disabled selected>Categories</option>
                     {% for category in categories %}
@@ -57,6 +71,40 @@
                     {% endfor %}
                 </select>
                 <label class="options-label">Looking For: (Optional)</label>
+            </div>
+        </div>
+        <h6 class="center accent-text">Add your socials</h6>
+        <!-- Facebook Messanger -->
+        <div class="row">
+            <div class="col s12 input-field">
+                <input
+                    id="fb-msgr"
+                    name="fb-msgr"
+                    type="text"
+                    class="validate"/>
+                <label for="fb-msgr" class="blue-text"><i class="fab fa-facebook-messenger"></i></label>
+            </div>
+        </div>
+        <!-- Whatsapp -->
+        <div class="row">
+            <div class="col s12 input-field">
+                <input
+                    id="whatsapp"
+                    name="whatsapp"
+                    type="text"
+                    class="validate"/>
+                <label for="whatsapp" class="green-text text-accent-4"><i class="fab fa-whatsapp"></i></label>
+            </div>
+        </div>
+        <!-- Facebook Messanger -->
+        <div class="row">
+            <div class="col s12 input-field">
+                <input
+                    id="instagram"
+                    name="instagrfam"
+                    type="text"
+                    class="validate"/>
+                <label for="instagram" class="pink-text text-darken-1"><i class="fab fa-instagram"></i></label>
             </div>
         </div>
         <!-- submit button -->
