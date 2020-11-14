@@ -28,12 +28,12 @@
                     <ul class="left hide-on-med-and-down">
                         <li><a href="{{ url_for('home') }}" class="hvr-underline-from-center {% block nav_home %}{% endblock %}">Home</a></li>
                         <!-- Differentiate between a loggedx in user and a guest without an account -->
-                        <li><a href="{{ url_for('items', username=session.user) }}" class="hvr-underline-from-center {% block nav_items %}{% endblock %}">Items</a></li>
+                        <li><a href="{{ url_for('items') }}" class="hvr-underline-from-center {% block nav_items %}{% endblock %}">Items</a></li>
                     </ul>
                     <ul class="right hide-on-med-and-down">
                         <!-- Display my profile, add item and log out pages if user is logged in -->
-                        {% if session.user and session.user != 'guest' %}
-                            <li><a href="{{ url_for('my_profile') }}" class="hvr-underline-from-center {% block nav_my_profile %}{% endblock %}">My Profile</a></li>
+                        {% if session.user and session.user %}
+                            <li><a href="{{ url_for('my_profile', username=session.user) }}" class="hvr-underline-from-center {% block nav_my_profile %}{% endblock %}">My Profile</a></li>
                             <li><a href="{{ url_for('add_item') }}" class="hvr-underline-from-center {% block nav_add_item %}{% endblock %}">Add Item</a></li>
                             <li><a href="{{ url_for('logout') }}" class="hvr-underline-from-center {% block nav_logout %}{% endblock %}">Log Out</a></li>
                         {% else %}
@@ -47,10 +47,10 @@
             <!-- Collapsable Navbar for mobile screen sizes -->
             <ul class="sidenav" id="mobile-demo">
                 <li><a href="{{ url_for('home') }}" class="{% block sidenav_home %}{% endblock %}">Home</a></li>
-                <li><a href="{{ url_for('items', username=session.user) }}" class="{% block sidenav_items %}{% endblock %}">Items</a></li>
+                <li><a href="{{ url_for('items') }}" class="{% block sidenav_items %}{% endblock %}">Items</a></li>
                 <!-- Display my profile, add item and log out pages if user is logged in -->
-                {% if session.user and session.user != 'guest' %}
-                    <li><a href="{{ url_for('my_profile') }}" class="{% block sidenav_my_profile %}{% endblock %}">My Profile</a></li>
+                {% if session.user %}
+                    <li><a href="{{ url_for('my_profile', username=session.user) }}" class="{% block sidenav_my_profile %}{% endblock %}">My Profile</a></li>
                     <li><a href="{{ url_for('add_item') }}" class="{% block sidenav_add_item %}{% endblock %}">Add Item </a></li>
                     <li><a href="{{ url_for('logout') }}" class="{% block sidenav_logout %}{% endblock %}">Log Out</a></li>
                 {% else %}
@@ -84,7 +84,7 @@
                     <div>
                         <p><i class="fas fa-plus accent-text"></i> Create an account <i class="fas fa-user-circle"></i></p>
                         <p><i class="fas fa-plus accent-text"></i> Add any clothing pieces or accessories that you are no longer getting use out of</p>
-                        <p><i class="fas fa-plus accent-text"></i> Browse through other Swappers' added pieces on <a href="{{url_for('items', username=session.user)}}" class="accent-text hover-undrline">Items page</a></p>
+                        <p><i class="fas fa-plus accent-text"></i> Browse through other Swappers' added pieces on <a href="{{url_for('items')}}" class="accent-text hover-undrline">Items page</a></p>
                         <p><i class="fas fa-plus accent-text"></i> If you an item tickles your fancy, make sure to like it <i class="fas fa-heart"></i>!</p>
                         <p><i class="fas fa-plus accent-text"></i> When you and another Swapper like each others items, you'll match (hooray!)</p>
                         <p><i class="fas fa-plus accent-text"></i> You'll be able to see each others socials and organize the SWAP</p>

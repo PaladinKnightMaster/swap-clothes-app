@@ -208,7 +208,7 @@
         <h5 class="center-align">Go to Items Page and see if anything tickles your fancy</h5>
         <div class="row">
             <div class="col s12 center">
-                <a href="{{ url_for('items', username = session.user) }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
+                <a href="{{ url_for('items') }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
                     Items
                 </a>
             </div>
@@ -291,7 +291,7 @@
         <h5 class="center-align">Let us know what you're looking for.</h5>
         <div class="row">
             <div class="col s12 center">
-                <a href="{{ url_for('items', username = session.user) }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
+                <a href="{{ url_for('edit_profile', username = session.user) }}" class="swap-btn outlined-red border-radius-m center-align profile-btn">
                     Edit Profile
                 </a>
             </div>

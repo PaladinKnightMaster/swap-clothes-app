@@ -58,33 +58,31 @@ def pagination_arg(items):
 @app.route("/home")
 def home():
     """
-    Display home page with top 3 items and add
-    a guest as a session user until user logs in 
+    Display home page with top 3 liked items
     """
-    if not session:
-        session["user"] = "guest"
-
     items = mongo.db.items.find().sort("liked_count", -1).limit(3)
-
     return render_template("index.html", items=items)
 
 
-@app.route("/items/<username>", methods=["GET", "POST"])
-def items(username):
+@app.route("/items", methods=["GET", "POST"])
+def items():
     """
-    Display all items sorted  by the most recent and
-    Paginate displayed items
+    Display all items sorted by the most recent added
+    and Paginate displayed items
+
+    If a user is logged in, retrieve a list of usernmaes they 
+    are liked by and retrieve user data to be used in matching
     """
     items = list(mongo.db.items.find().sort('_id', -1))
-
+    # Retrieve Pagination parameters
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
     categories = mongo.db.categories.find()
-    # If user is logged in, add useers data to identify matched and like items
-    if username != "guest":
-        user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
-        user_data = mongo.db.users.find_one({"username": username})
+    
+    if session:
+        user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
+        user_data = mongo.db.users.find_one({"username": session["user"]})
         return render_template("items.html", items=items_paginated,
                             categories=categories, pagination=pagination,
                             liked=user_liked_by, user=user_data)
@@ -94,8 +92,8 @@ def items(username):
 
 
 
-@app.route("/filter/<username>")
-def filter(username):
+@app.route("/filter")
+def filter():
     """
     Get all checked values for category filter,
     find and display items with those categories
@@ -108,10 +106,9 @@ def filter(username):
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    if username != "guest":
-        user_data = mongo.db.users.find_one({"username": username})
-        # a list of users who have liked session user
-        user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
+    if session:
+        user_data = mongo.db.users.find_one({"username": session["user"]})
+        user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
         return render_template("items.html", items=items_paginated,
                             categories=categories,
                             selected_categories=selected_categories,
@@ -124,11 +121,11 @@ def filter(username):
                            pagination=pagination)
 
 
-@app.route("/sort/<sort_by>/<username>")
-def sort(sort_by, username):
+@app.route("/sort/<sort_by>")
+def sort(sort_by):
     """
     Sort items alphabetically, reverse alphabetically,
-    by the lates date added, by liked items or
+    by the latest date added, by liked items or
     by item being flagged
     """
     categories = mongo.db.categories.find()
@@ -146,9 +143,9 @@ def sort(sort_by, username):
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    if username != "guest":
-        user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
-        user_data = mongo.db.users.find_one({"username": username})
+    if session:
+        user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
+        user_data = mongo.db.users.find_one({"username": session["user"]})
         return render_template("items.html", items=items_paginated,
                             categories=categories, pagination=pagination,
                             liked=user_liked_by, user=user_data)
@@ -157,30 +154,23 @@ def sort(sort_by, username):
                         categories=categories, pagination=pagination)
 
 
-@app.route("/search/<username>", methods=["GET", "POST"])
-def search(username):
+@app.route("/search")
+def search():
     """
     Use an index from items collections to allow the user
     to search through the item names and item short description
-
-    If a user likes a searched item, the page is refreshed without 
-    a search query being passed in and the page breaks. As a fix, 
-    users liked items are being displayed
     """
     categories = mongo.db.categories.find()
     query = request.args.get("search")
 
-    # if query == None:
-    #     items = list(mongo.db.items.find({"liked_by": session['user']}))
-    # else:
     items = list(mongo.db.items.find({"$text": {"$search": query}}))
     
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    if username != 'guest':
-        user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
-        user_data = mongo.db.users.find_one({"username": username})
+    if session:
+        user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
+        user_data = mongo.db.users.find_one({"username": session["user"]})
         return render_template("items.html", items=items_paginated,
                                 categories=categories, pagination=pagination,
                                 liked=user_liked_by, user=user_data, query=query)
@@ -226,6 +216,7 @@ def register():
         session["user"] = request.form.get("username")
         flash("You're officially a Swapper now, woo!")
         return redirect(url_for('items', username=session['user']))
+
     return render_template("register.html", categories=categories)
 
 
@@ -247,7 +238,7 @@ def login():
                                    request.form.get("password")):
                 session["user"] = request.form.get("username")
                 flash("Welcome Back {}".format(session["user"]))
-                return redirect(url_for('items', username=session["user"]))
+                return redirect(url_for('my_profile', username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for('login'))
@@ -262,12 +253,12 @@ def login():
 @app.route('/logout')
 def logout():
     """
-    Implement log out functionality by switching to a guest user
+    Implement log out functionality by removing user from
     the session cookie
     """
     flash("See you soon")
-    session['user'] = 'guest'
-    return redirect(url_for('login'))
+    session.pop("user")
+    return redirect(url_for("login"))
 
 
 @app.route("/add_item", methods=["GET","POST"])
@@ -382,27 +373,31 @@ def liked_item(item_id, action):
         if len(liked_items_from_creator) == 0:
             mongo.db.matches.update_one({"username": item_creator},
                         {'$pull': {'liked_by': user}})
-    print(request.referrer)       
+     
     return redirect(request.referrer)
 
 
-@app.route('/my_profile')
-def my_profile():
+@app.route('/my_profile/<username>')
+def my_profile(username):
     """
-    Get session user data and items data
+    Get session user data and items data,
+    Display them on user's profile page
     """
     items = list(mongo.db.items.find())
-    item_count = mongo.db.items.find({"created_by": session["user"]}).count()
-    user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
-    user = mongo.db.users.find_one({"username": session["user"]})
+    item_count = mongo.db.items.find({"created_by": username}).count()
+    user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
+    user = mongo.db.users.find_one({"username": username})
 
     return render_template('my_profile.html', items=items, user=user, item_count=item_count, liked=user_liked_by)
 
+
 @app.route('/edit_profile/<username>', methods=['GET', 'POST'])
 def edit_profile(username):
-
+    """
+    Edit user's profile
+    """
     categories = mongo.db.categories.find()
-    user = mongo.db.users.find_one({"username": session['user']})
+    user = mongo.db.users.find_one({"username": username})
 
     if request.method == 'POST':
         edited_profile = {
@@ -417,11 +412,9 @@ def edit_profile(username):
 
         mongo.db.users.update({"username": session['user']}, edited_profile)
         flash("{}'s profile updated succesfully".format(edited_profile["username"]))
-        return redirect(url_for('my_profile'))
+        return redirect(url_for('my_profile', username=username))
 
     return render_template("edit_profile.html", categories=categories, user=user )
-
-
 
 
 if __name__ == '__main__':
