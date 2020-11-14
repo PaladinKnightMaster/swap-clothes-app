@@ -920,3 +920,10 @@ div.swal2-popup {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+/* ----------MODALS--------- */
+div.modal {
+    width: fit-content;
+}
+
+/* About modal */

@@ -3,7 +3,10 @@
 $(document).ready(function(){
 	$('.sidenav').sidenav();
 	$('.tooltipped').tooltip();
-	$('select').formSelect();
+    $('select').formSelect();
+    $('.modal').modal({
+        endingTop: '40%'
+    });
 	// scrolling effect for items on My Profile page
 	$('.carousel').carousel({
 		dist: -30,

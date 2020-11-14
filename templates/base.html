@@ -72,16 +72,35 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-        </section>
+        </section>     
 
         <main>{% block content %} {% endblock content %}</main>
+
+        <!-- About Modal -->
+        <section>
+            <div id="about-modal" class="modal border-radius-m">
+                <div class="modal-content">
+                    <h4 class="accent-text">How it works? <i class="fas fa-route"></i></h4>
+                    <div>
+                        <p><i class="fas fa-plus accent-text"></i> Create an account <i class="fas fa-user-circle"></i></p>
+                        <p><i class="fas fa-plus accent-text"></i> Add any clothing pieces or accessories that you are no longer getting use out of</p>
+                        <p><i class="fas fa-plus accent-text"></i> Browse through other Swappers' added pieces on <a href="{{url_for('items', username=session.user)}}" class="accent-text hover-undrline">Items page</a></p>
+                        <p><i class="fas fa-plus accent-text"></i> If you an item tickles your fancy, make sure to like it <i class="fas fa-heart"></i>!</p>
+                        <p><i class="fas fa-plus accent-text"></i> When you and another Swapper like each others items, you'll match (hooray!)</p>
+                        <p><i class="fas fa-plus accent-text"></i> You'll be able to see each others socials and organize the SWAP</p>
+                        <p><i class="fas fa-plus accent-text"></i> Not only is this fun, but also Environmentally friendly <i class="fas fa-recycle"></i></p>
+                    </div>
+                    <p class="center-align"><strong>Happy Swapping <i class="fas fa-grin-beam"></i> </strong></p>
+                </div>
+            </div> 
+        </section>
 
         <footer>
             <div class="container">
                 <div class="row">
                     <div class="col s6 m6">
                         <ul class="left footer-nav footer-links">
-                            <li><a href="">About</a></li>
+                            <li><a href="#about-modal" class="modal-trigger">About</a></li>
                             <li><a href="">Contact Us</a></li>
                         </ul>
                     </div>
