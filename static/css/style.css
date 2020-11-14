@@ -856,7 +856,7 @@ a i.like-button-disabled {
 
 /* Hot Items section */
 .hot-items {
-    margin: 5rem auto;
+    margin: 0 auto;
     max-width: 1200px;
 }
 
@@ -873,11 +873,6 @@ a i.like-button-disabled {
     margin-bottom: 2rem;
 }
 
-@media screen and (min-width: 992px) {
-    .hot-items {
-        margin: 10rem auto;
-    }
-}
 
 /* ---------DELETE CONFIRMATION--------- */
 /* heading */
@@ -886,12 +881,6 @@ h2#swal2-title {
     padding: 0.5rem;
     border-width: 2px;
 }
-
-/* warnin sign color */
-/* div.swal2-icon.swal2-warning {
-    border-color: #FF626D;
-    color: #FF626D;
-} */
 
 /* confirm button */
 button.swal2-styled.swal2-confirm {
@@ -916,7 +905,7 @@ div.swal2-popup {
 
 .hot-items h2 i {
     font-size: 3rem;
-    background: -webkit-linear-gradient(270deg, rgba(255,98,109,1) 0%, rgba(255,187,94,1) 58%, rgba(255,187,94,1) 100%);
+    background: -webkit-linear-gradient(270deg, rgba(255,98,109,1) 40%, rgba(255,187,94,1) 70%, rgba(255,187,94,1) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
