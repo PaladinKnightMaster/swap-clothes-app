@@ -789,9 +789,22 @@ a i.like-button-disabled {
     line-height: 2rem;
 }
 
+.landing-content .colored-icons i {
+    color: #FF626D;
+    background: -webkit-linear-gradient(180deg, rgba(255,98,109,1) 60%, rgba(255,187,94,1) 90%, rgba(255,187,94,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.landing-content p span {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
 .landing-content a {
     margin: 1rem 0 0;
-    width: 8rem;
+    width: 9rem;
+    padding: 0.5rem 1rem;
 }
  
 #swap-heading {

@@ -16,11 +16,17 @@
             <h1 id="swap-heading">SWAP</h1>
             <p id="swap-subheading">your clothes</p>
             <div class="landing-content">
-                <p>Ready for a closet makeover?</p>
-                <p>Add items you're ready to say goodbye to and swap them with other pre-loved pieces.</p>
-                <p>Add. Like. Swap. Enjoy!</p>
-                <a href="{{ url_for('register') }}" class="swap-btn filled-red border-radius-m profile-btn">Register</a>
-                <a href="{{ url_for('login') }}" class="swap-btn filled-red border-radius-m profile-btn">Log In</a>
+                <p>Ready for a closet makeover <i class="fas fa-question"></i></p>
+                <p>Add items you're ready to say goodbye to and swap them for someone else's pre-<i class="fas fa-heart"></i> pieces </p>
+                <p class="colored-icons">Add <i class="fas fa-angle-double-right"></i> Like <i class="fas fa-angle-double-right"></i> Match <i class="fas fa-angle-double-right"></i> <span>SWAP</span></p>
+                {% if session.user != 'guest' %}
+                    <a href="{{ url_for('items', username=session.user) }}" class="swap-btn filled-red border-radius-m">Get Started</a>
+                {% else %}
+                    <a href="{{ url_for('register') }}" class="swap-btn filled-red border-radius-m">Get Started</a>
+                {% endif %}
+                <p>
+                    <a href="" class="grey-text text-darken-1 tooltipped" data-tooltip="Tell me more"><i class="far fa-question-circle"></i></a>
+                </p>
             </div>
         </div>
     </div>
