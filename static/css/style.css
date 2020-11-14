@@ -284,6 +284,7 @@ nav ul a:hover, .active {
     max-width: 1200px;
 }
 
+
 .item-image {
     height: 300px;
     object-fit: cover;
@@ -708,6 +709,14 @@ a i.like-button-disabled {
     line-height: 1.25rem;
 }
 /* ----------MY PROFILE PAGE---------- */
+.profile-container {
+    margin: 2rem auto 10rem;
+}
+
+.profile-items {
+    margin-bottom: 6rem;
+}
+
 .profile-img-container {
     width: 250px;
     height: 250px;
@@ -763,19 +772,42 @@ a i.like-button-disabled {
     }
 }
 
-/* ----------CAROUSEL STYLES---------- */
-.carousel-item.active {
+/* ----------SLICK CAROUSEL STYLES---------- */
+
+div.slick-slide {
     height: 550px;
-    letter-spacing: 0;
 }
 
-.carousel div.carousel-item {
-    top: -175px;
+.carousel-container {
+
+    width: 100%;
 }
 
-.carousel {
-    height: 600px;
+.slick-prev:before, .slick-next:before {
+    color: #FF626D;
+    font-size: 2rem;
 }
+
+.slick-list {
+    margin: 0 1rem;
+}
+
+.slick-dots li button:before {
+    color: #FF626D;
+    font-size: 0.75rem;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #585858;
+}
+
+
+@media screen and (min-width: 601px) {
+    .carousel-container {
+        padding: 3rem;
+    }
+}
+
 
 /* ---------HOME PAGE---------- */
 
