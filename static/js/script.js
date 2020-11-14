@@ -1,6 +1,36 @@
 
-// Initialize Materialize components using jQuery
+// Initialize JS components
 $(document).ready(function(){
+    // Slick carousel
+    $('.carousel-items').slick({
+        arrows: true,
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+          {
+            breakpoint: 1100,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 800,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false
+            }
+          },
+        ]
+    });
+
+// Initialize Materialize components using jQuery
 	$('.sidenav').sidenav();
 	$('.tooltipped').tooltip();
     $('select').formSelect();
@@ -9,10 +39,12 @@ $(document).ready(function(){
     });
 	// scrolling effect for items on My Profile page
 	$('.carousel').carousel({
-		dist: -30,
-		shift: -20,
+		dist: -60,
+        shift: -20,
+        numVisible: 5
 	});
-	$('.register input#username, .register input#password, input#item_name, textarea#short_desc, textarea#long_desc').characterCounter();
+    $('.register input#username, .register input#password, input#item_name, textarea#short_desc, textarea#long_desc').characterCounter();
+    
 
 	// Code used from Code Institute task manager mini project, classes changed to fit formating for this project
 	validateMaterializeSelect();
@@ -44,7 +76,7 @@ $(document).ready(function(){
     }
 });
 
-
+      
 $('.item-creator-container').on('click', function() {
 	$(this).next().toggleClass('visible')
 })

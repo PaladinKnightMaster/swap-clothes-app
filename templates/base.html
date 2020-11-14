@@ -8,6 +8,9 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
             type="text/css"/>
+        <!-- Add Slick css and css theme for slick carousel -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css')}}"/>
         <!-- Add Font Awesome icon kit -->
         <script
             src="https://kit.fontawesome.com/d6343cbdf9.js"
@@ -127,6 +130,8 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.0/dist/sweetalert2.all.min.js"></script>
         <!-- Include a polyfill for ES6 Promises for IE11 Sweetalert -->
         <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+        <!-- Include slick js file for slick carousel -->
+        <script src="{{ url_for('static', filename='slick/slick.min.js') }}"></script>
         <!-- Link up static js file -->
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </body>
