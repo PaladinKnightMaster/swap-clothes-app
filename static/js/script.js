@@ -95,3 +95,15 @@ $('.delete-confirm').click(function(event) {
     deleteConfirm(link)
 
 })
+
+
+// Apply class 'small' card when an item card width<300px
+$(window).resize(function() {
+    if ($('.card').width() < 300 && $('.card-content').hasClass('small-card') == false) {
+       $('.card-content').addClass('small-card');
+       $('.card-reveal').addClass('small-card');
+    } else if ($('.card').width() >= 300 && $('.card-content').hasClass('small-card')) {
+        $('.card-content').removeClass('small-card');
+        $('.card-reveal').removeClass('small-card');
+    }
+  });

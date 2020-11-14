@@ -171,7 +171,10 @@
                     </div>
                     <!-- More information displayed using card reveal component -->
                     <div class="card-reveal">
-                        <span class="card-title card-reveal-title">{{ item.item_name }}<i class="fas fa-times right accent-text"></i></span>
+                        <span class="card-title card-reveal-title">
+                            <i class="fas fa-times right accent-text right"></i>
+                            {{ item.item_name }}
+                        </span>
                         <p>{{ item.long_description }}</p>
                         <hr>
                         <!-- Specific item details -->

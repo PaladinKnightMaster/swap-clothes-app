@@ -299,12 +299,44 @@ nav ul a:hover, .active {
     max-width: 300px;
     margin: 1rem auto;
     border-radius: 1rem;
+    overflow-wrap: break-word;
 }
 
 .card .card-content {
     height: 200px;
     display: relative;
     padding: 1rem 0.5rem;
+}
+
+.card .card-reveal {
+    padding: 1rem;
+}
+
+.card-reveal .card-title {
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+
+}
+.card-reveal .card-title i, .card-reveal .card-title {
+    font-size: 1.5rem;
+}
+
+/* Styles for when a card has width < 300px */
+.small-card.card-reveal {
+    padding: 0.5rem;
+}
+
+.small-card .card-title {
+    font-size: 1.3rem;
+}
+
+.small-card p {
+    font-size: 0.9rem;
+}
+
+.small-card .item-labels, .small-card .item-values{
+    font-size: 0.85rem;
+    padding: 0;
 }
 
 .item-creator {
