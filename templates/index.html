@@ -19,15 +19,13 @@
                 <p>Ready for a closet makeover <i class="fas fa-question"></i></p>
                 <p>Add items you're ready to say goodbye to and swap them for someone else's pre-<i class="fas fa-heart"></i> pieces </p>
                 <p class="colored-icons">Add <i class="fas fa-angle-double-right"></i> Like <i class="fas fa-angle-double-right"></i> Match <i class="fas fa-angle-double-right"></i> <span>SWAP</span></p>
-                {% if session.user != 'guest' %}
-                    <a href="{{ url_for('items', username=session.user) }}" class="swap-btn filled-red border-radius-m">Get Started</a>
+                {% if session.user %}
+                    <a href="{{ url_for('items') }}" class="swap-btn filled-red border-radius-m">Get Started</a>
                 {% else %}
                     <a href="{{ url_for('register') }}" class="swap-btn filled-red border-radius-m">Get Started</a>
                 {% endif %}
                 <p>
                     <a href="#about-modal" class="grey-text text-darken-1 tooltipped modal-trigger" data-tooltip="Tell me more"><i class="far fa-question-circle"></i></a>
-
-     
                 </p>
             </div>
         </div>
@@ -46,21 +44,24 @@
                     <div class="card-image">
                         <img src="{{ item.item_image }}" class="item-image">
                         <!-- Checks if the logged in user already likes the item and display the like button accordingly -->
+                        <!-- If user has logged in and is the creator of item -->
                         {% if session.user == item.created_by %}
                             <a class="btn-floating halfway-fab waves-effect waves-light white">
                                 <i class="far fa-heart like-button-disabled"></i></a>
-                        <!-- Disable like buttons if user has not logged in -->
-                        {% elif session.user == 'guest' %}
-                            <a class="btn-floating halfway-fab waves-effect waves-light white tooltipped" data-position="bottom" data-tooltip="Register to like an item">
-                                <i class="far fa-heart like-button-disabled"></i></a>
+                        <!-- If user is logged in and already likes the item  -->
                         {% elif session.user in item.liked_by %}
                             <a href="{{ url_for('liked_item', item_id=item._id, action='unlike') }}"
                                 class="btn-floating halfway-fab waves-effect waves-light white">
                                 <i class="fas fa-heart like-button"></i></a>
-                        {% else %}
+                        <!-- If user is logged in and hasn't liked the item -->
+                        {% elif session.user %}
                             <a href="{{ url_for('liked_item', item_id=item._id, action='like') }}"
                                 class="btn-floating halfway-fab waves-effect waves-light white">
                                 <i class="far fa-heart like-button"></i></a>
+                        <!-- If user hasn't logged in -->
+                        {% else %}
+                            <a class="btn-floating halfway-fab waves-effect waves-light white tooltipped" data-position="bottom" data-tooltip="Register to like an item">
+                                <i class="far fa-heart like-button-disabled"></i></a>
                         {% endif %}    
                     </div>
                     <!-- Card Content -->
