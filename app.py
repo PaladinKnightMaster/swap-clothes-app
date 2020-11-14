@@ -136,7 +136,7 @@ def sort(sort_by):
     elif sort_by == 'date':
         items = list(mongo.db.items.find().sort("created_on", -1))
     elif sort_by == 'liked':
-        items = list(mongo.db.items.find().sort("liked_by", 1))
+        items = list(mongo.db.items.find({"liked_by": session['user']}))
     elif sort_by == 'flagged':
         items = list(mongo.db.items.find().sort("flagged", -1))
 
