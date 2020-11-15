@@ -103,9 +103,9 @@
             <div class="input-field col s6">
                 <select name="size_region" class="validate" required>
                     <option value="" disabled selected>From</option>
-                        <option value="EU">EU</option>
-                        <option value="UK">UK</option>
-                        <option value="USA">USA</option>
+                    {% for size_region in item_size %}
+                        <option value="{{ size_region }}">{{ size_region }}</option>
+                    {% endfor %}
                 </select>
                 <label class="options-label">From:</label>
             </div>
@@ -116,9 +116,9 @@
             <div class="input-field col s12">
                 <select name="item_fit" class="validate" required>
                     <option value="" disabled selected>Fit</option>
-                        <option value="Women">Women</option>
-                        <option value="Men">Men</option>
-                        <option value="Unisex">Unisex</option>
+                    {% for fit in item_fit %}
+                        <option value="{{ fit }}">{{ fit }}</option>
+                    {% endfor %}
                 </select>
                 <label class="options-label">Fit</label>
             </div>
@@ -129,11 +129,9 @@
             <div class="input-field col s12">
                 <select name="used_status" class="validate" required>
                     <option value="" disabled selected>Used</option>
-                        <option value="Never">Never</option>
-                        <option value="Barely">Barely</option>
-                        <option value="Few Times">Few Times</option>
-                        <option value="Often">Often</option>
-                        <option value="Heavily">Heavily</option>
+                    {% for used in item_used %}
+                        <option value="{{ used }}">{{ used }}</option>
+                    {% endfor %}
                 </select>
                 <label class="options-label">Used</label>
             </div>

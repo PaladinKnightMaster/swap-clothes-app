@@ -58,9 +58,25 @@ def item_categories():
     # Retrieve item categories
     return mongo.db.categories.find_one({"category_name": "item_categories"})['category_value']
 
+
 def profile_img():
-    # Retrieve profile image links
+    # Retrieve profile image links and image names
     return mongo.db.categories.find_one({"category_name": "image_url"})['category_value']
+
+
+def item_size_from():
+    # Retrieve Item sizing regions
+    return mongo.db.categories.find_one({"category_name": "item_size_from"})['category_value']
+
+
+def item_size_fit():
+    # Retrieve item fit
+    return mongo.db.categories.find_one({"category_name": "item_size_fit"})['category_value']
+
+
+def item_used_status():
+    # Retrieve used status
+    return mongo.db.categories.find_one({"category_name": "item_used_status"})['category_value']
 
 
 @app.route("/")
@@ -288,9 +304,17 @@ def add_item():
     created the item
     """
     categories = item_categories()
+    item_size = item_size_from()
+    item_fit = item_size_fit()
+    item_used = item_used_status()
+    # If user didn't add item image link, insert a generic image
+    item_image = request.form.get("item_image")
+    if item_image == "":
+        item_image = "https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+
     if request.method == "POST":
         new_item = {
-            "item_image": request.form.get("item_image"),
+            "item_image": item_image,
             "item_name": request.form.get("item_name"),
             "short_description": request.form.get("short_desc"),
             "long_description": request.form.get("long_desc"),
@@ -310,7 +334,9 @@ def add_item():
         return redirect(url_for('items', username=session['user']))
 
     user_data = mongo.db.users.find_one({"username": session["user"]})
-    return render_template("add_item.html", categories=categories, user=user_data)
+    return render_template("add_item.html", categories=categories, user=user_data,
+                           item_size=item_size, item_fit=item_fit,
+                           item_used=item_used)
 
 
 @app.route("/edit_item/<item_id>", methods=["GET", "POST"])
@@ -319,6 +345,10 @@ def edit_item(item_id):
     Edit a chosen item identified by item_id and display updated version
     after changes have been submitted
     """
+    categories = item_categories()
+    item_size = item_size_from()
+    item_fit = item_size_fit()
+    item_used = item_used_status()
     if request.method == "POST":
         edited_item = {
             "item_image": request.form.get("item_image"),
@@ -341,9 +371,10 @@ def edit_item(item_id):
         return redirect(url_for('items', username=session['user']))
 
     item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
-    categories = item_categories()
     user_data = mongo.db.users.find_one({"username": session["user"]})
-    return render_template("edit_item.html", categories=categories, item=item, user=user_data)
+    return render_template("edit_item.html", categories=categories, item=item, user=user_data,
+                           item_size=item_size, item_fit=item_fit,
+                           item_used=item_used)
 
 
 

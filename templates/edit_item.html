@@ -104,9 +104,13 @@
             <div class="input-field col s6">
                 <select name="size_region" class="validate" required>
                     <option value="" disabled>From</option>
-                        <option value="EU" {% if item.size_country == "EU" %} selected {% endif %}>EU</option>
-                        <option value="UK" {% if item.size_country == "UK" %} selected {% endif %}>UK</option>
-                        <option value="USA" {% if item.size_country == "USA" %} selected {% endif %}>USA</option>
+                        {% for size_region in item_size %}
+                            {% if size_region == item.size_country %}
+                                <option value="{{ size_region }}" selected>{{ size_region }}</option>
+                            {% else %}
+                                <option value="{{ size_region }}">{{ size_region }}</option>
+                            {% endif %}
+                        {% endfor %}
                 </select>
             </div>
         </div>
@@ -116,9 +120,13 @@
             <div class="input-field col s12">
                 <select name="item_fit" class="validate" required>
                     <option value="" disabled>Fit</option>
-                        <option value="Women" {% if item.size_gender == "Women" %} selected {% endif %}>Women</option>
-                        <option value="Men" {% if item.size_gender == "Men" %} selected {% endif %}>Men</option>
-                        <option value="Unisex" {% if item.size_gender == "Unisex" %} selected {% endif %}>Unisex</option>
+                        {% for fit in item_fit %}
+                            {% if fit == item.size_gender %}
+                                <option value="{{ fit }}" selected>{{ fit }}</option>
+                            {% else %}
+                                <option value="{{ fit }}">{{ fit }}</option>
+                            {% endif %}
+                        {% endfor %}
                 </select>
                 <label class="options-label">Fit</label>
             </div>
@@ -129,11 +137,13 @@
             <div class="input-field col s12">
                 <select name="used_status" class="validate" required>
                     <option value="" disabled>Used</option>
-                        <option value="Never" {% if item.used_status == "Never" %} selected {% endif %}>Never</option>
-                        <option value="Barely" {% if item.used_status == "Barely" %} selected {% endif %}>Barely</option>
-                        <option value="Few Times" {% if item.used_status == "Few Times" %} selected {% endif %}>Few Times</option>
-                        <option value="Often" {% if item.used_status == "Often" %} selected {% endif %}>Often</option>
-                        <option value="Heavily" {% if item.used_status == "Heavily" %} selected {% endif %}>Heavily</option>
+                        {% for used in item_used %}
+                            {% if used == item.used_status %}
+                                <option value="{{ used }}" selected>{{ used }}</option>
+                            {% else %}
+                                <option value="{{ used }}">{{ used }}</option>
+                            {% endif %}
+                        {% endfor %}
                 </select>
                 <label class="options-label">Used</label>
             </div>
