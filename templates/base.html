@@ -41,7 +41,7 @@
                     <ul class="right hide-on-med-and-down">
                         <!-- Display my profile, add item and log out pages if user is logged in -->
                         {% if session.user and session.user %}
-                            <li><a href="{{ url_for('my_profile', username=session.user) }}" class="hvr-underline-from-center {% block nav_my_profile %}{% endblock %}">My Profile</a></li>
+                            <li><a href="{{ url_for('my_profile', username=session.user) }}" class="hvr-underline-from-center {% block nav_my_profile %}{% endblock %}">My Profile <img src="{{user['user_image']}}" alt="{{user['username']}}'s profile image" class="z-depth-2 border-radius-m profile-icon nav-icon"></a></li>
                             <li><a href="{{ url_for('add_item') }}" class="hvr-underline-from-center {% block nav_add_item %}{% endblock %}">Add Item</a></li>
                             <li><a href="{{ url_for('logout') }}" class="hvr-underline-from-center {% block nav_logout %}{% endblock %}">Log Out</a></li>
                         {% else %}

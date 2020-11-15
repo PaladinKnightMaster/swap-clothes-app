@@ -61,7 +61,12 @@ def home():
     Display home page with top 3 liked items
     """
     items = mongo.db.items.find().sort("liked_count", -1).limit(3)
-    return render_template("index.html", items=items)
+    all_users = list(mongo.db.users.find())
+    if session:
+        user_data = mongo.db.users.find_one({"username": session['user']})
+        return render_template("index.html", items=items, all_users=all_users, user=user_data)
+
+    return render_template("index.html", items=items, all_users=all_users)
 
 
 @app.route("/items", methods=["GET", "POST"])
@@ -79,16 +84,18 @@ def items():
     pagination = pagination_arg(items)
 
     categories = mongo.db.categories.find()
+
+    all_users = list(mongo.db.users.find())
     
     if session:
         user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
         user_data = mongo.db.users.find_one({"username": session["user"]})
         return render_template("items.html", items=items_paginated,
                             categories=categories, pagination=pagination,
-                            liked=user_liked_by, user=user_data)
+                            liked=user_liked_by, user=user_data, all_users=all_users)
                             
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+                           categories=categories, pagination=pagination, all_users=all_users)
 
 
 
@@ -290,7 +297,8 @@ def add_item():
         flash("Item added succesfully")
         return redirect(url_for('items', username=session['user']))
 
-    return render_template("add_item.html", categories=categories)
+    user_data = mongo.db.users.find_one({"username": session["user"]})
+    return render_template("add_item.html", categories=categories, user=user_data)
 
 
 @app.route("/edit_item/<item_id>", methods=["GET", "POST"])
@@ -318,10 +326,13 @@ def edit_item(item_id):
         }
         mongo.db.items.update({"_id": ObjectId(item_id)}, edited_item)
         flash("'{}' updated succesfully".format(edited_item["item_name"]))
+        return redirect(url_for('items', username=session['user']))
 
     item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
     categories = mongo.db.categories.find()
-    return render_template("edit_item.html", categories=categories, item=item)
+    user_data = mongo.db.users.find_one({"username": session["user"]})
+    return render_template("add_item.html", categories=categories, item=item, user=user_data)
+
 
 
 @app.route('/delete_item/<item_id>')
@@ -385,10 +396,13 @@ def my_profile(username):
     """
     items = list(mongo.db.items.find())
     item_count = mongo.db.items.find({"created_by": username}).count()
+    all_users = list(mongo.db.users.find())
     user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
-    user = mongo.db.users.find_one({"username": username})
-
-    return render_template('my_profile.html', items=items, user=user, item_count=item_count, liked=user_liked_by)
+    user_data = mongo.db.users.find_one({"username": username})
+    matches = list(mongo.db.items.find(
+        {"created_by": {"$in": user_liked_by}, "liked_by": session['user']}))
+    
+    return render_template('my_profile.html', items=items, user=user_data, item_count=item_count, liked=user_liked_by, matches=matches, all_users=all_users)
 
 
 @app.route('/edit_profile/<username>', methods=['GET', 'POST'])
@@ -397,12 +411,12 @@ def edit_profile(username):
     Edit user's profile
     """
     categories = mongo.db.categories.find()
-    user = mongo.db.users.find_one({"username": username})
+    user_data = mongo.db.users.find_one({"username": username})
 
     if request.method == 'POST':
         edited_profile = {
-            "username": user["username"],
-            "password": user["password"],
+            "username": user_data["username"],
+            "password": user_data["password"],
             "user_image": request.form.get("user-img"),
             "looking_for": request.form.getlist("looking-for"),
             "fb_msgr": request.form.get("fb-msgr"),
@@ -414,7 +428,7 @@ def edit_profile(username):
         flash("{}'s profile updated succesfully".format(edited_profile["username"]))
         return redirect(url_for('my_profile', username=username))
 
-    return render_template("edit_profile.html", categories=categories, user=user )
+    return render_template("edit_profile.html", categories=categories, user=user_data )
 
 
 if __name__ == '__main__':

@@ -708,6 +708,10 @@ a i.like-button-disabled {
     cursor: pointer;
 }
 
+.item-creator-active .profile-name:hover {
+    text-decoration: underline;
+}
+
 .item-socials-container {
     display: flex;
     justify-content: space-between;
@@ -1024,3 +1028,21 @@ div.modal {
 
 /* About modal */
 
+.profile-icon {
+    height: 2rem; 
+    width: 2rem;
+    position: absolute;
+    bottom: 0;
+    object-fit: cover;
+}
+
+.profile-icon.nav-icon {
+    position: relative;
+    vertical-align: middle;
+}
+
+
+.profile-name {
+    position: absolute;
+    left: 3.4rem;
+}

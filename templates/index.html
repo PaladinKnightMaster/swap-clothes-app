@@ -77,8 +77,12 @@
                         <div class="row item-footer">
                         <!-- In case of a match  display creators socials in a dropdown so the user can contact them -->
                         {% if session.user in item.liked_by and item.created_by in liked %}
-                            <div class="col s5 item-creator-container">
-                                <p class="left item-creator-active accent-text">{{ item.created_by }}</p>
+                        <div class="col s5 item-creator-container">
+                            {% for data in all_users %}
+                                {% if item.created_by == data.username %}
+                                    <p class="left item-creator-active accent-text"><img src="{{data.user_image}}" alt="{{data.username}}'s profile image" class="z-depth-2 border-radius-m profile-icon"> <span class="profile-name">{{ item.created_by }}</span></p>
+                                {% endif %}
+                            {% endfor %}
                             </div>
                             <div class="col s5 item-socials-container">
                                 <a href="https://m.me/{{ user['fb_msgr'] }}" target="_blank" class="blue-text"><i class="fab fa-facebook-messenger"></i></a>
@@ -88,11 +92,15 @@
                         <!--If it's not a match, show unclickable creators username  -->
                         {% else %}
                             <div class="col s6">
-                                <p class="left item-creator">{{ item.created_by }}</p>
+                            {% for data in all_users %}
+                                {% if item.created_by == data.username %}
+                                <p class="left item-creator"><img src="{{data.user_image}}" alt="{{data.username}}'s profile image" class="z-depth-2 border-radius-m profile-icon"> <span class="profile-name">{{ item.created_by }}</span></p>
+                                {% endif %}
+                            {% endfor %}
                             </div>
                         {% endif %}
                         <!-- Display flag icon to all users, display edit and delete otpions to creator only -->
-                        {% if session.user != 'guest' %}
+                        {% if session.user%}
                             {% if session.user == item.created_by %}
                                 <div class="col s6 item-icon-container">
                                     <a href="{{ url_for('delete_item', item_id = item._id) }}" class="delete-confirm"><i class="far fa-trash-alt"></i></a>

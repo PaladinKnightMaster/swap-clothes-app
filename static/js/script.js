@@ -156,3 +156,4 @@ $(window).resize(function() {
     smallCard();
     smallLandingContainer();
   });
+
