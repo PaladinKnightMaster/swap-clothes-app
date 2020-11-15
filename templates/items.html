@@ -29,14 +29,17 @@
                     <a href="{{ url_for('sort', sort_by = 'date') }}">
                         <i class="far fa-calendar-alt"></i>
                     </a>
-                    <!-- Sort by users liked items -->
-                    <a href="{{ url_for('sort', sort_by = 'liked') }}">
-                        <i class="far fa-heart"></i>
-                    </a>
-                    <!-- Sort by flagged items -->
-                    <a href="{{ url_for('sort', sort_by = 'flagged') }}">
-                        <i class="far fa-flag"></i>
-                    </a>
+                    <!-- Displayed only if a user has logged in -->
+                    {% if session.user %}
+                        <!-- Sort by users liked items -->
+                        <a href="{{ url_for('sort', sort_by = 'liked') }}">
+                            <i class="far fa-heart"></i>
+                        </a>
+                        <!-- Sort by flagged items -->
+                        <a href="{{ url_for('sort', sort_by = 'flagged') }}">
+                            <i class="far fa-flag"></i>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
             <!-- Add search bar to allow the user to search through the items  -->
