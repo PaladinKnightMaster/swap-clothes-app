@@ -129,13 +129,30 @@ $('.delete-confirm').click(function(event) {
 })
 
 
+// Function to Apply class 'small' card when an item card width<300px
+function smallCard() {
+    if ($('.card').width() < 300 && $('.card-content').hasClass('small-card') == false) {
+        $('.card-content').addClass('small-card');
+        $('.card-reveal').addClass('small-card');
+     } else if ($('.card').width() >= 300 && $('.card-content').hasClass('small-card')) {
+         $('.card-content').removeClass('small-card');
+         $('.card-reveal').removeClass('small-card');
+     }
+}
+
+// Function to Apply class 'small' card when an screen heigth is smaller than landing container height
+function smallLandingContainer() {
+    let containerHeight = $('.landing-content-container').height() + $('.landing-content-container').offset().top
+    let windowHeight = $(window).height()
+    if (containerHeight > windowHeight && $('.landing-page').hasClass('small-container') == false) {
+        $('.landing-page').addClass('small-container');
+    } else if (containerHeight+100 <= windowHeight && $('.landing-page').hasClass('small-container'))
+        $('.landing-page').removeClass('small-container');
+}
+
+
 // Apply class 'small' card when an item card width<300px
 $(window).resize(function() {
-    if ($('.card').width() < 300 && $('.card-content').hasClass('small-card') == false) {
-       $('.card-content').addClass('small-card');
-       $('.card-reveal').addClass('small-card');
-    } else if ($('.card').width() >= 300 && $('.card-content').hasClass('small-card')) {
-        $('.card-content').removeClass('small-card');
-        $('.card-reveal').removeClass('small-card');
-    }
+    smallCard();
+    smallLandingContainer();
   });

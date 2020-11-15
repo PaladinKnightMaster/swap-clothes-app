@@ -8,31 +8,31 @@
 {% block sidenav_home %}active-sidenav{% endblock %}
 
 {% block content %}
-<div class="landing-page">
+<section class="landing-page">
     <!-- Landing Page graphic, hero image and content -->
-    <div class="landing-image-container"></div>
-    <div class="landing-graphic-container center"></div>
-    <!-- Top Landing Page section -->
-    <div class="container center">
-        <div class="landing-content-container z-depth-4 border-radius-m">
-            <h1 id="swap-heading">SWAP</h1>
-            <p id="swap-subheading">your clothes</p>
-            <div class="landing-content">
-                <p>Ready for a closet makeover <i class="fas fa-question"></i></p>
-                <p>Add items you're ready to say goodbye to and swap them for someone else's pre-<i class="fas fa-heart"></i> pieces </p>
-                <p class="colored-icons">Add <i class="fas fa-angle-double-right"></i> Like <i class="fas fa-angle-double-right"></i> Match <i class="fas fa-angle-double-right"></i> <span>SWAP</span></p>
-                {% if session.user %}
-                    <a href="{{ url_for('items') }}" class="swap-btn filled-red border-radius-m">Get Started</a>
-                {% else %}
-                    <a href="{{ url_for('register') }}" class="swap-btn filled-red border-radius-m">Get Started</a>
-                {% endif %}
-                <p>
-                    <a href="#about-modal" class="grey-text text-darken-1 tooltipped modal-trigger" data-tooltip="Tell me more"><i class="far fa-question-circle"></i></a>
-                </p>
+    <div class="landing-image-container center">
+        <!-- Top Landing Page section -->
+        <img src="{{ url_for('static', filename='graphics/feet.png') }}" alt="">
+        <div class="container center">
+            <div class="landing-content-container z-depth-4 border-radius-m">
+                <h1 id="swap-heading">SWAP <span>your clothes</span></h1>
+                <div class="landing-content">
+                    <p>Ready for a closet makeover?</p>
+                    <p>Add items you're ready to say goodbye to and swap them for someone else's pre-<i class="fas fa-heart accent-text"></i> pieces </p>
+                    <p class="colored-icons">Add <i class="fas fa-angle-double-right"></i> Like <i class="fas fa-angle-double-right"></i> Match <i class="fas fa-angle-double-right"></i> <span>SWAP</span></p>
+                    {% if session.user %}
+                        <a href="{{ url_for('items') }}" class="swap-btn filled-red border-radius-m">Get Started</a>
+                    {% else %}
+                        <a href="{{ url_for('register') }}" class="swap-btn filled-red border-radius-m">Get Started</a>
+                    {% endif %}
+                    <p>
+                        <a href="#about-modal" class="grey-text text-darken-1 tooltipped modal-trigger" data-tooltip="Tell me more"><i class="far fa-question-circle"></i></a>
+                    </p>
+                </div>    
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <!-- Hot Items section -->
 <section class="hot-items">
