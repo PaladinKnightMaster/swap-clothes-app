@@ -389,6 +389,20 @@ def liked_item(item_id, action):
     return redirect(request.referrer)
 
 
+@app.route('/flagged_item/<item_id>/<action>')
+def flagged_item(item_id, action):
+    """
+    Allows users to flag items and admin to unflag
+    """
+    if action == 'flag':
+        mongo.db.items.update_one({"_id": ObjectId(item_id)}, {'$set': {'flagged': 'Y'}})
+    
+    elif action == 'unflag':
+        mongo.db.items.update_one({"_id": ObjectId(item_id)}, {'$set': {'flagged': 'N'}})
+    
+    return redirect(request.referrer)
+
+
 @app.route('/my_profile/<username>')
 def my_profile(username):
     """

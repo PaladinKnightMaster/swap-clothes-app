@@ -183,11 +183,11 @@
                                 <!-- Let users flag item but only admin can 'unflag' -->
                                 <div class="col s2 item-icon-container right">
                                     {% if item.flagged == "Y" and session.user == 'Admin' %}
-                                        <a href="#" class="accent-text"><i class="fas fa-flag"></i></a>
+                                        <a href="{{ url_for('flagged_item', item_id=item._id, action='unflag') }}" class="accent-text"><i class="fas fa-flag"></i></a>
                                     {% elif item.flagged == "Y" %}
-                                        <a href="#" class="accent-text inactive-flag"><i class="fas fa-flag"></i></a>
+                                        <i class="fas fa-flag accent-text"></i>
                                     {% else %}
-                                        <a href="#"><i class="far fa-flag"></i></a>
+                                        <a href="{{ url_for('flagged_item', item_id=item._id, action='flag') }}"><i class="far fa-flag"></i></a>
                                     {% endif %}
                                 </div>
                             {% endif %}
