@@ -838,7 +838,6 @@ div.slick-slide {
     min-height: 100vh;
     height: fit-content;
     position: absolute;
-    z-index: -2;
     top: 0;
     left: 0;
     background: url('https://images.unsplash.com/photo-1529720317453-c8da503f2051?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80') top/cover no-repeat;    
@@ -1018,3 +1017,4 @@ div.modal {
 }
 
 /* About modal */
+

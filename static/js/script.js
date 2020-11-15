@@ -35,7 +35,7 @@ $(document).ready(function(){
 	$('.tooltipped').tooltip();
     $('select').formSelect();
     $('.modal').modal({
-        endingTop: '40%'
+        endingTop: '20%'
     });
 	// scrolling effect for items on My Profile page
 	$('.carousel').carousel({
