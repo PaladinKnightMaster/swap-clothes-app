@@ -547,7 +547,7 @@ form .swap-btn {
 div.input-field input[type=text],
 div.input-field input[type=password],
 div.input-field textarea {
-    height: 3rem;
+    height: 4rem;
 }
 
 /* Label syle */
@@ -568,11 +568,6 @@ label>i {
 }
 
 @media screen and (min-width: 600px) {
-    div.input-field input[type=text],
-    div.input-field input[type=password],
-    div.input-field textarea {
-        height: 4rem;
-    }
     .input-field>label {
         top: 0.5rem;
     }
@@ -647,11 +642,23 @@ textarea.materialize-textarea {
  /* Change label animation */
  .input-field>label:not(.label-icon).active,
  .input-field>input[type]:-webkit-autofill:not(.browser-default):not([type="search"])+label {
-    -webkit-transform: translateY(-25px) scale(0.8);
-    transform: translateY(-25px) scale(0.8);
+    -webkit-transform: translateY(-20px) scale(0.8);
+    transform: translateY(-20px) scale(0.8);
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
  }
+
+
+ @media screen and (min-width: 600px) {
+    .input-field>label:not(.label-icon).active,
+    .input-field>input[type]:-webkit-autofill:not(.browser-default):not([type="search"])+label {
+       -webkit-transform: translateY(-25px) scale(0.8);
+       transform: translateY(-25px) scale(0.8);
+       -webkit-transform-origin: 0 0;
+       transform-origin: 0 0;
+    }
+}
+
 
  /* Form dvider heading */
 form h6 {
@@ -921,7 +928,6 @@ div.slick-slide {
 }
 
 @media screen and (min-width: 600px) {
-
 
     .landing-content{
         margin: 0 auto;
