@@ -54,6 +54,10 @@ def pagination_arg(items):
                       css_framework="bootstrap3")
 
 
+def item_categories():
+    # Retrieve item categories
+    return mongo.db.categories.find_one({"category_name": "item_categories"})['category_value']
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -84,7 +88,7 @@ def items():
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    categories = mongo.db.categories.find()
+    categories = item_categories()
 
     all_users = list(mongo.db.users.find())
     
@@ -106,7 +110,7 @@ def filter():
     Get all checked values for category filter,
     find and display items with those categories
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     selected_categories = request.args.getlist("selected-categories")
     items = list(mongo.db.items.find(
         {"category": {"$in": selected_categories}}).sort('_id', -1))
@@ -136,7 +140,7 @@ def sort(sort_by):
     by the latest date added, by liked items or
     by item being flagged
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     if sort_by == 'a-to-z':
         items = list(mongo.db.items.find().sort("item_name", 1))
     elif sort_by == 'z-to-a':
@@ -168,7 +172,7 @@ def search():
     Use an index from items collections to allow the user
     to search through the item names and item short description
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     query = request.args.get("search")
 
     items = list(mongo.db.items.find({"$text": {"$search": query}}))
@@ -194,7 +198,7 @@ def register():
     usernme and password is added to the users database,
     otherwise the user is redirected to the registration page
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     if request.method == 'POST':
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username")})
@@ -276,7 +280,7 @@ def add_item():
     date and time when item was created and the user who
     created the item
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     if request.method == "POST":
         new_item = {
             "item_image": request.form.get("item_image"),
@@ -330,7 +334,7 @@ def edit_item(item_id):
         return redirect(url_for('items', username=session['user']))
 
     item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     user_data = mongo.db.users.find_one({"username": session["user"]})
     return render_template("edit_item.html", categories=categories, item=item, user=user_data)
 
@@ -425,7 +429,7 @@ def edit_profile(username):
     """
     Edit user's profile
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     user_data = mongo.db.users.find_one({"username": username})
 
     if request.method == 'POST':

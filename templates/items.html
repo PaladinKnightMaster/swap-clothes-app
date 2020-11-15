@@ -82,14 +82,14 @@
                 <div class="category-labels">
                     {% for category in categories %}
                     <p>
-                        <label for="{{ category.category_name }}">
+                        <label for="{{ category }}">
                             <!-- Distinguish between selected and non selected categories -->
-                            {% if category.category_name in selected_categories %}
-                                <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories" checked/>
-                                <span class="filtered-category">{{ category.category_name }}</span>
+                            {% if category in selected_categories %}
+                                <input type="checkbox" value="{{category}}" id="{{ category }}" name="selected-categories" checked/>
+                                <span class="filtered-category">{{ category }}</span>
                             {% else %}
-                                <input type="checkbox" value="{{category.category_name}}" id="{{ category.category_name }}" name="selected-categories"/>
-                                <span>{{ category.category_name }}</span>
+                                <input type="checkbox" value="{{category}}" id="{{ category }}" name="selected-categories"/>
+                                <span>{{ category }}</span>
                             {% endif %}
                         </label>
                     </p>
