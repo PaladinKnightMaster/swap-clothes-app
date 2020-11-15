@@ -7,6 +7,8 @@
         <meta name="author" content="Liga Baikova">
         <meta name="description" content="This website allows users to swap their clothes with others to encourage sustainable living./">
         <title>{% block title %}{% endblock %}</title>
+        <!-- Add favicon -->
+        <link rel="icon" href="{{ url_for('static', filename='graphics/SWAP-logo.png') }}">
         <!-- Add Materialize CDN -->
         <link
             rel="stylesheet"
@@ -29,7 +31,7 @@
             <!-- Navbar for larger screens -->
             <nav class="nav-extended gradient-bkg">
                 <div class="nav-wrapper">
-                    <a href="{{ url_for('home') }}" class="brand-logo center">SWAP</a>
+                    <a href="{{ url_for('home') }}" class="brand-logo center"><img src="{{ url_for('static', filename='graphics/SWAP-logo.png') }}" alt="Swap logo - double sided arrow in a shape of S">WAP</a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
                     <ul class="left hide-on-med-and-down">
                         <li><a href="{{ url_for('home') }}" class="hvr-underline-from-center {% block nav_home %}{% endblock %}">Home</a></li>
