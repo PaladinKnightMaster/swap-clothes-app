@@ -332,7 +332,7 @@ def edit_item(item_id):
     item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
     categories = mongo.db.categories.find()
     user_data = mongo.db.users.find_one({"username": session["user"]})
-    return render_template("add_item.html", categories=categories, item=item, user=user_data)
+    return render_template("edit_item.html", categories=categories, item=item, user=user_data)
 
 
 
