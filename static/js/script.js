@@ -83,7 +83,7 @@ $('.item-creator-container').on('click', function() {
 
 
 // Delay page re-direct for 1.5s so user can sede pop-up display with detail cnfirmation
-function deleteItemDelay(link) {
+function ItemDelay(link) {
     setTimeout(function () {
         window.location.href = link;
     }, 1500);
@@ -111,7 +111,7 @@ function deleteConfirm(link) {
                 timer: 1500
             })
             // Go to link in href attribute of the delete button clicked
-            deleteItemDelay(link)
+            ItemDelay(link)
         }
     });
 }
@@ -127,6 +127,38 @@ $('.delete-confirm').click(function(event) {
     deleteConfirm(link)
 
 })
+
+// Use sweetalert to confirm flagging
+function flagConfirm(link) {
+    Swal.fire({
+        title: 'Do you find this item offensive or inapropriate?',
+        text: "Flagged items can only be unflagged by admin",
+        icon: 'warning',
+        iconColor: '#FF626D',
+        showCancelButton: true,
+        confirmButtonColor: '#FF626D',
+        cancelButtonColor: '#fff',
+        confirmButtonText: 'Yes, flag it!',
+    }).then((result) => {
+        if (result.isConfirmed) { 
+            Swal.fire({
+                title: 'Flagged!',
+                icon: 'success',
+                iconColor: '#FF626D',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            ItemDelay(link)
+        }
+    });
+}
+
+$('.flag-confirm').click(function(event) {
+    event.preventDefault();
+    let link = $(this).attr("href");
+    flagConfirm(link)
+})
+
 
 
 // Function to Apply class 'small' card when an item card width<300px
