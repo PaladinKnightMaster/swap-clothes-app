@@ -54,6 +54,31 @@ def pagination_arg(items):
                       css_framework="bootstrap3")
 
 
+def item_categories():
+    # Retrieve item categories
+    return mongo.db.categories.find_one({"category_name": "item_categories"})['category_value']
+
+
+def profile_img():
+    # Retrieve profile image links and image names
+    return mongo.db.categories.find_one({"category_name": "image_url"})['category_value']
+
+
+def item_size_from():
+    # Retrieve Item sizing regions
+    return mongo.db.categories.find_one({"category_name": "item_size_from"})['category_value']
+
+
+def item_size_fit():
+    # Retrieve item fit
+    return mongo.db.categories.find_one({"category_name": "item_size_fit"})['category_value']
+
+
+def item_used_status():
+    # Retrieve used status
+    return mongo.db.categories.find_one({"category_name": "item_used_status"})['category_value']
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -84,7 +109,7 @@ def items():
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
-    categories = mongo.db.categories.find()
+    categories = item_categories()
 
     all_users = list(mongo.db.users.find())
     
@@ -106,7 +131,7 @@ def filter():
     Get all checked values for category filter,
     find and display items with those categories
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     selected_categories = request.args.getlist("selected-categories")
     items = list(mongo.db.items.find(
         {"category": {"$in": selected_categories}}).sort('_id', -1))
@@ -136,7 +161,7 @@ def sort(sort_by):
     by the latest date added, by liked items or
     by item being flagged
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     if sort_by == 'a-to-z':
         items = list(mongo.db.items.find().sort("item_name", 1))
     elif sort_by == 'z-to-a':
@@ -168,7 +193,7 @@ def search():
     Use an index from items collections to allow the user
     to search through the item names and item short description
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
     query = request.args.get("search")
 
     items = list(mongo.db.items.find({"$text": {"$search": query}}))
@@ -194,7 +219,8 @@ def register():
     usernme and password is added to the users database,
     otherwise the user is redirected to the registration page
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
+    profile_images = profile_img()
     if request.method == 'POST':
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username")})
@@ -225,7 +251,8 @@ def register():
         flash("You're officially a Swapper now, woo!")
         return redirect(url_for('items', username=session['user']))
 
-    return render_template("register.html", categories=categories)
+    return render_template("register.html", categories=categories,
+                           profile_images=profile_images)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -276,10 +303,18 @@ def add_item():
     date and time when item was created and the user who
     created the item
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
+    item_size = item_size_from()
+    item_fit = item_size_fit()
+    item_used = item_used_status()
+    # If user didn't add item image link, insert a generic image
+    item_image = request.form.get("item_image")
+    if item_image == "":
+        item_image = "https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+
     if request.method == "POST":
         new_item = {
-            "item_image": request.form.get("item_image"),
+            "item_image": item_image,
             "item_name": request.form.get("item_name"),
             "short_description": request.form.get("short_desc"),
             "long_description": request.form.get("long_desc"),
@@ -299,7 +334,9 @@ def add_item():
         return redirect(url_for('items', username=session['user']))
 
     user_data = mongo.db.users.find_one({"username": session["user"]})
-    return render_template("add_item.html", categories=categories, user=user_data)
+    return render_template("add_item.html", categories=categories, user=user_data,
+                           item_size=item_size, item_fit=item_fit,
+                           item_used=item_used)
 
 
 @app.route("/edit_item/<item_id>", methods=["GET", "POST"])
@@ -308,6 +345,10 @@ def edit_item(item_id):
     Edit a chosen item identified by item_id and display updated version
     after changes have been submitted
     """
+    categories = item_categories()
+    item_size = item_size_from()
+    item_fit = item_size_fit()
+    item_used = item_used_status()
     if request.method == "POST":
         edited_item = {
             "item_image": request.form.get("item_image"),
@@ -330,9 +371,10 @@ def edit_item(item_id):
         return redirect(url_for('items', username=session['user']))
 
     item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
-    categories = mongo.db.categories.find()
     user_data = mongo.db.users.find_one({"username": session["user"]})
-    return render_template("edit_item.html", categories=categories, item=item, user=user_data)
+    return render_template("edit_item.html", categories=categories, item=item, user=user_data,
+                           item_size=item_size, item_fit=item_fit,
+                           item_used=item_used)
 
 
 
@@ -425,7 +467,8 @@ def edit_profile(username):
     """
     Edit user's profile
     """
-    categories = mongo.db.categories.find()
+    categories = item_categories()
+    profile_images = profile_img()
     user_data = mongo.db.users.find_one({"username": username})
 
     if request.method == 'POST':
@@ -443,7 +486,8 @@ def edit_profile(username):
         flash("{}'s profile updated succesfully".format(edited_profile["username"]))
         return redirect(url_for('my_profile', username=username))
 
-    return render_template("edit_profile.html", categories=categories, user=user_data )
+    return render_template("edit_profile.html", categories=categories,
+                           user=user_data, profile_images=profile_images )
 
 
 if __name__ == '__main__':
