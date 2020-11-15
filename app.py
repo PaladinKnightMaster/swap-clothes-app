@@ -58,6 +58,11 @@ def item_categories():
     # Retrieve item categories
     return mongo.db.categories.find_one({"category_name": "item_categories"})['category_value']
 
+def profile_img():
+    # Retrieve profile image links
+    return mongo.db.categories.find_one({"category_name": "image_url"})['category_value']
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -199,6 +204,7 @@ def register():
     otherwise the user is redirected to the registration page
     """
     categories = item_categories()
+    profile_images = profile_img()
     if request.method == 'POST':
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username")})
@@ -229,7 +235,8 @@ def register():
         flash("You're officially a Swapper now, woo!")
         return redirect(url_for('items', username=session['user']))
 
-    return render_template("register.html", categories=categories)
+    return render_template("register.html", categories=categories,
+                           profile_images=profile_images)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -430,6 +437,7 @@ def edit_profile(username):
     Edit user's profile
     """
     categories = item_categories()
+    profile_images = profile_img()
     user_data = mongo.db.users.find_one({"username": username})
 
     if request.method == 'POST':
@@ -447,7 +455,8 @@ def edit_profile(username):
         flash("{}'s profile updated succesfully".format(edited_profile["username"]))
         return redirect(url_for('my_profile', username=username))
 
-    return render_template("edit_profile.html", categories=categories, user=user_data )
+    return render_template("edit_profile.html", categories=categories,
+                           user=user_data, profile_images=profile_images )
 
 
 if __name__ == '__main__':

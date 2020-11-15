@@ -20,10 +20,14 @@
         <div class="row input-container">
             <div class="input-field col s12 dropdown-space">
                 <select name="user-img" class="center">
-                    <option value="" disabled selected>Choose your face</option>
-                    <option value="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/woman-detective.png" data-icon="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/woman-detective.png">Detective</option>
-                    <option value="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/man-cook.png" data-icon="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/man-cook.png">Cook</option>
-                    <option value="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/woman-construction-worker.png" data-icon="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-12/128/woman-construction-worker.png">Construction Worker</option>
+                    <option value="" disabled>Choose your face</option>
+                    {% for image in profile_images %}
+                        {% if image[0] == user.user_image %}
+                            <option value="{{ image[0] }}" data-icon="{{ image[0] }}" selected>{{ image[1] }}</option>
+                        {% else %}
+                            <option value="{{ image[0] }}" data-icon="{{ image[0] }}">{{ image[1] }}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
                 <label class="options-label">Profile Pic</label>
             </div>
