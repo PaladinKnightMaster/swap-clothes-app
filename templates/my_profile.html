@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+
+<!-- Add Page Title -->
+{% block title %}{{user["username"]}} | SWAP{% endblock %}
+
 <!-- Add active class to the  navbar and sidebar -->
 {% block nav_my_profile %}active{% endblock %}
 {% block sidenav_my_profile %}active{% endblock %}
