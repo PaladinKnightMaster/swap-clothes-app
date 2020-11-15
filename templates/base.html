@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="author" content="Liga Baikova">
+        <meta name="description" content="This website allows users to swap their clothes with others to encourage sustainable living./">
+        <title>{% block title %}{% endblock %}</title>
         <!-- Add Materialize CDN -->
         <link
             rel="stylesheet"
@@ -18,7 +22,6 @@
         </script>
         <!-- Link to static stylesheet -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
-        <title>{% block title %}{% endblock %}</title>
     </head>
 
     <body>
