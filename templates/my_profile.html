@@ -171,8 +171,15 @@
                                         <a href="https://wa.me/{{ user['whatsapp'] }}" target="_blank" class="green-text text-accent-4"><i class="fab fa-whatsapp"></i></a>
                                         <a href="https://instagram.com/{{ user['instagram'] }}" target="_blank" class="pink-text text-darken-1"><i class="fab fa-instagram"></i></a>
                                     </div>
-                                    <div class="col s2 item-icon-container">
-                                        <a href="#"><i class="far fa-flag"></i></a>
+                                    <!-- Let users flag item but only admin can 'unflag' -->
+                                    <div class="col s2 item-icon-container right">
+                                        {% if match.flagged == "Y" and session.user == 'Admin' %}
+                                            <a href="#" class="accent-text"><i class="fas fa-flag"></i></a>
+                                        {% elif match.flagged == "Y" %}
+                                            <a href="#" class="accent-text inactive-flag"><i class="fas fa-flag"></i></a>
+                                        {% else %}
+                                            <a href="#"><i class="far fa-flag"></i></a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -260,8 +267,15 @@
                                             {% endif %}
                                         {% endfor %}
                                         </div>
-                                        <div class="col s6 item-icon-container">
-                                            <a href="#"><i class="far fa-flag"></i></a>
+                                        <!-- Let users flag item but only admin can 'unflag' -->
+                                        <div class="col s2 item-icon-container right">
+                                            {% if item.flagged == "Y" and session.user == 'Admin' %}
+                                                <a href="#" class="accent-text"><i class="fas fa-flag"></i></a>
+                                            {% elif item.flagged == "Y" %}
+                                                <a href="#" class="accent-text inactive-flag"><i class="fas fa-flag"></i></a>
+                                            {% else %}
+                                                <a href="#"><i class="far fa-flag"></i></a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

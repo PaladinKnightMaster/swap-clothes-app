@@ -62,8 +62,8 @@ def home():
     """
     items = mongo.db.items.find().sort("liked_count", -1).limit(3)
     all_users = list(mongo.db.users.find())
-    user_liked_by = mongo.db.matches.find_one({"username": session['user']})["liked_by"]
     if session:
+        user_liked_by = mongo.db.matches.find_one({"username": session['user']})["liked_by"]
         user_data = mongo.db.users.find_one({"username": session['user']})
         return render_template("index.html", items=items, all_users=all_users, user=user_data, liked=user_liked_by)
 
