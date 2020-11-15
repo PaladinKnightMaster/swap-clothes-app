@@ -62,8 +62,8 @@ def home():
     """
     items = mongo.db.items.find().sort("liked_count", -1).limit(3)
     all_users = list(mongo.db.users.find())
-    user_liked_by = mongo.db.matches.find_one({"username": session['user']})["liked_by"]
     if session:
+        user_liked_by = mongo.db.matches.find_one({"username": session['user']})["liked_by"]
         user_data = mongo.db.users.find_one({"username": session['user']})
         return render_template("index.html", items=items, all_users=all_users, user=user_data, liked=user_liked_by)
 
@@ -386,6 +386,20 @@ def liked_item(item_id, action):
             mongo.db.matches.update_one({"username": item_creator},
                         {'$pull': {'liked_by': user}})
      
+    return redirect(request.referrer)
+
+
+@app.route('/flagged_item/<item_id>/<action>')
+def flagged_item(item_id, action):
+    """
+    Allows users to flag items and admin to unflag
+    """
+    if action == 'flag':
+        mongo.db.items.update_one({"_id": ObjectId(item_id)}, {'$set': {'flagged': 'Y'}})
+    
+    elif action == 'unflag':
+        mongo.db.items.update_one({"_id": ObjectId(item_id)}, {'$set': {'flagged': 'N'}})
+    
     return redirect(request.referrer)
 
 

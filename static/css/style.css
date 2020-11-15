@@ -724,6 +724,7 @@ a i.like-button-disabled {
 }
 
 .item-footer {
+    height: 1.25rem;
     line-height: 1.25rem;
 }
 /* ----------MY PROFILE PAGE---------- */
