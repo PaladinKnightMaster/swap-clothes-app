@@ -101,6 +101,8 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
         - Graphics are used for aesthetic and design purposes only. The legs on the landing page set the tone for the website and the colors tie in with the header gradient to create a sense of uniformity.
         - Graphics used were designed by [Pablo Stanley from Hhmaaans](https://www.humaaans.com/) and [Katerina Limpitsouni from unDraw](https://undraw.co/)
 
+- #### Shadow (lack of borders) & front end technology
+
 - #### Wireframes
     - Wireframes were created using Adobe Xd
     - Mobile Wireframes
@@ -149,32 +151,78 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
          <img src="static/graphics/readme/mockups/mockups-desktop.png" height="400px"/>
 
 
-
-
-
-
 ## Features
 
 ### Existing Features
 
-#### Common Features Across All Pages
-- [x] **xxx** - xxx
-    - xxx
-    - xxx
-- [x] **xxx**
-    - xxx
+#### Common Features Across Pages
+- [x] **Header** - facilitates an effortless navigation across all pages
+    - The header is positioned to always be visible at the top of the screen (mobile, tablet, and desktop) which allows visitors to find it quickly.
+    - The brand logo is positioned at the top of the page in the header and redirects the user back to the home page. This allows the user to easily find the homepage.
+    - The page navigation is located in the header at the top of the page on desktop and laptop sizes and a side navigation component on mobile and tablet sizes. This adheres to the navigation conventions allowing the user to intuitively navigate the page.
+    - Navigation links expand and are underlined when hovered over on larger screen sizes, letting the user know that these are clickable links.
+    - The navigation link, matching the page that the user is visiting, stays 'active'(which matches the hover effect from the previous point) to let the user quickly establish which page she/he is visiting.
+    - Navigation links collapse in a personalized hamburger menu when viewed in mobile sizes.
+- [x] **Heading**
+    - All headings are styled in the same manner to let the user understand the page structure quickly.
+- [x] **Links/buttons**
+    - All links have a hover effect and are noticeably different than the rest of the text around them, indicating that they are clickable.
+    - All external links open in a new tab to allow the user to easily navigate back to the page.
+    - Buttons increase in size and have a shadow effect applied when hovered over.
+- [x] **Footer**
+    - Footer is always displayed at the bottom of the page, regardless of the content size.
+    - 'Go to the top' link included allowing the user to easily navigate to the top which is particularly important on mobile screen sizes.
+    - Socials are displayed and grouped. They are displayed in the footer to adhere to the convention and let the user locate them quickly.
+- [x] **Card Items** - display clothing items added by users
+    - All cards are the same size regardless of the content amount. This is achieved by limiting characters allowed when an item is added. This provides consistency and creates predictability of how the page will look.
+    - Images take the most of the space and are fitted to be contained within a space without being distorted. This creates a visually appealing and not text-heavy site and keeps the user interested to look through items.
+    - Each item has a heading and a short description is shown with an option to get more detailed information once clicked on.
+    - Item creator and their image is displayed in the card footer. If the user has matched with the creator of the item, the username can be clicked on and reveals the creator's social media icons.
+    - Delete and edit icons are displayed in the card footer to the creator of the item.
+    - Flag item is displayed in the c rd footer allowing users to flag inappropriate content and only the admin to unflag it.
+    - Floating 'like' button is displayed at the bottom of the image. It has 3 different instances - disabled to the creator of the item, empty heart on unliked items, and filled heart on liked items.
+    - Confirmation for deleting and flagging items is displayed using [sweetalert](https://sweetalert2.github.io/) which pops-up and provides feedback after confirmation.
+- [x] **Responsivensess**
+    - All Pages are responsive and provide the same functionality regardless of the viewport size.
+- [x] **Accessibility**
+    - There are no flashing images or sounds to hinder the user experience.
+- [x] **Flash messages**
+    - Messages displayed at the top of the page to provide the user with feedback when the user logs-out, registers, etc.
+
 
 
 ### Specific to Pages
-- [x] **xxx**
-    - xxx
+- [x] **Home** Page
+    - Short introduction to let the user know what the page is.
+    - 'Get Started' button that navigates an unauthorized user to the 'Register' page. This allows users to find the Register page easily and a user will more likely create an account. If a user is logged in and navigates to the 'Home' page, the 'Get Started'  button will redirect them to the 'Items' page.
+    - A helper icon displayed under the call-to-action button that triggers the 'About' modal which has more detailed information about how the site works. This further provides clarity of the meaning of the website.
+    - Hot Items section displays the 3 most liked items which might be a factor in deciding to create an account.
+- [x] **Items** Page
+    - Category filter allows users to filter all items by categories that allow users to view items that they are interested in. Furthermore, the displayed categories have been formatted to let the user know what they have selected. User can clear all filters to display all items
+    - Sort functionality allows an unauthorized user to sort items by the most recently added, alphabetical order, and reverse alphabetical order. Authorized users and admin have additional functionality to sort items by their liked items and flagged items.
+    - Search functionality allows the user to search for items using specific words or phrases. The items are searched by using their headings and short descriptions.
+    - Pagination allows the page not to get overcrowded and display only 9 items at a time. The total number of items is displayed alongside the page number to let the user know how many items there are altogether.
+- [x] **My Profile** Page
+    - Top component displays user information letting the user know what details they have entered.
+    - Edit Profile button allows the user to edit their profile
+    - Responsive carousels containing Added items, matched items, and suggested items. This allows the page not to get too overcrowded while still having a good overview of all sections. It scales down depending on the screen size. The carousel items have arrow buttons to facilitate site navigation, icons at the bottom indicating how many slides there are and additionally, the slides can be dragged and swiped.
+- [x] **Register, Log In, Add Item** Pages
+    - Responsive forms to allow users to easily fill them out on all screen sizes. 
+    - Forms provide validation if an input field is required and provides the user with real-time feedback if the value entered is valid. This lets the user save time by fixing the input field before submitting the form if relevant.
 
 
 ### Future Features
-- [ ] xxx
-        <img src="" />
+- [ ] Add the' Events' section at the bottom of the 'Home' page to create real-life swapping events.
 
-- [ ] xxx
+    <img src="./static/graphics/readme/mockups/mockup-events.png" height="400px" />
+
+- [ ] Implement additional 'liked items' and 'flagged items' (for admin) sections in 'My Profile' page 
+- [ ] Add password confirmation when the user is registering and let them view their password if they wish so.
+- [ ] Allow users to edit their passwords and delete their accounts.
+- [ ] Implement flash messages as toasters.
+- [ ] Allow user to upload their images and store them on Cloudinary.
+- [ ] Let users visit each other's pages to get 'the socials' details.
+- [ ] Facilitate an in-app communication.
 
 
 
