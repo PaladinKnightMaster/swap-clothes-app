@@ -237,11 +237,37 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
 
 ### Languages Used
 
-- [xxx](xxx)
-
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+- [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+- [JavaScript](https://www.javascript.com/)
+- [Python 3.8.5](https://www.python.org/)
 
 ### Frameworks, Libraries and Programs Used
-- [xxx](xxx) - xxx
+- Front-End
+    - [Materialize v1.0.0](https://materializecss.com/) - Used for the responsive layout as well as the navigation, header, footer, forms, dropdowns, item cards, modals.
+    - [Font Awesome](https://fontawesome.com/) - Font Awesome was used to add social media icons at the bottom of the page and icons throughout the pages.
+    - [Google Fonts](https://fonts.google.com/) - Google Fonts was used to import 'Montserrat' font in the style.css file.
+    - [Sweetalert 2](https://sweetalert2.github.io/) - Used to display pop-up confirmation modals.
+    - [Slick](https://kenwheeler.github.io/slick/) - Used to dispaly responsive item carousels on 'My Profile' pages.
+    - [jQuery 3.5.1](https://jquery.com/) - Used to initialize Materialize components, used in building sweetalert and applying classes on window resize.
+- Back-End
+    - [Flask 1.1.2](https://flask.palletsprojects.com/en/1.1.x/) - Web micro-framework written in Python and was used in building the web application. 
+    - [Flask-Paginate 0.7.1](https://github.com/lixxu/flask-paginate) - Used to implement the pagination within the flask framework.
+    - [Jinja 2.11.2](https://jinja.palletsprojects.com/en/2.11.x/) - Templating language used across all HTML pages
+    - [Werkzeug 1.0.1](https://werkzeug.palletsprojects.com/en/1.0.x/) - Used in hashing and unhashing user passwords.
+    - [MongoDB](https://www.mongodb.com/) - Non relational document-oriented database. Used to store all JSON-like documents and user, item, match, and category data.
+    - [PyMongo 3.11.0](https://pymongo.readthedocs.io/en/stable/) - Used to connect Python to MongoDB Databse.
+- General
+    - [Git](https://git-scm.com/) - Git was used to allowing for tracking of any changes in the code and version control.
+    - [Github](https://github.com/) - GitHub is used to host the project files.
+    - [Visual Studio Code](https://code.visualstudio.com/) - IDE used to compile the code as well as facilitate a virtual environment.
+    - [TinyJPG](https://tinypng.com/) - Used to minify and compress images.
+    - [Heroku](https://dashboard.heroku.com/apps) - A cloud platform used to deploy the web application.
+    - [Lightroom](https://www.adobe.com/ie/products/photoshop-lightroom.html?gclid=CjwKCAjwwYP2BRBGEiwAkoBpAqomS77OrQwQggC9QPnPACrkLBs-2AcrW9ZUvxbUJnFOgbRGKNeNEhoC95IQAvD_BwE&sdid=88X75SKS&mv=search&ef_id=CjwKCAjwwYP2BRBGEiwAkoBpAqomS77OrQwQggC9QPnPACrkLBs-2AcrW9ZUvxbUJnFOgbRGKNeNEhoC95IQAvD_BwE:G:s&s_kwcid=AL!3085!3!394412108599!e!!g!!lightroom) - Lightroom was used to edit and resize all images.
+    - [Adobe Xd](https://www.adobe.com/ie/products/xd.html) - Adobe Xd was used to create wireframes and mockups.
+    - [Canva](https://www.canva.com/) - Graphic Design Platform used in creating the logo and favicon.
+
+
 
 <a name="#testing"></a>
 ## Testing
