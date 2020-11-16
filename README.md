@@ -4,7 +4,7 @@
 
  <a href="https://clothes-swap-app.herokuapp.com/"><img src="./static/graphics/SWAP-logo.png" width="25px" /></a> :point_left: Live website
 
-  <a href="https://github.com/LigaMoon/swap-clothes-app"><img src=".static/graphics/readme/githublogo.png" width="25px" /></a> :point_left: GitHub Repository
+  <a href="https://github.com/LigaMoon/swap-clothes-app"><img src="./static/graphics/readme/githublogo.png" width="25px" /></a> :point_left: GitHub Repository
  
  ## About
 
@@ -93,49 +93,49 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
 - #### Wireframes
     - Wireframes were created using Adobe Xd
     - Mobile Wireframes
-        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-mobile-unauthorised.png) :point_left:
-        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-mobile-authorised.png) :point_left:
-        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-mobile-admin.png) :point_left:
+        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-mobile-unauthorised.png) :point_left:
+        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-mobile-authorised.png) :point_left:
+        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-mobile-admin.png) :point_left:
 
-         <img src="static/graphics/readme/wireframes-mobile.png" height="400px"/>
+         <img src="static/graphics/readme/wireframes/wireframes-mobile.png" height="400px"/>
 
     - Tablet Wireframes
-        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-tablet-unauthorised.png) :point_left:
-        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-tablet-authorised.png) :point_left:
-        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-tablet-admin.png) :point_left:
+        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-tablet-unauthorised.png) :point_left:
+        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-tablet-authorised.png) :point_left:
+        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-tablet-admin.png) :point_left:
 
-         <img src="static/graphics/readme/wireframes-tablet.png" height="400px"/>
+         <img src="static/graphics/readme/wireframes/wireframes-tablet.png" height="400px"/>
 
     - Desktop Wireframes
-        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-desktop-unauthorised.png) :point_left:
-        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-desktop-authorised.png) :point_left:
-        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes-desktop-admin.png) :point_left:
+        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-desktop-unauthorised.png) :point_left:
+        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-desktop-authorised.png) :point_left:
+        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/wireframes/wireframes-desktop-admin.png) :point_left:
 
-         <img src="static/graphics/readme/wireframes-desktop.png" height="400px"/>
+         <img src="static/graphics/readme/wireframes/wireframes-desktop.png" height="400px"/>
 
 
 - #### Mockups
     - Mockups were created using Adobe Xd
     - Mobile Mockups
-        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-mobile-unauthorised.png) :point_left:
-        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-mobile-authorised.png) :point_left:
-        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-mobile-admin.png) :point_left:
+        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-mobile-unauthorised.png) :point_left:
+        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-mobile-authorised.png) :point_left:
+        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-mobile-admin.png) :point_left:
 
-         <img src="static/graphics/readme/mockups-mobile.png" height="400px"/>
+         <img src="static/graphics/readme/mockups/mockups-mobile.png" height="400px"/>
 
     - Tablet Mockups
-        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-tablet-unauthorised.png) :point_left:
-        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-tablet-authorised.png) :point_left:
-        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-tablet-admin.png) :point_left:
+        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-tablet-unauthorised.png) :point_left:
+        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-tablet-authorised.png) :point_left:
+        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-tablet-admin.png) :point_left:
 
-         <img src="static/graphics/readme/mockups-tablet.png" height="400px"/>
+         <img src="static/graphics/readme/mockups/mockups-tablet.png" height="400px"/>
 
     - Desktop Mockups
-        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-desktop-unauthorised.png) :point_left:
-        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-desktop-authorised.png) :point_left:
-        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups-desktop-admin.png) :point_left:
+        - [Unauthorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-desktop-unauthorised.png) :point_left:
+        - [Authorised User](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-desktop-authorised.png) :point_left:
+        - [Admin](https://github.com/LigaMoon/swap-clothes-app/tree/main/static/graphics/readme/mockups/mockups-desktop-admin.png) :point_left:
 
-         <img src="static/graphics/readme/mockups-desktop.png" height="400px"/>
+         <img src="static/graphics/readme/mockups/mockups-desktop.png" height="400px"/>
 
 
 
