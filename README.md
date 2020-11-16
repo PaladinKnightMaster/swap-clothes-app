@@ -101,7 +101,14 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
         - Graphics are used for aesthetic and design purposes only. The legs on the landing page set the tone for the website and the colors tie in with the header gradient to create a sense of uniformity.
         - Graphics used were designed by [Pablo Stanley from Hhmaaans](https://www.humaaans.com/) and [Katerina Limpitsouni from unDraw](https://undraw.co/)
 
-- #### Shadow (lack of borders) & front end technology
+- #### Other 
+    - Technology
+        - [Materialize](https://materializecss.com/) front-end framework to implement responsive design and features.
+        - [Swseetalert](https://sweetalert2.github.io/) to display confirmation pop-up for deleting or flaggin items. 
+        - [slick carousel](https://kenwheeler.github.io/slick/) to contain items on the 'My Profile' page. I opted to use this as opposed to materialize carousel due to ease of implementation as Materialize carousel uses IDs as triggers which are not ideal as the data was rendered by looping through the database.
+    - Shadows
+        - Instead of creating borders around items and sections, shadows were used instead. It creates a 3D effect and an illusion of a clean, non-restricted space.
+
 
 - #### Wireframes
     - Wireframes were created using Adobe Xd
