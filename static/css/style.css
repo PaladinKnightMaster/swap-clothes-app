@@ -1054,3 +1054,13 @@ div.modal {
     position: absolute;
     left: 3.4rem;
 }
+
+
+/* Flash images */
+.flash-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(255,156,98,0.3);
+    border-radius: 0 0 3rem 3rem;
+    padding: 0 2rem;
+}
