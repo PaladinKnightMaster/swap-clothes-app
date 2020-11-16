@@ -511,8 +511,6 @@ form .swap-btn {
 /* Profile image dropdown */
 .register .input-container .input-field.dropdown-space img {
     object-fit: cover;
-    height: 60px;
-    width: 60px;
 }
 
 @media screen and (max-width: 300px) {
