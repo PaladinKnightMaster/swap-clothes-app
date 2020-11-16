@@ -268,8 +268,34 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
     - [Canva](https://www.canva.com/) - Graphic Design Platform used in creating the logo and favicon.
 
 
+## Database
 
-<a name="#testing"></a>
+### Structure
+- Database 'swap_clothes' contain 4 collections
+    - **Users** - The main function of this collections is to store user data which is retrieved to identify user, personalize user's experience by suggesting them items they are looking for, facilitate authorization, store their socials to be retrieved if they match with another user. The data is inserted from the 'Register' page and can be edited from the 'My Profile' page. Socials are used on item cards.
+
+    <img src="./static/graphics/readme/col-users.png" height="150px" />
+
+    - **Items** - The main function is to store data about each item which is visually then rendered in item cards. The secondary function is to be used in 'liking' and 'matching' functionality as well as searching and filtering. This data is inserted on the 'Add Item' page, which can be edited on the 'Edit Item' page, and displayed across the website in item cards. Used in back-end logic across all pages to display item footer icons depending if the user is logged in, creator of the account, or admin. 
+
+    <img src="./static/graphics/readme/col-items.png" height="200px" />
+
+    - **Matches** - Used mainly in matching logic to keep track of which users are the logged-in user liked by. This collection is mainly used alongside the 'items' collection to facilitate 'liking' and 'matching' functionality.
+
+    <img src="./static/graphics/readme/col-matches.png" height="100px" />
+
+    -  **Categories** - Used to keep all types of categories (such as item fit, item categories, profile image link
+    s, etc.) as arrays that are mainly used in dropdowns and to display item category filter.
+
+    <img src="./static/graphics/readme/col-categories.png" height="400px" />
+
+
+
+### Relationship
+- The relationship between different fields is shown in the image below. Even though the database used in this project was non-relation, I believe in the future this project could benefit from a SQL based relation database
+
+<img src="./static/graphics/readme/collection-relationship.png" height="400px" />
+
 ## Testing
 
  ### Functionality Testing
