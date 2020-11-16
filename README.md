@@ -2,21 +2,23 @@
 <h1 align="center">SWAP your clothes</h1>
 <h1 align="center"><img src="" /></h1>
 
- <a href="https://clothes-swap-app.herokuapp.com/"> :star2:	</a> :point_left: Live website
+ <a href="https://clothes-swap-app.herokuapp.com/"><img src="./static/graphics/SWAP-logo.png" width="25px" /></a> :point_left: Live website
 
-  <a href="https://github.com/LigaMoon/swap-clothes-app"><img src="./assets/images/readme/githublogo.png" width="25px" /></a> :point_left: GitHub Repository
+  <a href="https://github.com/LigaMoon/swap-clothes-app"><img src=".static/graphics/readme/githublogo.png" width="25px" /></a> :point_left: GitHub Repository
  
  ## About
 
-xxx
+This website is an alternative to thrifting, buying, and donating clothes by facilitating users to swap their pre-loved items. Not only is it great for the environment and allows users to connect with like-minded people, but it is cost-friendly too.
 
 ## Table of Contents
 
-[User Experience (UX)](#UX)
+1. [User Experience (UX)](#user-experience)
+    1. [User Stories](#user-stories)
+    1. [Design](#design)
 
 [Features](#features)
 
-[Technologies Used](#technologies)
+[Technologies Used](#technologies-used)
 
 [Testing](#testing)
 
@@ -27,23 +29,45 @@ xxx
 [Credits](#credits)
 
 
-
-<a name="UX"></a>
 ## User Experience (UX)
 
 ### User Stories
 
-- #### xxx
-    1. xxx
-    1. xxx
-    1. xxx
-- #### xxx
-    1. xxx
-    1. xxx
-    1. xxx
-    1. xxx
-    1. xxx
+- #### Common user stories
+    1. I want to intuitively navigate through the site to browse the content.
+    1. I want the experience of using this site to be interactive.
+    1. I want to be able to view all clothing items.
+    1. I want to be able to sort all items by the most recent added.
+    1. I want to be able to sort all items by alphabetical and reverse alphabetical order.
+    1. I want to be able to filter items by their categories.
+    1. I want to be able to search for a specific item.
+    1. I want to be able to understand the purpose of the site.
+    1. I want to be able to contact the owner of the site.
+    1. I want the page to be responsive on all screen sizes.
+    1. I want to be able to navigate to the top of the page quickly, particularly in the mobile view.
 
+- #### As a first time visitor
+    1. I want to be able to find the 'Register' page easily.
+    1. I want to be able to register easily
+    
+- #### As a returning user
+    1. I want to be able to navigate to the 'Login' page easily.
+    1. I want to be able to Log In quickly.
+    1. I want to add new items easily.
+    1. I want to be able to edit and delete my items.
+    1. I want to like items.
+    1. I want to be able to flag inappropriate content.
+    1. I want to see the items that I have liked.
+    1. I want to be able to update my profile.
+    1. I want to view all my added items.
+    1. I want to view all items I have matched with.
+    1. I want to see items that matched the categories that I'm looking for.
+    1. I want to be able to contact another user if I match to swap the items.
+    1. I want to be able to Log out.
+
+- #### As an admin
+    1. I want to be able to unflag an item if it's been flagged incorrectly.
+    1. I want to be able to delete an item if it's inapropriate.
 
 
 ### Design
@@ -117,7 +141,7 @@ xxx
 
 
 
- <a name="features"></a>
+
 ## Features
 
 ### Existing Features
@@ -142,7 +166,7 @@ xxx
 - [ ] xxx
 
 
-<a name="technologies"></a>
+
 ## Technologies Used
 
 ### Languages Used
