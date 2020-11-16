@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0 />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="author" content="Liga Baikova">
         <meta name="description" content="This website allows users to swap their clothes with others to encourage sustainable living./">
@@ -29,7 +29,7 @@
     <body>
         <header>
             <!-- Navbar for larger screens -->
-            <nav class="nav-extended gradient-bkg">
+            <nav class="nav-extended gradient-bkg" id="top">
                 <div class="nav-wrapper">
                     <a href="{{ url_for('home') }}" class="brand-logo center"><img src="{{ url_for('static', filename='graphics/SWAP-logo.png') }}" alt="Swap logo - double sided arrow in a shape of S">WAP</a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
@@ -109,7 +109,7 @@
                     <div class="col s6 m6">
                         <ul class="left footer-nav footer-links">
                             <li><a href="#about-modal" class="modal-trigger">About</a></li>
-                            <li><a href="">Contact Us</a></li>
+                            <li><a href="#top">Go to Top <i class="fas fa-angle-up"></i> </a></li>
                         </ul>
                     </div>
                     <div class="col s6 m6">
