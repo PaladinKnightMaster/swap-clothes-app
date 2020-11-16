@@ -232,7 +232,7 @@ def register():
             "username": request.form.get("username"),
             "password": generate_password_hash(request.form.get("password")),
             "user_image": request.form.get("user-img"),
-            "looking_for": request.form.getlist("looking_for"),
+            "looking_for": request.form.getlist("looking-for"),
             "fb_msgr": request.form.get("fb-msgr"),
             "whatsapp": request.form.get("whatsapp"),
             "instagram": request.form.get("instagram")
