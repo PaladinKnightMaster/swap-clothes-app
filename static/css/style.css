@@ -312,7 +312,7 @@ nav ul a:hover, .active {
 
 .card .card-content {
     height: 200px;
-    display: relative;
+    position: relative;
     padding: 1rem 0.5rem;
 }
 
@@ -1033,7 +1033,6 @@ div.modal {
 }
 
 /* About modal */
-
 .profile-icon {
     height: 2rem; 
     width: 2rem;

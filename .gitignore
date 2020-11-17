@@ -3,3 +3,4 @@
 env.py
 __pycache__
 requirements2.txt
+.DS_Store

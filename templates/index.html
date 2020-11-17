@@ -12,7 +12,7 @@
     <!-- Landing Page graphic, hero image and content -->
     <div class="landing-image-container center">
         <!-- Top Landing Page section -->
-        <img src="{{ url_for('static', filename='graphics/feet.png') }}" alt="">
+        <img src="{{ url_for('static', filename='graphics/feet.png') }}" alt="feet">
         <div class="container center">
             <div class="landing-content-container z-depth-4 border-radius-m">
                 <h1 id="swap-heading">SWAP <span>your clothes</span></h1>
@@ -44,7 +44,7 @@
                 <div class="card center z-depth-4">
                     <!-- Card Image -->
                     <div class="card-image">
-                        <img src="{{ item.item_image }}" class="item-image">
+                        <img src="{{ item.item_image }}" class="item-image" alt="item image">
                         <!-- Checks if the logged in user already likes the item and display the like button accordingly -->
                         <!-- If user has logged in and is the creator of item -->
                         {% if session.user == item.created_by %}
