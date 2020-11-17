@@ -29,8 +29,6 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
 
 [Deployment](#deployment)
 
-[Known Bugs](#bugs)
-
 [Credits](#credits)
 
 
@@ -298,65 +296,13 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
 
 ## Testing
 
- ### Functionality Testing
-- #### xxx
-    - xxx
-    - xxx
-
- 
-
-### HTML5 validator
-- xxx - xxx - [Results](xxx)
-
-### CSS3 validator - Pass
-
-
-### JSHint validator
-- xxx
-
-
-### Usability Testing
-- xxx
-
-### Compatibility Testing
-- Browser Compatibility
-
-    | Screen size\Browser | Safari           | Opera            | Microsoft Edge   | Chrome           | Firefox          | Internet Explorer |
-    | --------------------|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|:-----------------:|
-    | Mobile              |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| Not Tested        |
-    | Tablet              |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| Not Tested        |
-    | Laptop              |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| Not Tested        |
-    | Desktop             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| Not Tested        |
-
-- xxx
-
-### Performance Testing
-- xxx.
-    - Home Page - [Results](xxx)
-    - Constellations Page - [Results](xxx)
-    - Zodiac Signs Page - [Results](xxx)
-    - Calculator Page - [Results](xxx)
-
-        <img src="" height="50px"/>
-
-
-### Testing User Stories 
-- #### xxx
-    1. xxx
-        - xxx
-        - xxx
-    1. xxx
-        - xxx
-        - xxx
-
+All testing was documented in [testing.md](ttps://github.com/LigaMoon/swap-clothes-app/blob/main/testing.md) file
+<a href="https://github.com/LigaMoon/swap-clothes-app/blob/main/testing.md">  
+:bar_chart: </a> :point_left: testing.md
 
 <a name="deployment"></a>
 ## Deployment
 
-
-<a name="bugs"></a>
-## Known Bugs
-- xxx
 
 
 
