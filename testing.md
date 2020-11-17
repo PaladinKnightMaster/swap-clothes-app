@@ -16,9 +16,8 @@
 1. [Validators](#validators)
     - [HTML5](#html5)
     - [CSS](#css)
-    - [JSHint](#jshint)
-    - [JSHint](#jshint)
-    - [PEP8](#pep8)
+    - [JavaScript](#javascript)
+    - [Python](#python)
 
 1. [Compatibility](#compatibility)
 
@@ -149,20 +148,30 @@
 
 ## Validators
 
-### HTML5 validator
+### HTML5
+- 5 validator
 - xxx - xxx - [Results](xxx)
 
-### CSS3 validator - Pass
+### CSS3
+-  validator - Pass
 
 
-### JSHint validator
+### JavaScript
+- JSHint
 - xxx
 
+### Python
+- PEP8
 
-### Usability Testing
-- xxx
 
-### Compatibility Testing
+## Usability
+- To test the ease of navigation, this website was shared with friends and family of different ages and different levels of computer/smart device knowledge. There were no issues identified regarding the simplicity of navigating the website.
+- The testers also verified that all functionality aspects are working as explained above and as expected.
+- Testers expressed that the design is easy to understand and navigate.
+- Additionally multiple 'dummy' acounts were created and multiple items were added.
+- These accounts were used to interact with the site to test all the functionality explained.
+
+## Compatibility
 - Browser Compatibility
 
     | Screen size\Browser | Safari           | Opera            | Microsoft Edge   | Chrome           | Firefox          | Internet Explorer |
@@ -172,14 +181,18 @@
     | Laptop              |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| Not Tested        |
     | Desktop             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| Not Tested        |
 
-- xxx
+- OS Compatibility was tested on iOS 14.2, Android 10.0, MacOS Catalina v10.15.7, iPadOS 14.2, and Windows 10 'October 2020 update'. It is yet to be tested on Unix, Linux or Solaris Operating Systems.
+- The devices used in this testing include iMac, windows desktop with a 27" screen, Macbook Pro, Toshiba laptop, iPad Pro, iPhone Xr, Xiaomi 3, HTC 11, iPhone 8, HUAWEI P40 Pro and other android mobile phones.
+- The website was exhaustively tested for responsiveness on [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) and [Responsive Web Design Chekcer](https://responsivedesignchecker.com/) all screen sizes provided. Different viewport sizes were simulated ranging from as small as Galaxy Fold (280px) to large desktop sizes (1200px and above).
 
 ### Performance Testing
 - xxx.
     - Home Page - [Results](xxx)
-    - Constellations Page - [Results](xxx)
-    - Zodiac Signs Page - [Results](xxx)
-    - Calculator Page - [Results](xxx)
+    - Items Page - [Results](xxx)
+    - Register Page - [Results](xxx)
+    - Log In Page - [Results](xxx)
+    - My Profile
+    - Add Item
 
         <img src="" height="50px"/>
 
@@ -297,7 +310,8 @@
         - The delete icon is displayed on all unliked items.
 
 
-## Bugs :beetle:
+## Bugs
+ :beetle:
 1. ### Identified bugs
     - Not retrieving information from MongoDB with an 'ERR_TOO_MANY_REDIRECTS' error.
         - This was caused due to some passwords being hashed and some that were added to the database before authentification.
@@ -312,7 +326,7 @@
         - This is an identified bug within the materialize community as described in this [GitHub Post](https://github.com/Dogfalo/materialize/issues/6449)
         - The fix was implemented by manually adding a [select.js](https://github.com/LigaMoon/swap-clothes-app/blob/main/static/js/select.js) file with a fix coded into it as provided by this [solution by Dogfalo](https://github.com/Dogfalo/materialize/commit/c0da34049deec36efbd4681f73b3446e92918ca8)
 2. ### Existing Bugs
-    - No known existing bugs.
+    - When a page is resized, the image carousel doesn't resize automatically. For the carousel to be resized, the page has to be re-loaded.
 
 
 ## Future Testing
