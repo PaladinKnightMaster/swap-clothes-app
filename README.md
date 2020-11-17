@@ -468,7 +468,7 @@ SECRET_KEY | `<your_secret_key>`
 - Item carousels use [Slick](https://kenwheeler.github.io/slick/)
 - Front end components were coded using [Materialize v1.0.0](https://materializecss.com/)
 - Select validation used code provided in Code Institute DataBase Mini Project video
-- Code to delay page from opening 
+- Code to delay page from opening when using sweetalert came from this [tutorial](https://www.seblod.com/resources/tutorials/sebold-and-sweetalert2-replace-the-default-delete-confirm-box)
 - Code 
 
 
