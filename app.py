@@ -160,12 +160,14 @@ def filter():
                                categories=categories,
                                selected_categories=selected_categories,
                                pagination=pagination,
-                               liked=user_liked_by, user=user_data)
+                               liked=user_liked_by, user=user_data,
+                               all_users=all_users)
 
     return render_template("items.html", items=items_paginated,
                            categories=categories,
                            selected_categories=selected_categories,
-                           pagination=pagination)
+                           pagination=pagination,
+                           all_users=all_users)
 
 
 @app.route("/sort/<sort_by>")
@@ -196,10 +198,12 @@ def sort(sort_by):
         user_data = mongo.db.users.find_one({"username": session["user"]})
         return render_template("items.html", items=items_paginated,
                                categories=categories, pagination=pagination,
-                               liked=user_liked_by, user=user_data)
+                               liked=user_liked_by, user=user_data,
+                               all_users=all_users)
 
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination)
+                           categories=categories, pagination=pagination,
+                           all_users=all_users)
 
 
 @app.route("/search")
@@ -223,11 +227,11 @@ def search():
         return render_template("items.html", items=items_paginated,
                                categories=categories, pagination=pagination,
                                liked=user_liked_by, user=user_data,
-                               query=query)
+                               query=query, all_users=all_users)
 
     return render_template("items.html", items=items_paginated,
                            categories=categories, pagination=pagination,
-                           query=query)
+                           query=query, all_users=all_users)
 
 
 @app.route("/register", methods=["GET", "POST"])

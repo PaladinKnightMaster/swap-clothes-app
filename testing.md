@@ -149,19 +149,23 @@
 ## Validators
 
 ### HTML5
-- 5 validator
-- xxx - xxx - [Results](xxx)
+- 5 validator - Fail
+    - HTML validator does not recognize Jinja and returns multiple errors
+
 
 ### CSS3
 -  validator - Pass
+    - No Errors
+    - 43 warnings related to imported stylesheets adn unknown style vendors
 
 
 ### JavaScript
-- JSHint
-- xxx
+- JSHint - script.js - pass
+    - Only known warnings for using `let`, `=>` syntax, `$` (jQuery) and `swal` (sweetalert)
+
 
 ### Python
-- PEP8
+- PEP8 - app.py - pass
 
 
 ## Usability
