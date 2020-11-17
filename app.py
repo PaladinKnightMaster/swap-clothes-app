@@ -56,27 +56,32 @@ def pagination_arg(items):
 
 def item_categories():
     # Retrieve item categories
-    return mongo.db.categories.find_one({"category_name": "item_categories"})['category_value']
+    return mongo.db.categories.find_one(
+        {"category_name": "item_categories"})['category_value']
 
 
 def profile_img():
     # Retrieve profile image links and image names
-    return mongo.db.categories.find_one({"category_name": "image_url"})['category_value']
+    return mongo.db.categories.find_one(
+        {"category_name": "image_url"})['category_value']
 
 
 def item_size_from():
     # Retrieve Item sizing regions
-    return mongo.db.categories.find_one({"category_name": "item_size_from"})['category_value']
+    return mongo.db.categories.find_one(
+        {"category_name": "item_size_from"})['category_value']
 
 
 def item_size_fit():
     # Retrieve item fit
-    return mongo.db.categories.find_one({"category_name": "item_size_fit"})['category_value']
+    return mongo.db.categories.find_one(
+        {"category_name": "item_size_fit"})['category_value']
 
 
 def item_used_status():
     # Retrieve used status
-    return mongo.db.categories.find_one({"category_name": "item_used_status"})['category_value']
+    return mongo.db.categories.find_one(
+        {"category_name": "item_used_status"})['category_value']
 
 
 @app.route("/")
@@ -88,11 +93,16 @@ def home():
     items = mongo.db.items.find().sort("liked_count", -1).limit(3)
     all_users = list(mongo.db.users.find())
     if session:
-        user_liked_by = mongo.db.matches.find_one({"username": session['user']})["liked_by"]
-        user_data = mongo.db.users.find_one({"username": session['user']})
-        return render_template("index.html", items=items, all_users=all_users, user=user_data, liked=user_liked_by)
+        user_liked_by = mongo.db.matches.find_one(
+            {"username": session['user']})["liked_by"]
+        user_data = mongo.db.users.find_one(
+            {"username": session['user']})
+        return render_template("index.html", items=items,
+                               all_users=all_users, user=user_data,
+                               liked=user_liked_by)
 
-    return render_template("index.html", items=items, all_users=all_users)
+    return render_template("index.html", items=items,
+                           all_users=all_users)
 
 
 @app.route("/items", methods=["GET", "POST"])
@@ -101,7 +111,7 @@ def items():
     Display all items sorted by the most recent added
     and Paginate displayed items
 
-    If a user is logged in, retrieve a list of usernmaes they 
+    If a user is logged in, retrieve a list of usernmaes they
     are liked by and retrieve user data to be used in matching
     """
     items = list(mongo.db.items.find().sort('_id', -1))
@@ -112,17 +122,20 @@ def items():
     categories = item_categories()
 
     all_users = list(mongo.db.users.find())
-    
-    if session:
-        user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
-        user_data = mongo.db.users.find_one({"username": session["user"]})
-        return render_template("items.html", items=items_paginated,
-                            categories=categories, pagination=pagination,
-                            liked=user_liked_by, user=user_data, all_users=all_users)
-                            
-    return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination, all_users=all_users)
 
+    if session:
+        user_liked_by = mongo.db.matches.find_one(
+            {"username": session["user"]})["liked_by"]
+        user_data = mongo.db.users.find_one(
+            {"username": session["user"]})
+        return render_template("items.html", items=items_paginated,
+                               categories=categories, pagination=pagination,
+                               liked=user_liked_by, user=user_data,
+                               all_users=all_users)
+
+    return render_template("items.html", items=items_paginated,
+                           categories=categories, pagination=pagination,
+                           all_users=all_users)
 
 
 @app.route("/filter")
@@ -141,12 +154,13 @@ def filter():
 
     if session:
         user_data = mongo.db.users.find_one({"username": session["user"]})
-        user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
+        user_liked_by = mongo.db.matches.find_one(
+            {"username": session["user"]})["liked_by"]
         return render_template("items.html", items=items_paginated,
-                            categories=categories,
-                            selected_categories=selected_categories,
-                            pagination=pagination,
-                            liked=user_liked_by, user=user_data)
+                               categories=categories,
+                               selected_categories=selected_categories,
+                               pagination=pagination,
+                               liked=user_liked_by, user=user_data)
 
     return render_template("items.html", items=items_paginated,
                            categories=categories,
@@ -177,14 +191,15 @@ def sort(sort_by):
     pagination = pagination_arg(items)
 
     if session:
-        user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
+        user_liked_by = mongo.db.matches.find_one(
+            {"username": session["user"]})["liked_by"]
         user_data = mongo.db.users.find_one({"username": session["user"]})
         return render_template("items.html", items=items_paginated,
-                            categories=categories, pagination=pagination,
-                            liked=user_liked_by, user=user_data)
-    
+                               categories=categories, pagination=pagination,
+                               liked=user_liked_by, user=user_data)
+
     return render_template("items.html", items=items_paginated,
-                        categories=categories, pagination=pagination)
+                           categories=categories, pagination=pagination)
 
 
 @app.route("/search")
@@ -197,19 +212,22 @@ def search():
     query = request.args.get("search")
 
     items = list(mongo.db.items.find({"$text": {"$search": query}}))
-    
+
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
 
     if session:
-        user_liked_by = mongo.db.matches.find_one({"username": session["user"]})["liked_by"]
+        user_liked_by = mongo.db.matches.find_one(
+            {"username": session["user"]})["liked_by"]
         user_data = mongo.db.users.find_one({"username": session["user"]})
         return render_template("items.html", items=items_paginated,
-                                categories=categories, pagination=pagination,
-                                liked=user_liked_by, user=user_data, query=query)
+                               categories=categories, pagination=pagination,
+                               liked=user_liked_by, user=user_data,
+                               query=query)
 
     return render_template("items.html", items=items_paginated,
-                           categories=categories, pagination=pagination, query=query)
+                           categories=categories, pagination=pagination,
+                           query=query)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -228,10 +246,18 @@ def register():
             flash("A Swapper already has this name, pick a new one!")
             return redirect(url_for("register"))
 
+        user_image = request.form.get("user-img")
+        print(user_image)
+        if user_image is None:
+            user_image = "https://images.unsplash.com/photo-"\
+                         "1586769852836-bc069f19e1b6?ixlib=rb-1.2."\
+                         "1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&"\
+                         "fit=crop&w=1650&q=80"
+
         register = {
             "username": request.form.get("username"),
             "password": generate_password_hash(request.form.get("password")),
-            "user_image": request.form.get("user-img"),
+            "user_image": user_image,
             "looking_for": request.form.getlist("looking-for"),
             "fb_msgr": request.form.get("fb-msgr"),
             "whatsapp": request.form.get("whatsapp"),
@@ -242,10 +268,10 @@ def register():
 
         # Add new user to matches database to facilitate
         mongo.db.matches.insert_one(
-            { "username": request.form.get("username"),
-            "liked_by": [],
-            "matched_items": [],
-            "matched_creator": []})
+            {"username": request.form.get("username"),
+             "liked_by": [],
+             "matched_items": [],
+             "matched_creator": []})
 
         session["user"] = request.form.get("username")
         flash("You're officially a Swapper now, woo!")
@@ -272,7 +298,8 @@ def login():
             if check_password_hash(existing_user["password"],
                                    request.form.get("password")):
                 session["user"] = request.form.get("username")
-                return redirect(url_for('my_profile', username=session["user"]))
+                return redirect(url_for('my_profile',
+                                        username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for('login'))
@@ -295,7 +322,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_item", methods=["GET","POST"])
+@app.route("/add_item", methods=["GET", "POST"])
 def add_item():
     """
     Insert new items added into Items collection along with
@@ -309,7 +336,10 @@ def add_item():
     # If user didn't add item image link, insert a generic image
     item_image = request.form.get("item_image")
     if item_image == "":
-        item_image = "https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        item_image = "https://images.unsplash.com/photo-"\
+                      "1586769852836-bc069f19e1b6?ixlib=rb-1.2."\
+                      "1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&"\
+                      "fit=crop&w=1650&q=80"
 
     if request.method == "POST":
         new_item = {
@@ -332,8 +362,10 @@ def add_item():
         flash("Item added succesfully")
         return redirect(url_for('items', username=session['user']))
 
-    user_data = mongo.db.users.find_one({"username": session["user"]})
-    return render_template("add_item.html", categories=categories, user=user_data,
+    user_data = mongo.db.users.find_one(
+        {"username": session["user"]})
+    return render_template("add_item.html", categories=categories,
+                           user=user_data,
                            item_size=item_size, item_fit=item_fit,
                            item_used=item_used)
 
@@ -369,12 +401,13 @@ def edit_item(item_id):
         flash("'{}' updated succesfully".format(edited_item["item_name"]))
         return redirect(url_for('items', username=session['user']))
 
-    item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
+    item = mongo.db.items.find_one(
+        {"_id": ObjectId(item_id)})
     user_data = mongo.db.users.find_one({"username": session["user"]})
-    return render_template("edit_item.html", categories=categories, item=item, user=user_data,
+    return render_template("edit_item.html", categories=categories,
+                           item=item, user=user_data,
                            item_size=item_size, item_fit=item_fit,
                            item_used=item_used)
-
 
 
 @app.route('/delete_item/<item_id>')
@@ -383,7 +416,7 @@ def delete_item(item_id):
     mongo.db.items.remove({'_id': ObjectId(item_id)})
     return redirect(url_for('items', username=session['user']))
 
- 
+
 @app.route('/liked_item/<item_id>/<action>')
 def liked_item(item_id, action):
     """
@@ -400,7 +433,8 @@ def liked_item(item_id, action):
     # Add user to liked_by array in the item dictinory and increase like count
     if action == 'like':
         mongo.db.items.update_one({"_id": ObjectId(item_id)},
-                                  {'$push': {'liked_by': user}, '$inc': {'liked_count': 1}})
+                                  {'$push': {'liked_by': user},
+                                  '$inc': {'liked_count': 1}})
         # Add user to creators liked_by array
         if user not in item_creator_liked_by:
             mongo.db.matches.update_one({"username": item_creator},
@@ -413,20 +447,22 @@ def liked_item(item_id, action):
     # Remove user from liked_by array in item dictionary
     elif action == 'unlike':
         mongo.db.items.update_one({"_id": ObjectId(item_id)},
-                                  {'$pull': {'liked_by': user}, '$inc': {'liked_count': -1}})
+                                  {'$pull': {'liked_by': user},
+                                  '$inc': {'liked_count': -1}})
         # check if user likes any other creator items
-        all_items_from_creator = list(mongo.db.items.find({"created_by": item_creator}))
+        all_items_from_creator = list(mongo.db.items.find(
+            {"created_by": item_creator}))
         liked_items_from_creator = []
         for item in all_items_from_creator:
             # Add all liked items by the same creator in a list
             if user in item["liked_by"]:
                 liked_items_from_creator.append(item["item_name"])
 
-            # If list=0 remove user from creators matched dictionary 
+        # If list=0 remove user from creators matched dictionary
         if len(liked_items_from_creator) == 0:
             mongo.db.matches.update_one({"username": item_creator},
-                        {'$pull': {'liked_by': user}})
-     
+                                        {'$pull': {'liked_by': user}})
+
     return redirect(request.referrer)
 
 
@@ -436,11 +472,13 @@ def flagged_item(item_id, action):
     Allows users to flag items and admin to unflag
     """
     if action == 'flag':
-        mongo.db.items.update_one({"_id": ObjectId(item_id)}, {'$set': {'flagged': 'Y'}})
-    
+        mongo.db.items.update_one({"_id": ObjectId(item_id)},
+                                  {'$set': {'flagged': 'Y'}})
+
     elif action == 'unflag':
-        mongo.db.items.update_one({"_id": ObjectId(item_id)}, {'$set': {'flagged': 'N'}})
-    
+        mongo.db.items.update_one({"_id": ObjectId(item_id)},
+                                  {'$set': {'flagged': 'N'}})
+
     return redirect(request.referrer)
 
 
@@ -453,12 +491,16 @@ def my_profile(username):
     items = list(mongo.db.items.find())
     item_count = mongo.db.items.find({"created_by": username}).count()
     all_users = list(mongo.db.users.find())
-    user_liked_by = mongo.db.matches.find_one({"username": username})["liked_by"]
+    user_liked_by = mongo.db.matches.find_one(
+        {"username": username})["liked_by"]
     user_data = mongo.db.users.find_one({"username": username})
     matches = list(mongo.db.items.find(
         {"created_by": {"$in": user_liked_by}, "liked_by": session['user']}))
-    
-    return render_template('my_profile.html', items=items, user=user_data, item_count=item_count, liked=user_liked_by, matches=matches, all_users=all_users)
+
+    return render_template('my_profile.html',
+                           items=items, user=user_data,
+                           item_count=item_count, liked=user_liked_by,
+                           matches=matches, all_users=all_users)
 
 
 @app.route('/edit_profile/<username>', methods=['GET', 'POST'])
@@ -482,11 +524,12 @@ def edit_profile(username):
         }
 
         mongo.db.users.update({"username": session['user']}, edited_profile)
-        flash("{}'s profile updated succesfully".format(edited_profile["username"]))
+        flash("{}'s profile updated succesfully".format
+              (edited_profile["username"]))
         return redirect(url_for('my_profile', username=username))
 
     return render_template("edit_profile.html", categories=categories,
-                           user=user_data, profile_images=profile_images )
+                           user=user_data, profile_images=profile_images)
 
 
 if __name__ == '__main__':
