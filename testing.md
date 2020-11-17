@@ -31,7 +31,7 @@
 1. [Future Testing](#future-testing)
 
 
-## Functionality Testing
+## Functionality
 - #### Navigation Bar
     - When the logo 'SWAP' located in the middle of the navigation bar is clicked, it brings the user to the Home Page. This has been tested on desktop, tablet, and mobile views and from all pages.
     - All links in the navbar are working and have been tested.
@@ -78,6 +78,14 @@
     - Brand word located in the navigation bar always brings the user to the home page.
     - Links connecting the 'Register' page to the 'Log In' page and vice versa work and have been tested.
     - Links directed to the 'Items' page located in the navbar, on the 'Home' page under Hot Items, on the 'My Profile' page under My Items, in the 'About' modal, work as expected and bring the user to the 'Items' page.
+- #### Matching
+    - Users can like items by clicking on the 'like' button.
+    - When the creator of the item likes the user's item, they match.
+    - A flash message is displayed at the top of the page explaining that the user can now click on the creator's username to reveal their social media details.
+    - The user can click on the social media icons which bring the user to the relevant social media platform opened in a new tab.
+    - The user can see all the matched items on the 'My Profile' page under Matches.
+
+
 - #### Home Page
     - Likes counter works as expected and increments/decrements by 1 when a user likes/unlikes the item.
     - Top 3 items are displayed - this has been tested by many test accounts liking/unliking numerous items.
@@ -174,14 +182,117 @@
         <img src="" height="50px"/>
 
 
-### Testing User Stories 
-- #### xxx
-    1. xxx
-        - xxx
-        - xxx
-    1. xxx
-        - xxx
-        - xxx
+### User Stories
+
+- #### Common user stories
+    1. I want to intuitively navigate through the site to browse the content.
+        - The landing page takes the whole screen with one call-to-action button which brings the user to the 'Register' or 'Items' page.
+        - The footer and the header remain the same throughout the site which provides consistency for the user to easily understand how the site works.
+        - The header and the footer are kept in line with conventional styles which lets the user access the navigation without thinking.
+        - The header is always visible at the top of the page and the user can find each page easily at any time.
+        - The active website is indicated by different formatting.
+        - All pages are displayed in the navigation bar as well as throughout the pages to provide the user with multiple points of navigation.
+        - The style is kept the same throughout the page to allow the user to intuitively understand how to navigate the page.
+    1. I want the experience of using this site to be interactive.
+        - All cards have like/unlike buttons.
+        - Flash message feedback is provided to the user.
+        - Delete/Flag confirmation is displayed as a pop-up.
+        - About modal is displayed as a pop-up.
+        - Items are positioned on the 'My Profile' page in a carousel, allowing the user to click/drag/swipe.
+        - Item category filter has animated checkboxes.
+    1. I want to be able to view all clothing items.
+        - User view all items on the 'Items' page.
+        - If the user has filtered or searched, they can view all items by clicking 'reset' or 'Show All'.
+        - User is given a link to the 'Items' page in the 'About' modal, on the 'Home' page under Hot Items, on the 'My Profile' page under Matches.
+    1. I want to be able to sort all items by the most recent added.
+        - On the 'Items' page, under 'Sort' there is a clickable calendar icon that sorts all items by the most recently added.
+        - Icon changes color when hovered over.
+        - By default, all items are sorted by the most recently added.
+    1. I want to be able to sort all items by alphabetical and reverse alphabetical order.
+        - On the 'Items' page, under 'Sort' there is a clickable A-Z icon that sorts all items in alphabetical order.
+        - Icon changes color when hovered over.
+    1. I want to be able to filter items by their categories.
+        - On the 'Items' page, under 'Sort' there is a clickable Z-A icon that sorts all items in reversed alphabetical order.
+        - Icon changes color when hovered over.
+    1. I want to be able to search for a specific item.
+        - On the 'Items' page, under 'Search' there is a text input field where user can enter their search keyword.
+        - Users can search by either pressing the 'Enter' key or clicking on the search button.
+    1. I want to be able to understand the purpose of the site.
+        - Landing Page has a short description of what the site is.
+        - 'About' modal in the footer provides a more detailed description of what the page is about.
+        - On the Landing Page, under the call-to-action button, there is a '?' icon which opens the 'About' modal.
+    1. I want to be able to contact the owner of the site.
+        - Footer contains creators socials that can be used to contact the creator.
+    1. I want the page to be responsive to all screen sizes.
+        - Page has been extensively tested to ensure it is responsive and works in all screen sizes.
+    1. I want to be able to navigate to the top of the page quickly, particularly in the mobile view.
+        - Footer contains a 'Go to top' button which brings the user to the top of the page.
+
+- #### As a first time visitor
+    1. I want to be able to find the 'Register' page easily.
+        - The 'Register' page is located and clearly labeled in the navigation bar.
+        - If the user clicks on the 'Log In' page instead, they can fid the 'Register' page link under the login form.
+        - The call-to-action button on the landing page redirects the user to the 'Register' page.
+    1. I want to be able to register easily
+        - Form on the 'Register' paged is responsive and easy to use.
+        - Only 2 fields are required which allows the user to register quickly.
+        - Real-time feedback is provided to the user in form of the color around the input field. This saves time for the user as they can see if the value entered is correct/incorrect before submitting the form.
+    
+- #### As a returning user
+    1. I want to be able to navigate to the 'Login' page easily.
+        - The 'Log In' page is located and clearly labeled in the navigation bar.
+        - If the user clicks on the 'Register' page instead, they can find the 'Log In' page link under the login form.
+        - The call-to-action button on the landing page redirects the user to the 'Register' page which has the 'Log In' page link. 
+        - If the user Logs Out, they are redirected to the login page in case they want to Log in again.
+    1. I want to be able to Log In quickly.
+        - The login form only contains 2 fields.
+    1. I want to add new items easily.
+        - The 'Add Item' page is located in the navigation bar and clearly labeled.
+        - If the user doesn't have any items added, there will be a call-to-action button displayed on the 'My Profile' page under My Items. This will bring the user to the 'Add Item' page.
+        - Real-time feedback is provided to the user in form of the color around the input field. This saves time for the user as they can see if the value entered is correct/incorrect before submitting the form.
+        - The form can be easily reset by clicking on the 'Rese' button.
+        - The form is responsive and easy to use.
+    1. I want to be able to edit and delete my items.
+        - Each Item card displays an edit button to the creator of the item which brings the user to the 'Edit Item' page.
+        - Item details are pre-filled in the form to allow the user to quickly change the relevant fields.
+        - Users can cancel editing items by clicking the 'Cancel' button.
+        - Each item displays a delete button to the creator of the item.
+        - When the delete button is clicked, the user is prompted with a confirmation. This prevents the user from accidentally deleting an item (especially relevant on mobile sizes as it is easier to click/tap on the wrong button)
+    1. I want to like items.
+        - All items that have not been created by the user, has a like action button.
+        - Like button is formatted depending if the user has liked an item.
+        - Like functionality is provided throughout the whole site.
+    1. I want to be able to flag inappropriate content.
+        - All items display a flag button that is formatted depending if the item has already been flagged.
+        - When clicked on the flag icon, the user will be prompted to confirm if they wish to flag this item as inappropriate.
+        - The user cannot unflag an item. This is to facilitate the moderation of inappropriate content.
+    1. I want to see the items that I have liked.
+        - The user can sort items by their liked items on the 'Items' page by clicking the heart icon.
+    1. I want to be able to update my profile.
+        - The 'My Profile' page has an 'Edit Profile' button just under the profile details.
+        - If the user hadn't selected what items they are looking for when registering, they will also see an 'Edit Profile; button under Suggestions on the 'My Profile' page.
+        - The form is pr-filled with details already entered but the user when registering. This saves time and allows the user to update only relevant fields.
+    1. I want to view all my added items.
+        - The user can view all their added items on the 'My Profile' page under My Items.
+    1. I want to view all items I have matched with.
+        - The user can view all the items they have matched with on the 'My Profile' page under My Items.
+    1. I want to see items that matched the categories that I'm looking for.
+        - The user can view suggested items based on the categories they re looking for on the 'My Profile' page under Suggestions
+    1. I want to be able to contact another user if I match to swap the items.
+        - When a user likes an item from a creator that has liked the user's item, they match. The user can then click on the creator's username which will display their social media icons.
+        - Matched username is colored and has a hover effect to indicate that it is clickable.
+        - When the user has matched, flash messages lets them know that they can contact another user by clicking on their username.
+    1. I want to be able to Log out.
+        - The 'Log Out' button is located in the navigation bar and labeled clearly
+
+- #### As an admin
+    1. I want to be able to unflag an item if it's been flagged incorrectly.
+        - Admin user has additional functionality to unflag items.
+        - This is done by clicking the flagged items flag button.
+    1. I want to be able to delete an item if it's inappropriate.
+        - Admin has the additional functionality to delete items that haven't liked.
+        - The delete icon is displayed on all unliked items.ms that haven't liked.
+        - The delete icon is displayed on all unliked items.
 
 
 ## Known Bugs
