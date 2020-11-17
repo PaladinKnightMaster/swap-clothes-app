@@ -26,7 +26,9 @@
 
 1. [User Stories](#user-stories)
 
-1. [Known Bugs](#known-bugs)
+1. [Bugs](#bugs)
+    - [Identified Bugs](#identified-bugs)
+    - [Existing Bugs](#existing-bugs)
 
 1. [Future Testing](#future-testing)
 
@@ -295,7 +297,23 @@
         - The delete icon is displayed on all unliked items.
 
 
-## Known Bugs
-- xxx
+## Bugs :beetle:
+1. ### Identified bugs
+    - Not retrieving information from MongoDB with an 'ERR_TOO_MANY_REDIRECTS' error.
+        - This was caused due to some passwords being hashed and some that were added to the database before authentification.
+        - This was fixed by deleting the first dummy accounts from the database/
+    - Filtered item pagination not working when the user clicks on pages 2 and onwards
+        - This was caused by the filter form trying to resubmit when the user clicks on pages 2 and onwards. Due to form/item filter not being filled in each time the user selects a new page, it would return 'No results found'
+        - This was solved by changing the form method to `GET` instead of `POST` and using query strings alongside with `request.args.get`
+    - Page breaking when the user likes a searched item
+        - This happened as the user is redirected to the page they were on when they like an item and in this instance the 'search' page. Search functionality relies on the input string and as the user would be redirected to the same page, the search string would come back as None, breaking the page.
+        - This was solved by changing the form method to `GET` instead of `POST` and using query strings alongside with `request.args.get`
+    - On mobile, the dropdown options onclick does not fire when "clicked/tapped".
+        - This is an identified bug within the materialize community as described in this [GitHub Post](https://github.com/Dogfalo/materialize/issues/6449)
+        - The fix was implemented by manually adding a [select.js](https://github.com/LigaMoon/swap-clothes-app/blob/main/static/js/select.js) file with a fix coded into it as provided by this [solution by Dogfalo](https://github.com/Dogfalo/materialize/commit/c0da34049deec36efbd4681f73b3446e92918ca8)
+2. ### Existing Bugs
+    - No known existing bugs.
+
 
 ## Future Testing
+- Automated testing using testing frameworks such as Jasmine will be implemented in future versions.
