@@ -151,6 +151,7 @@ def filter():
 
     items_paginated = pag_items(items)
     pagination = pagination_arg(items)
+    all_users = list(mongo.db.users.find())
 
     if session:
         user_data = mongo.db.users.find_one({"username": session["user"]})
@@ -177,6 +178,7 @@ def sort(sort_by):
     by the latest date added, by liked items or
     by item being flagged
     """
+    all_users = list(mongo.db.users.find())
     categories = item_categories()
     if sort_by == 'a-to-z':
         items = list(mongo.db.items.find().sort("item_name", 1))
@@ -212,6 +214,7 @@ def search():
     Use an index from items collections to allow the user
     to search through the item names and item short description
     """
+    all_users = list(mongo.db.users.find())
     categories = item_categories()
     query = request.args.get("search")
 
