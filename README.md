@@ -296,34 +296,189 @@ This website is an alternative to thrifting, buying, and donating clothes by fac
 
 ## Testing
 
-All testing was documented in [testing.md](ttps://github.com/LigaMoon/swap-clothes-app/blob/main/testing.md) file
-<a href="https://github.com/LigaMoon/swap-clothes-app/blob/main/testing.md">  
-:bar_chart: </a> :point_left: testing.md
+All testing was documented in [testing.md](https://github.com/LigaMoon/swap-clothes-app/blob/main/testing.md) file
 
-<a name="deployment"></a>
+<a href="https://github.com/LigaMoon/swap-clothes-app/blob/main/testing.md">   
+:bar_chart: </a>  :point_left: testing.md
+
+
 ## Deployment
+### Local
+Instructions to run the project on your local device using an IDE
+
+#### Pre-requisites
+- [Python 3](https://www.python.org/downloads/) - used to write the code and to run the project
+- [PIP](https://pypi.org/project/pip/) - used to install packages
+- [Git](https://git-scm.com/downloads) - used for version control
+- [Visual Studio Code](https://code.visualstudio.com/) or any IDE of your choice - used to compile the code.
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) account - used to facilitate databases and collections needed throughout the project. More detailed instructions on how to get started in [Mongo DB Atlas docs](https://docs.atlas.mongodb.com/)
+
+#### Recommended
+- A virtual environment of your choice - used to contain all installations and packages and prevents clashing projects that might use the same package but different versions.
+    - Python 3 has a built-in virtual environment [venv](https://docs.python.org/3/tutorial/venv.html). To initialize:
+
+            python3 -m venv .venv
+        where `.venv` is the name/path you are giving to the virtual environment
+
+### Steps
+1. Go to the project repository https://github.com/LigaMoon/swap-clothes-app
+1. Get the files used by using one of the methods below:
+    1. Download the files used by clicking the 'Code' button located in the top section of the repository. Then select 'Download ZIP' and unzip the files in the directory of your choice.
+
+    <img src="./static/graphics/readme/zip.png" height="200px" /> 
+    
+    1. Clone the repository by running the following command from your IDE
+
+            git repo clone LigaMoon/swap-clothes-app
+    
+1. In your IDE, navigate to the project directory where you located downloaded files/cloned the repo
+
+        cd path/to/your/folder
+1. Activate your virtual environment. If using Python's venv:
+
+        source .venv/bin/activate
+    on MacOS and Unix where .venv is the name you gave previously
+
+        .venv\Scripts\activate.bat
+    on Windows where .venv is the name you gave previously
+
+1. Install all reqauirements from [requirements.txt](requrements.txt) file
+    
+        pip3 install -r requirements.txt
+
+1. Create a file `env.py` to store environment variables
+1. Add environment variable in the format as shown below
+
+        os.environ.setdefault("SECRET_KEY", "")
+        os.environ.setdefault("MONGO_URI", "")
+    where `SECRET_KEY` value is a key of your choice and `MONGO_URI` is obained from your MongoDB account under Overview > Connect > Connect your application and select relevant version of Python.
+
+1. Create the structure as outlined in the [Database](#database) section and below
+    - Database name 'swap-clothes'
+    - collection 'items'
+
+            _id: <ObjectId>
+            item_image: <String>
+            item_name: <String>
+            short_description: <String>
+            long_description: <String>
+            category: <String>
+            size_gender: <String>
+            size_country: <String>
+            size: <String>
+            used_status: <String>
+            created_on: <Date>
+            created_by: <String>
+            liked_by: <Array>
+            liked_count: <Int32>
+            flagged: <String>
+
+    - collection 'users'
+
+            _id: <ObjectId>
+            username: <String>
+            user_image: <String>
+            password: <String>
+            looking_for: <Array>
+            fb_msgr: <String>
+            whatsapp: <String>
+            instagram: <String>
+
+    - collection 'matches'
+
+            _id: <ObjectId>
+            username: <String>
+            liked_by: <Array>
+
+    - collection 'categories'
+
+            _id: <ObjectId>
+            category_name: <String>
+            category_value: <Array>
+
+        - You will need 6 documents in the 'categories' collection with the following values
+
+| _id | category_name | category_value |
+ --- | --- | ---
+generated_automatically | item_categories | Array 
+generated_automatically | item_size_from | Array
+generated_automatically | item_size_fit | Array
+generated_automatically | item_used_status | Array
+generated_automatically| "generic_item_image | Array
+generated_automatically| "generic_item_image | Array with nested arrays (see below)
+
+<img src="./static/graphics/readme/categories.png" height="200px" /> 
+
+1. Run the application
+```
+python3 app.py
+```
+
+1. Website should be available on a link similar to `http://127.0.0.1:5000`. (check your IDE terminal)
+1. Note: `python3` and `pip3` commands can vary depending on version/machine/IDE you're using. Always check docs if unsure.
+
+## Remote
+### Pre-requisites
+- Create an account on [Heroku](https://dashboard.heroku.com/apps)
+- Create a new app on the Heroku website
+- Go to the app and select 'Deploy' tab
+
+    <img src="./static/graphics/readme/deploy.png" height="70px" />
+
+- Deploy your app using GitHub and enable Automatic Deploys
+
+    <img src="./static/graphics/readme/github.png" height="70px" />
+
+
+### Steps
+1. Create the requirements.txt file to contain all dependencies
+
+        pip3 freeze --local > requirements.txt
+
+1. Create a Procfile
+
+        echo web: python app.py > Procfile
+
+1. Add environment variables
+    - Go to the 'Settings' tab and click 'Reveal Config Vars' and add the following variables
+        <img src="./static/graphics/readme/settings.png" height="70px" />
+
+
+    | Key | Value |
+ --- | ---
+IP | 0.0.0.0
+PORT | 5000
+MONGO_DBNAME | swap_clothes
+MONGO_URI | `mongodb+srv://<username>:<password>@<cluster_name>-qtxun.mongodb.net/<database_name>?retryWrites=true&w=majority`
+SECRET_KEY | `<your_secret_key>`
+
+1. Make sure all your files have been added, committed and pushed to your GitHub repository
+
+1. Open your app
+
+    <img src="./static/graphics/readme/openapp.png" height="70px" />
 
 
 
-
-<a name="credits"></a>
 ## Credits
 
 ### Code :floppy_disk:
-- xxx
+- Most of the code was written  by author Liga Baikova
+- Pop-ups were coded using [Sweetalert 2](https://sweetalert2.github.io/)
+- Item carousels use [Slick](https://kenwheeler.github.io/slick/)
+- Front end components were coded using [Materialize v1.0.0](https://materializecss.com/)
+- Select validation used code provided in Code Institute DataBase Mini Project video
+- Code to delay page from opening 
+- Code 
 
-### Content :book:
-
-- xx
 
 
 ### Media :clapper:
-- xx
+- All images used were taken from [Unsplash](https://unsplash.com/)
+- All graphics used were taken from [Pablo Stanley from Hhmaaans](https://www.humaaans.com/) and [Katerina Limpitsouni from unDraw](https://undraw.co/)
 
 
 ### Acknowledgements
-
-- xx
-
-
-
+- Thank you to everyone who took their time to provide me constructive feedback on the Slack community page.
+- Thanks to my friends and family for endless testing.
+- Big thanks to my mentor for putting up with my questions and giving me great insights.
