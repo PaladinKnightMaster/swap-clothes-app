@@ -1,4 +1,3 @@
-
 // Initialize JS components
 $(document).ready(function(){
     // Slick carousel
@@ -78,8 +77,8 @@ $(document).ready(function(){
 
       
 $('.item-creator-container').on('click', function() {
-	$(this).next().toggleClass('visible')
-})
+	$(this).next().toggleClass('visible');
+});
 
 
 // Delay page re-direct for 1.5s so user can sede pop-up display with detail cnfirmation
@@ -109,9 +108,9 @@ function deleteConfirm(link) {
                 iconColor: '#FF626D',
                 showConfirmButton: false,
                 timer: 1500
-            })
+            });
             // Go to link in href attribute of the delete button clicked
-            ItemDelay(link)
+            ItemDelay(link);
         }
     });
 }
@@ -124,10 +123,9 @@ $('.delete-confirm').click(function(event) {
     // Get link in the href attribute of delete button
     let link = $(this).attr("href");
     // Run Sweetalert function
-    deleteConfirm(link)
-
-})
-
+    deleteConfirm(link);
+});
+          
 // Use sweetalert to confirm flagging
 function flagConfirm(link) {
     Swal.fire({
@@ -147,8 +145,8 @@ function flagConfirm(link) {
                 iconColor: '#FF626D',
                 showConfirmButton: false,
                 timer: 1500
-            })
-            ItemDelay(link)
+            });
+            ItemDelay(link);
         }
     });
 }
@@ -156,8 +154,8 @@ function flagConfirm(link) {
 $('.flag-confirm').click(function(event) {
     event.preventDefault();
     let link = $(this).attr("href");
-    flagConfirm(link)
-})
+    flagConfirm(link);
+});
 
 
 
@@ -174,8 +172,8 @@ function smallCard() {
 
 // Function to Apply class 'small' card when an screen heigth is smaller than landing container height
 function smallLandingContainer() {
-    let containerHeight = $('.landing-content-container').height() + $('.landing-content-container').offset().top
-    let windowHeight = $(window).height()
+    let containerHeight = $('.landing-content-container').height() + $('.landing-content-container').offset().top;
+    let windowHeight = $(window).height();
     if (containerHeight > windowHeight && $('.landing-page').hasClass('small-container') == false) {
         $('.landing-page').addClass('small-container');
     } else if (containerHeight+100 <= windowHeight && $('.landing-page').hasClass('small-container'))
