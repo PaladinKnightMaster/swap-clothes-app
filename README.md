@@ -1,10 +1,6 @@
 
 <h1 align="center">SWAP your clothes</h1>
 <h1 align="center"><img src="./static/graphics/readme/amiresponsive.png" /></h1>
-
- <a href="https://clothes-swap-app.herokuapp.com/"><img src="./static/graphics/SWAP-logo.png" width="25px" /></a> :point_left: Live website
-
-  <a href="https://github.com/LigaMoon/swap-clothes-app"><img src="./static/graphics/readme/githublogo.png" width="25px" /></a> :point_left: GitHub Repository
  
  ## About
 
